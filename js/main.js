@@ -17,7 +17,7 @@ document.body.insertAdjacentHTML("afterbegin",
     `<a href="${base}${h}"${k === page ? ' class="active"' : ""} title="${t}"><span class="ab">${a}</span><span class="lbl">${t.toUpperCase()}</span></a>`).join("") +
   `</nav></aside>`);
 document.body.insertAdjacentHTML("beforeend",
-  `<footer><p>© 2026 LI ZHONGYU</p><p>Made with curiosity.</p></footer>`);
+     `<footer><p>© 2026 LI ZHONGYU</p><p>Keep Exploring.</p></footer>`);
 
 const toggle = document.getElementById("sideToggle");
 const syncToggle = () => {
