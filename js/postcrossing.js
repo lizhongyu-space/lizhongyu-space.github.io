@@ -16,13 +16,6 @@ const sw = (type) => `<i class="sw ${type === "sent" ? "sent" : "recv"}"></i>${l
 const byDate = (a, b) => (a.date < b.date ? 1 : -1);
 
 // ---- 1) 地图底图 ----
-const defs = el("defs");
-for (const [id, cls] of [["arrowSent", "sent"], ["arrowRecv", "recv"]]) {
-  const m = el("marker", { id, viewBox: "0 0 10 10", refX: 8, refY: 5, markerWidth: 5, markerHeight: 5, orient: "auto-start-reverse" });
-  m.appendChild(el("path", { d: "M0 0L10 5L0 10z", class: "arrow " + cls }));
-  defs.appendChild(m);
-}
-svg.appendChild(defs);
 svg.appendChild(el("path", { d: WORLD_MAP.land, class: "land" }));
 svg.appendChild(el("path", { d: WORLD_MAP.borders, class: "borders" }));
 
@@ -42,6 +35,11 @@ Object.values(groups).forEach((g) => {
   let tx = target[0], shift = 0;
   if (dlon > 180) { tx -= MW; shift = MW; }          // 向西走更近
   else if (dlon < -180) { tx += MW; shift = -MW; }   // 向东走更近
+  // 美洲等位于本初子午线另一侧的目的地，优先从地图左侧进入，避免从右侧绕行造成视觉拥挤。
+  if (g.lon < -30 && HOME.lon > 0) {
+    tx = target[0] - MW;
+    shift = MW;
+  }
   g.records.forEach((p) => {
     const sent = p.type === "sent";
     const [ax, ay] = sent ? home : [tx, target[1]];
@@ -52,7 +50,7 @@ Object.values(groups).forEach((g) => {
     const k = sent ? 0.2 : 0.34;                     // 同一国家的发送 / 接收两条线拱度不同，避免重叠
     const cx = (ax + bx) / 2 + nx * len * k, cy = (ay + by) / 2 + ny * len * k;
     const d = `M${ax.toFixed(1)} ${ay.toFixed(1)}Q${cx.toFixed(1)} ${cy.toFixed(1)} ${bx.toFixed(1)} ${by.toFixed(1)}`;
-    const attrs = { d, class: "arc " + (sent ? "sent" : "recv"), "marker-end": `url(#${sent ? "arrowSent" : "arrowRecv"})` };
+    const attrs = { d, class: "arc " + (sent ? "sent" : "recv") };
     lines.appendChild(el("path", attrs));
     if (shift) { const second = el("path", attrs); second.setAttribute("transform", `translate(${shift} 0)`); lines.appendChild(second); }
   });
