@@ -1,28 +1,23 @@
-// Welcome：黑屏 → 非匀速打出 HERE → 短暂停留 → 进入 About
-const wl = document.getElementById("wl");
+// Welcome：黑屏 → 带有终端感的非匀速打字 → 短暂停留 → 进入 About
 const typed = document.getElementById("wlTyped");
 const go = () => { location.href = "about.html"; };
 
-const word = "HERE";
-const delays = [420, 760, 260, 980]; // 每一笔故意不同速，避免机械感
-
+const phrase = "hello from China";
+const delays = [110, 180, 75, 240, 95, 310, 120, 80, 210, 140, 95, 260, 100, 180, 120, 300]; // 故意不均匀
 let timer;
 let i = 0;
 
 const typeNext = () => {
-  if (i >= word.length) {
-    timer = setTimeout(go, 1500);
+  if (i >= phrase.length) {
+    timer = setTimeout(go, 1800);
     return;
   }
-
-  typed.textContent += word[i];
+  typed.textContent += phrase[i];
   i += 1;
-  timer = setTimeout(typeNext, delays[i - 1]);
+  timer = setTimeout(typeNext, delays[i - 1] ?? 140);
 };
 
-setTimeout(typeNext, 900);
-
+timer = setTimeout(typeNext, 1100);
 document.addEventListener("click", go);
 document.addEventListener("keydown", go);
-
 window.addEventListener("beforeunload", () => clearTimeout(timer));
