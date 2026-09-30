@@ -5,13 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About · LI ZHONGYU</title>
 <link rel="stylesheet" href="css/style.css">
-<style>.bio p + p { margin-top: 1em; }</style>
+
+<!-- 这一段是：About 页面专属样式（只影响 about.html，不影响其他页面） -->
+<style>
+.bio p + p { margin-top: 1em; }          /* 简介：段与段之间的间距 */
+main.about.narrow { max-width: 900px; }  /* 简介：内容区域的整体宽度（数字越大，每行字越多，篇幅越短；想再宽就改大，比如 1000px） */
+.about .bio p { max-width: none; }       /* 简介：取消每段文字自带的宽度限制，让文字铺满上面设置的宽度 */
+</style>
 </head>
+
 <body data-page="about">
+<!-- 左侧导航栏和页脚由 js/main.js 自动生成，不用在这里写 -->
 <main class="about narrow">
   <section>
+    <!-- 这一段是：页面小标题 ABOUT -->
     <p class="label">ABOUT</p>
 
+    <!-- 这一段是：身份区域（左边小头像，右边姓名 / 身份 / 城市） -->
     <div class="identity">
       <img class="avatar" src="images/avatar.png" alt="Avatar">
       <div>
@@ -21,8 +31,10 @@
       </div>
     </div>
 
+    <!-- 这一段是：兴趣标签（一行） -->
     <p class="tags">Biology · Photography · Computing · Postcrossing</p>
 
+    <!-- 这一段是：个人简介（标题 + 五个自然段，每个 <p> 是一段） -->
     <h2>A little about me</h2>
     <div class="bio">
       <p>Hi 👋 I'm Li Zhongyu, a high school student from Nanjing, China, with a focus on biology. 🧬</p>
@@ -33,6 +45,8 @@
     </div>
   </section>
 </main>
+
+<!-- 这一段是：加载全站脚本（生成左侧导航和页脚） -->
 <script src="js/main.js"></script>
 </body>
 </html>
