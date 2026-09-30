@@ -9,7 +9,7 @@ let i = 0;
 
 const typeNext = () => {
   if (i >= phrase.length) {
-    timer = setTimeout(go, 1800);
+    timer = setTimeout(go, 700);
     return;
   }
   typed.textContent += phrase[i];
