@@ -1,15 +1,37 @@
-// ===== 全站脚本：导航栏、页脚、照片墙、大图查看 =====
+// ===== 全站脚本：左侧导航、页脚、Gallery 分类 + 照片墙、大图查看 =====
 const base = document.body.dataset.base || "";   // 404 页面用 "/" 作为路径前缀
 const page = document.body.dataset.page || "";   // 当前页面名，用来高亮导航
 
-// 1) 导航栏和页脚（只在这里写一次，四个页面共用）
-const links = [["home", "Home", "index.html"], ["gallery", "Gallery", "gallery.html"], ["about", "About", "about.html"]];
+// 1) 左侧竖直导航（只在这里写一次，所有页面共用）：可展开 / 收缩，收缩后仍保留窄侧栏和控制按钮
+const links = [["about", "About", "about.html", "A"], ["gallery", "Gallery", "gallery.html", "G"], ["postcrossing", "Postcrossing", "postcrossing.html", "P"]];
+const root = document.documentElement;
+let collapsed = window.innerWidth < 720;   // 手机默认收缩
+try { const s = localStorage.getItem("navCollapsed"); if (s !== null) collapsed = s === "1"; } catch (e) {}
+root.classList.toggle("nav-collapsed", collapsed);
+
 document.body.insertAdjacentHTML("afterbegin",
-  `<header class="nav"><a class="logo" href="${base}index.html">[NAME]</a><nav>` +
-  links.map(([k, t, h]) => `<a href="${base}${h}"${k === page ? ' class="active"' : ""}>${t}</a>`).join("") +
-  `</nav></header>`);
+  `<aside class="side" id="side"><div class="side-top">` +
+  `<a class="logo" href="${base}about.html">LI ZHONGYU</a>` +
+  `<button class="side-toggle" id="sideToggle" type="button"></button></div><nav>` +
+  links.map(([k, t, h, a]) =>
+    `<a href="${base}${h}"${k === page ? ' class="active"' : ""} title="${t}"><span class="ab">${a}</span><span class="lbl">${t.toUpperCase()}</span></a>`).join("") +
+  `</nav></aside>`);
 document.body.insertAdjacentHTML("beforeend",
-  `<footer><p>© 2026 [NAME]</p><p>Made with curiosity.</p></footer>`);
+  `<footer><p>© 2026 LI ZHONGYU</p><p>Made with curiosity.</p></footer>`);
+
+const toggle = document.getElementById("sideToggle");
+const syncToggle = () => {
+  const c = root.classList.contains("nav-collapsed");
+  toggle.textContent = c ? "≡" : "‹";
+  toggle.setAttribute("aria-label", c ? "Expand navigation" : "Collapse navigation");
+  toggle.setAttribute("aria-expanded", String(!c));
+};
+toggle.addEventListener("click", () => {
+  const c = root.classList.toggle("nav-collapsed");
+  try { localStorage.setItem("navCollapsed", c ? "1" : "0"); } catch (e) {}
+  syncToggle();
+});
+syncToggle();
 
 // 2) 照片卡片模板
 const card = (p, i) =>
@@ -17,22 +39,31 @@ const card = (p, i) =>
   (p.image ? `<img src="${base}${p.image}" alt="${p.title}" loading="lazy">` : "") +
   `<figcaption>${p.title}</figcaption></figure>`;
 
-// 3) 首页精选照片：取前 4 张，点击进入 Gallery
-const featured = document.getElementById("featured");
-if (featured) {
-  featured.innerHTML = photos.slice(0, 4).map(card).join("");
-  featured.addEventListener("click", () => (location.href = "gallery.html"));
-}
-
-// 4) Gallery 页面：生成照片墙 + Lightbox
+// 3) Gallery 页面：分类筛选 + 照片墙 + Lightbox
 const gallery = document.getElementById("gallery");
 if (gallery) {
-  gallery.innerHTML = photos.map(card).join("");
-  const lb = document.getElementById("lightbox");
+  let list = photos;   // 当前分类下的照片
   let cur = 0;
+  const filters = document.getElementById("filters");
+  const empty = document.getElementById("empty");
+  const render = () => {
+    gallery.innerHTML = list.map(card).join("");
+    empty.hidden = list.length > 0;
+  };
+  filters.innerHTML = ["All", ...categories].map((c, i) =>
+    `<button type="button" class="chip${i === 0 ? " active" : ""}" data-cat="${c}">${c}</button>`).join("");
+  filters.addEventListener("click", (e) => {
+    const b = e.target.closest(".chip"); if (!b) return;
+    filters.querySelectorAll(".chip").forEach((x) => x.classList.toggle("active", x === b));
+    list = b.dataset.cat === "All" ? photos : photos.filter((p) => p.category === b.dataset.cat);
+    render();
+  });
+  render();
+
+  const lb = document.getElementById("lightbox");
   const show = (i) => {
-    cur = (i + photos.length) % photos.length;
-    const p = photos[cur];
+    cur = (i + list.length) % list.length;
+    const p = list[cur];
     lb.querySelector(".lb-img").innerHTML = p.image
       ? `<img src="${p.image}" alt="${p.title}">`
       : `<div class="ph" style="aspect-ratio:${p.ratio}"></div>`;

@@ -3,15 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gallery · [NAME]</title>
+<title>Gallery · LI ZHONGYU</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="gallery">
 <main>
   <section>
-    <h1>Gallery</h1>
-    <p class="muted" style="margin:8px 0 32px">GALLERY DESCRIPTION</p>
+    <p class="label">GALLERY</p>
+    <div id="filters" class="filters" role="tablist" aria-label="Categories"></div>
     <div id="gallery" class="masonry"></div>
+    <p id="empty" class="muted" hidden>No photos in this category yet.</p>
   </section>
 </main>
 <div id="lightbox" class="lightbox" hidden>

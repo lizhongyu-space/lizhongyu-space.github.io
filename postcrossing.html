@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Postcrossing · LI ZHONGYU</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="postcrossing">
+<main>
+  <section class="pc-top">
+    <p class="label">POSTCROSSING</p>
+
+    <!-- 上半部分：互动地图 -->
+    <div class="map-wrap" id="mapWrap">
+      <svg id="worldMap" viewBox="0 0 1000 394.4" role="img" aria-label="World map of postcards sent and received"></svg>
+      <div class="pc-card" id="pcCard" hidden></div>
+    </div>
+    <div class="legend">
+      <span><i class="sw sent"></i>Sent</span>
+      <span><i class="sw recv"></i>Received</span>
+      <span class="muted">Hover a place for a preview · click for details</span>
+    </div>
+  </section>
+
+  <!-- 下半部分：Records 表格 -->
+  <section class="pc-records">
+    <h2>Records</h2>
+    <div class="table-scroll">
+      <table class="records">
+        <thead><tr><th>Date</th><th>Country</th><th>Type</th><th>Postcard ID</th><th>Status</th></tr></thead>
+        <tbody id="recordsBody"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<!-- 点击地点后的完整信息 -->
+<div class="pc-modal" id="pcModal" hidden>
+  <div class="pc-panel">
+    <button class="pc-close" aria-label="Close">×</button>
+    <div id="pcDetail"></div>
+  </div>
+</div>
+
+<script src="js/worldmap.js"></script>
+<script src="js/postcards.js"></script>
+<script src="js/main.js"></script>
+<script src="js/postcrossing.js"></script>
+</body>
+</html>
