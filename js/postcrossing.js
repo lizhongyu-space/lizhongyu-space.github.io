@@ -35,11 +35,6 @@ Object.values(groups).forEach((g) => {
   let tx = target[0], shift = 0;
   if (dlon > 180) { tx -= MW; shift = MW; }          // 向西走更近
   else if (dlon < -180) { tx += MW; shift = -MW; }   // 向东走更近
-  // 美洲等位于本初子午线另一侧的目的地，优先从地图左侧进入，避免从右侧绕行造成视觉拥挤。
-  if (g.lon < -30 && HOME.lon > 0) {
-    tx = target[0] - MW;
-    shift = MW;
-  }
   g.records.forEach((p) => {
     const sent = p.type === "sent";
     const [ax, ay] = sent ? home : [tx, target[1]];
