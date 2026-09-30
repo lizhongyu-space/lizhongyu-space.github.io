@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery · [NAME]</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="gallery">
+<main>
+  <section>
+    <h1>Gallery</h1>
+    <p class="muted" style="margin:8px 0 32px">GALLERY DESCRIPTION</p>
+    <div id="gallery" class="masonry"></div>
+  </section>
+</main>
+<div id="lightbox" class="lightbox" hidden>
+  <button class="lb-close" aria-label="Close">×</button>
+  <button class="lb-prev" aria-label="Previous">‹</button>
+  <div class="lb-box"><div class="lb-img"></div><div class="lb-info"></div></div>
+  <button class="lb-next" aria-label="Next">›</button>
+</div>
+<script src="js/photos.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
