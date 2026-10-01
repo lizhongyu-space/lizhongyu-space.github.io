@@ -120,7 +120,7 @@
       const en = a.getAttribute("title"), ab = a.querySelector(".ab");
       if (ab && NAV_LETTERS[en]) ab.textContent = lang === "zh" ? NAV_LETTERS[en] : en[0];
     });
-    ctrl.querySelector("#langBtn").textContent = lang === "en" ? "中文" : "English";
+    ctrl.querySelector("#langBtn").textContent = lang === "en" ? "Language" : "语言";
     ctrl.querySelector("#themeBtn").textContent = (theme === "dark" ? "☀ " : "☾ ") + (theme === "dark" ? (lang === "en" ? "Light" : "浅色") : (lang === "en" ? "Dark" : "深色"));
     obs.observe(document.body, { childList: true, subtree: true });
   };
