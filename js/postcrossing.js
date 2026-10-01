@@ -91,7 +91,7 @@ nodes.addEventListener("focusout", hideCard);
 const openDetail = (code) => {
   const g = groups[code];
   detail.innerHTML = `<h3>${flag(g.code)} ${g.country}</h3>` + g.records.map((p) =>
-    `<article class="pc-rec"><div class="pc-rec-h"><span>${sw(p.type)}</span><span>${p.id}</span><span>${dot(p.status)}</span></div>` +
+    `<article class="pc-rec"><div class="pc-rec-h"><span>${p.id}</span><span>${dot(p.type)}</span></div>` +
     `<p><strong>${p.member}</strong></p>` +
     `<p class="muted">Sent: ${p.sentDate}<br>Received: ${p.receivedDate}</p></article>`).join("");
   modal.hidden = false;
@@ -104,7 +104,7 @@ document.addEventListener("keydown", (e) => { if (e.key === "Escape") modal.hidd
 
 // ---- 7) Records 表格 ----
 document.getElementById("recordsBody").innerHTML = [...postcards].sort(byDate).map((p) =>
-  `<tr data-code="${p.code}"><td>${primaryDate(p)}</td><td>${flag(p.flagCode || p.code)} ${p.country}</td><td>${label(p.type)}</td><td>${p.id}</td><td>${dot(p.status)}</td></tr>`).join("");
+  `<tr data-code="${p.code}"><td>${primaryDate(p)}</td><td>${flag(p.flagCode || p.code)} ${p.country}</td><td>${p.id}</td><td>${dot(p.type)}</td></tr>`).join("");
 
 // ---- 8) Hover Records：鼠标移到表格行时，地图上的对应地点同步放大 ----
 const rows = document.querySelectorAll("#recordsBody tr");
