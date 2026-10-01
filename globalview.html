@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global View · LI ZHONGYU</title>
+<link rel="stylesheet" href="css/style.css">
+
+<!-- 这一段是：Global View 页面专属样式（只影响 globalview.html，不影响其他页面） -->
+<style>
+/* ---- 1) Illustrate 弹窗（macOS 窗口风格） ---- */
+.mac-backdrop { position: fixed; inset: 0; z-index: 70; background: rgba(20,20,20,.45); backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center; padding: 24px; animation: fade .25s ease; }   /* 弹窗背后的半透明遮罩 */
+.mac-backdrop[hidden] { display: none; }
+.mac-win { width: min(640px, 100%); max-height: 86vh; display: flex; flex-direction: column; background: var(--background);
+  border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 24px 70px rgba(0,0,0,.28); overflow: hidden;
+  transition: width .25s ease, max-height .25s ease; }                                                          /* 弹窗窗口本体（默认大小 640px） */
+.mac-win.zoomed { width: min(1100px, 100%); height: 90vh; max-height: 90vh; }                                   /* 点绿色按钮放大后的大小 */
+.mac-bar { position: relative; display: flex; align-items: center; height: 40px; padding: 0 14px; flex: none;
+  background: #e6e4dd; border-bottom: 1px solid var(--border); }                                                /* 窗口顶部标题栏 */
+.mac-dots { display: flex; gap: 8px; z-index: 1; }                                                              /* 左上角红绿按钮的容器 */
+.mac-dot { width: 12px; height: 12px; border: 0; padding: 0; border-radius: 50%; cursor: pointer; color: transparent;
+  display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; line-height: 1; }
+.mac-close { background: #ff5f57; }                                                                             /* 红色按钮：关闭（叉号） */
+.mac-zoom { background: #28c840; }                                                                              /* 绿色按钮：放大 / 还原 */
+.mac-dots:hover .mac-dot { color: rgba(0,0,0,.6); }                                                             /* 鼠标移上去时，按钮里出现 × 和 + 符号，和 macOS 一样 */
+.mac-title { position: absolute; left: 0; right: 0; text-align: center; font-size: 13px; color: var(--muted); pointer-events: none; }
+.mac-body { padding: 28px 32px; overflow: auto; flex: 1; }                                                      /* 窗口中间的说明内容区（内容多时可滚动） */
+.mac-body h2 { font-size: 26px; margin-bottom: 12px; }
+.mac-body p { max-width: none; }
+.mac-body ol { margin: 14px 0 14px 0; padding-left: 20px; }
+.mac-body li { margin-bottom: 6px; }
+.mac-foot { flex: none; padding: 14px 32px; border-top: 1px solid var(--border); background: #e6e4dd; }       /* 窗口底部：跳转到 Contact 的按钮所在栏 */
+.mac-foot .btn { margin: 0; }
+
+/* ---- 2) 选择分类：页面中央两个大按钮 ---- */
+.gv-choice { min-height: 62vh; display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; }
+.gv-choice[hidden] { display: none; }
+.gv-big { width: min(340px, 100%); min-height: 220px; padding: 28px; background: none; border: 1px solid var(--text); border-radius: 2px;
+  font: inherit; color: var(--text); text-align: left; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-end;
+  transition: background .25s, color .25s; }                                                                    /* 两个大选项按钮 */
+.gv-big:hover { background: var(--text); color: var(--background); }                                           /* 鼠标移上去时反色 */
+.gv-big strong { font-family: var(--serif); font-weight: 400; font-size: 28px; margin-bottom: 6px; }
+.gv-big span { font-size: 14px; opacity: .75; }
+
+/* ---- 3) 真正的照片页面：分组标题 + 照片墙 ---- */
+.gv-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 8px; }
+.gv-head .label { margin-bottom: 0; }
+.gv-back { background: none; border: 0; border-bottom: 1px solid var(--border); padding: 0; font: inherit; font-size: 13px; letter-spacing: .12em; color: var(--muted); cursor: pointer; }
+.gv-back:hover { color: var(--text); border-color: var(--text); }                                              /* "Change" 返回分类选择的按钮 */
+.gv-group { padding: 32px 0 8px; }
+.gv-group h2 { font-size: 24px; margin-bottom: 18px; }                                                          /* 每一组的标题（国家名或人名） */
+.gv-view[hidden] { display: none; }
+</style>
+</head>
+
+<body data-page="globalview">
+<!-- 左侧导航栏和页脚由 js/main.js 自动生成，不用在这里写 -->
+<main>
+  <section>
+    <!-- 这一段是：第 2 步——选择分类（页面中央两个大按钮，关闭 Illustrate 弹窗后出现） -->
+    <div class="gv-choice" id="gvChoice" hidden>
+      <button class="gv-big" type="button" data-mode="country"><strong>By Country</strong><span>Browse photos by where they were taken</span></button>
+      <button class="gv-big" type="button" data-mode="person"><strong>By Person</strong><span>Browse photos by who took them</span></button>
+    </div>
+
+    <!-- 这一段是：第 3 步——真正的照片页面（选好分类后出现） -->
+    <div class="gv-view" id="gvView" hidden>
+      <div class="gv-head">
+        <p class="label" id="gvLabel">GLOBAL VIEW</p>
+        <button class="gv-back" id="gvBack" type="button">← Change</button>
+      </div>
+      <div id="gvGroups"></div>
+    </div>
+  </section>
+</main>
+
+<!-- 这一段是：第 1 步——Illustrate 弹窗（进入页面时自动弹出；左上角红色 = 关闭，绿色 = 放大 / 还原） -->
+<div class="mac-backdrop" id="gvIntro">
+  <div class="mac-win" id="gvWin" role="dialog" aria-modal="true" aria-label="Illustrate">
+    <div class="mac-bar">
+      <div class="mac-dots">
+        <button class="mac-dot mac-close" id="gvClose" type="button" aria-label="Close">×</button>
+        <button class="mac-dot mac-zoom" id="gvZoom" type="button" aria-label="Enlarge">+</button>
+      </div>
+      <div class="mac-title">Illustrate</div>
+    </div>
+    <!-- 弹窗中间的说明文字：想改说明内容，直接改这里 -->
+    <div class="mac-body">
+      <h2>Global View</h2>
+      <p>Global View is a collection of photographs from different places around the world, taken by different people.</p>
+      <ol>
+        <li>Choose how you want to browse: by country, or by person.</li>
+        <li>Click any photo to enlarge it.</li>
+        <li>Below the enlarged photo you'll find when and where it was taken, and a short note about it.</li>
+      </ol>
+      <p>Would you like to share a photo from where you are? You're very welcome to get in touch.</p>
+    </div>
+    <!-- 弹窗底部：跳转到 Contact 页面的选项 -->
+    <div class="mac-foot"><a class="btn" href="contact.html">Contact me →</a></div>
+  </div>
+</div>
+
+<!-- 这一段是：点击照片后的大图查看（样式沿用 Gallery 的 Lightbox） -->
+<div id="lightbox" class="lightbox" hidden>
+  <button class="lb-close" aria-label="Close">×</button>
+  <button class="lb-prev" aria-label="Previous">‹</button>
+  <div class="lb-box"><div class="lb-img"></div><div class="lb-info"></div></div>
+  <button class="lb-next" aria-label="Next">›</button>
+</div>
+
+<!-- 这一段是：加载脚本（照片数据 → 全站导航 → 本页逻辑） -->
+<script src="js/globalphotos.js"></script>
+<script src="js/main.js"></script>
+<script src="js/globalview.js"></script>
+</body>
+</html>
