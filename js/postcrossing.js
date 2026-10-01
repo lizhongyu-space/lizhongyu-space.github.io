@@ -68,7 +68,7 @@ const showCard = (node) => {
   const g = groups[node.dataset.code], p = g.records[0];
   cardEl.innerHTML =
     `<div class="pc-card-h"><span>${flag(g.code)} ${g.country}</span>${g.records.length > 1 ? `<span class="muted">${g.records.length} cards</span>` : ""}</div>` +
-    `<div class="pc-thumbs">${thumb(p.front, "Front")}${thumb(p.back, "Back")}</div>` +
+    `<div class="pc-thumbs">${thumb(p.front, "Front")}</div>` +
     `<div class="pc-meta">${sw(p.type)} · ${p.date}</div><div class="pc-id">${p.id}</div>` +
     (g.records.length > 1 ? `<div class="muted small">Click for all records</div>` : "");
   cardEl.hidden = false;
@@ -91,7 +91,7 @@ const openDetail = (code) => {
   const g = groups[code];
   detail.innerHTML = `<h3>${flag(g.code)} ${g.country}</h3>` + g.records.map((p) =>
     `<article class="pc-rec"><div class="pc-rec-h"><span>${sw(p.type)}</span><span>${p.date}</span><span>${p.id}</span><span>${dot(p.status)}</span></div>` +
-    `<div class="pc-rec-img">${thumb(p.front, "Front")}${thumb(p.back, "Back")}</div>` +
+    `<div class="pc-rec-img">${thumb(p.front, "Front")}</div>` +
     (p.note ? `<p class="muted">${p.note}</p>` : "") + `</article>`).join("");
   modal.hidden = false;
   hideCard();
@@ -103,4 +103,18 @@ document.addEventListener("keydown", (e) => { if (e.key === "Escape") modal.hidd
 
 // ---- 7) Records 表格 ----
 document.getElementById("recordsBody").innerHTML = [...postcards].sort(byDate).map((p) =>
-  `<tr><td>${p.date}</td><td>${flag(p.code)} ${p.country}</td><td>${label(p.type)}</td><td>${p.id}</td><td>${dot(p.status)}</td></tr>`).join("");
+  `<tr data-code="${p.code}"><td>${p.date}</td><td>${flag(p.code)} ${p.country}</td><td>${label(p.type)}</td><td>${p.id}</td><td>${dot(p.status)}</td></tr>`).join("");
+
+
+// ---- 8) Hover Records：鼠标移到表格行时，地图上的对应地点同步放大 ----
+const rows = document.querySelectorAll("#recordsBody tr");
+const setActive = (code, active) => {
+  const node = nodes.querySelector(`.node[data-code="${code}"]`);
+  if (node) node.classList.toggle("active", active);
+};
+rows.forEach((row) => {
+  row.addEventListener("mouseenter", () => setActive(row.dataset.code, true));
+  row.addEventListener("mouseleave", () => setActive(row.dataset.code, false));
+  row.addEventListener("focusin", () => setActive(row.dataset.code, true));
+  row.addEventListener("focusout", () => setActive(row.dataset.code, false));
+});
