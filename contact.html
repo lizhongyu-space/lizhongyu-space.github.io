@@ -65,7 +65,8 @@ const shareMsg = document.getElementById("shareMsg");
 const say = (t) => { shareMsg.textContent = t; setTimeout(() => (shareMsg.textContent = ""), 2500); };
 shareBtn.addEventListener("click", async () => {
   if (navigator.share) {
-    const data = SHARE[localStorage.getItem("lang") === "zh" ? "zh" : "en"];\n    try { await navigator.share(data); } catch (e) {}
+    const data = SHARE[localStorage.getItem("lang") === "zh" ? "zh" : "en"];
+    try { await navigator.share(data); } catch (e) {}
     return;
   }
   const data = SHARE[localStorage.getItem("lang") === "zh" ? "zh" : "en"];
