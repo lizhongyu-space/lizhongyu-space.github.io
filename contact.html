@@ -68,8 +68,9 @@ shareBtn.addEventListener("click", async () => {
     const data = SHARE[localStorage.getItem("lang") === "zh" ? "zh" : "en"];\n    try { await navigator.share(data); } catch (e) {}
     return;
   }
-  try { await navigator.clipboard.writeText(SHARE.text); say("Message copied ✓"); }
-  catch (e) { window.prompt("Copy this message:", SHARE.text); }
+  const data = SHARE[localStorage.getItem("lang") === "zh" ? "zh" : "en"];
+  try { await navigator.clipboard.writeText(data.text); say(localStorage.getItem("lang") === "zh" ? "已复制 ✓" : "Message copied ✓"); }
+  catch (e) { window.prompt(localStorage.getItem("lang") === "zh" ? "复制这段消息：" : "Copy this message:", data.text); }
 });
 </script>
 </body>
