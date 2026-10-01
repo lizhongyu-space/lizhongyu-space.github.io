@@ -93,3 +93,7 @@ if (gallery) {
     if (Math.abs(d) > 50) show(cur + (d < 0 ? 1 : -1));
   });
 }
+// 这一段是：加载右上角的"语言切换 + 深浅主题"功能（具体内容在 js/lang.js 里）
+const langScript = document.createElement("script");
+langScript.src = base + "js/lang.js";
+document.body.appendChild(langScript);
