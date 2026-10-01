@@ -35,7 +35,7 @@ const postcards = [
   { id: "PL-1777552", member: "mrowkanat", country: "Poland", code: "PL", lat: 52.23, lon: 21.01, type: "received", status: "received", sentDate: "2021-07-17", receivedDate: "2021-10-19" },
   { id: "PH-170613", member: "fel33", country: "Philippines", code: "PH", lat: 14.60, lon: 120.98, type: "received", status: "received", sentDate: "2021-06-24", receivedDate: "2021-09-19" },
   { id: "FR-1413007", member: "account closed", country: "France", code: "FR", lat: 48.86, lon: 2.35, type: "received", status: "received", sentDate: "2021-06-24", receivedDate: "2021-07-10" },
-  { id: "TW-3174333", member: "baaciiga", country: "Taiwan", code: "TW", lat: 25.03, lon: 121.56, type: "received", status: "received", sentDate: "2021-06-24", receivedDate: "2021-07-10" },
+  { id: "TW-3174333", member: "baaciiga", country: "Taiwan", code: "TW", flagCode: "CN", lat: 25.03, lon: 121.56, type: "received", status: "received", sentDate: "2021-06-24", receivedDate: "2021-07-10" },
   { id: "US-7641555", member: "SchneckenTochter", country: "U.S.A.", code: "US", lat: 38.90, lon: -77.04, type: "received", status: "received", sentDate: "2021-06-15", receivedDate: "2021-07-10" },
   { id: "SK-238463", member: "Emili74", country: "Slovakia", code: "SK", lat: 48.15, lon: 17.11, type: "received", status: "received", sentDate: "2021-06-08", receivedDate: "2021-07-07" },
   { id: "FI-3942446", member: "Einkeri", country: "Finland", code: "FI", lat: 60.17, lon: 24.94, type: "received", status: "received", sentDate: "2021-05-13", receivedDate: "2021-06-12" },
