@@ -28,3 +28,9 @@ html[data-theme="dark"] .land { fill: #34342f; }                                
 html[data-theme="dark"] .borders { stroke: #1f1f1d; }                                   /* 地图上的国界线颜色 */
 html[data-theme="dark"] .mac-bar,
 html[data-theme="dark"] .mac-foot { background: #222220; }                              /* Illustrate 弹窗的标题栏和底栏 */
+/* ---- Language selection menu ---- */
+.lang-menu{position:relative}
+.lang-options{position:absolute;top:calc(100% + 6px);right:0;min-width:92px;padding:5px;background:var(--background);border:1px solid var(--border);box-shadow:0 8px 24px rgba(0,0,0,.10)}
+.lang-options[hidden]{display:none}
+.lang-options button{display:block;width:100%;padding:6px 10px;border:0;border-radius:0;text-align:left;background:none;letter-spacing:.02em}
+.lang-options button:hover{background:var(--border)}
