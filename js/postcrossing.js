@@ -23,7 +23,7 @@ svg.appendChild(el("path", { d: WORLD_MAP.borders, class: "borders" }));
 // ---- 2) 按国家分组 ----
 const groups = {};
 postcards.forEach((p) => {
-  (groups[p.code] = groups[p.code] || { code: p.code, country: p.country, lat: p.lat, lon: p.lon, records: [] }).records.push(p);
+  (groups[p.code] = groups[p.code] || { code: p.code, flagCode: p.flagCode || p.code, country: p.country, lat: p.lat, lon: p.lon, records: [] }).records.push(p);
 });
 Object.values(groups).forEach((g) => g.records.sort(byDate));
 
@@ -67,7 +67,7 @@ Object.values(groups).forEach((g) => {
 const showCard = (node) => {
   const g = groups[node.dataset.code], p = g.records[0];
   cardEl.innerHTML =
-    `<div class="pc-card-h"><span>${flag(g.code)} ${g.country}</span>${g.records.length > 1 ? `<span class="muted">${g.records.length} cards</span>` : ""}</div>` +
+    `<div class="pc-card-h"><span>${flag(g.flagCode)} ${g.country}</span>${g.records.length > 1 ? `<span class="muted">${g.records.length} cards</span>` : ""}</div>` +
     `<div class="pc-meta">${sw(p.type)} · ${primaryDate(p)}</div>` +
     `<div class="pc-id">${p.id}</div>` +
     `<div class="muted small">${p.member}</div>` +
@@ -104,7 +104,7 @@ document.addEventListener("keydown", (e) => { if (e.key === "Escape") modal.hidd
 
 // ---- 7) Records 表格 ----
 document.getElementById("recordsBody").innerHTML = [...postcards].sort(byDate).map((p) =>
-  `<tr data-code="${p.code}"><td>${primaryDate(p)}</td><td>${flag(p.code)} ${p.country}</td><td>${label(p.type)}</td><td>${p.id}</td><td>${dot(p.status)}</td></tr>`).join("");
+  `<tr data-code="${p.code}"><td>${primaryDate(p)}</td><td>${flag(p.flagCode || p.code)} ${p.country}</td><td>${label(p.type)}</td><td>${p.id}</td><td>${dot(p.status)}</td></tr>`).join("");
 
 // ---- 8) Hover Records：鼠标移到表格行时，地图上的对应地点同步放大 ----
 const rows = document.querySelectorAll("#recordsBody tr");
