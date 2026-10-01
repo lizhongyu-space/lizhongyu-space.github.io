@@ -3,7 +3,8 @@ const base = document.body.dataset.base || "";   // 404 页面用 "/" 作为路�
 const page = document.body.dataset.page || "";   // 当前页面名，用来高亮导航
 
 // 1) 左侧竖直导航（只在这里写一次，所有页面共用）：可展开 / 收缩，收缩后仍保留窄侧栏和控制按钮
-const links = [["about", "About", "about.html", "A"], ["gallery", "Gallery", "gallery.html", "G"], ["postcrossing", "Postcrossing", "postcrossing.html", "P"]];
+// 这一段是：左侧导航里的菜单项。格式是 [页面名, 显示的名字, 链接文件, 收缩后显示的字母]。以后想加新菜单，照着在末尾加一项即可
+const links = [["about", "About", "about.html", "A"], ["gallery", "Gallery", "gallery.html", "G"], ["postcrossing", "Postcrossing", "postcrossing.html", "P"], ["contact", "Contact me", "contact.html", "C"]];
 const root = document.documentElement;
 let collapsed = window.innerWidth < 720;   // 手机默认收缩
 try { const s = localStorage.getItem("navCollapsed"); if (s !== null) collapsed = s === "1"; } catch (e) {}

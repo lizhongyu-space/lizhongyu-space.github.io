@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact me · LI ZHONGYU</title>
+<link rel="stylesheet" href="css/style.css">
+
+<!-- 这一段是：Contact 页面专属样式（只影响 contact.html，不影响其他页面） -->
+<style>
+main.contact.narrow { max-width: 900px; }       /* 页面内容宽度（数字越大，每行字越多） */
+.contact h1 { font-size: 30px; margin-bottom: 16px; }
+.contact h2 { font-size: 22px; margin: 56px 0 12px; }
+.contact p { max-width: none; }                  /* 取消段落宽度限制，让文字铺满上面设置的宽度 */
+.contact .ways { list-style: none; padding: 0; margin: 20px 0 0; }
+.contact .ways li { margin-bottom: 18px; }       /* 三种联系方式之间的间距 */
+.contact .ways .no { color: var(--muted); margin-right: 8px; }   /* (i.) (ii.) (iii.) 序号的颜色 */
+.contact a { border-bottom: 1px solid var(--border); transition: border-color .2s; word-break: break-all; }
+.contact a:hover { border-color: var(--text); }  /* 鼠标移到链接上时，下划线变深 */
+</style>
+</head>
+
+<body data-page="contact">
+<!-- 左侧导航栏和页脚由 js/main.js 自动生成，不用在这里写 -->
+<main class="contact narrow">
+  <section>
+    <!-- 这一段是：页面小标题 CONTACT -->
+    <p class="label">CONTACT</p>
+
+    <!-- 这一段是：Contact me! 标题 + 说明 + 三种联系方式 -->
+    <h1>Contact me!</h1>
+    <p>If you want to get in touch with me, upload your content on this website, or contribute to this site, there are several ways to do it:</p>
+    <ul class="ways">
+      <!-- (i.) GitHub 仓库链接 -->
+      <li><span class="no">(i.)</span>on GitHub to support me:<br>
+        <a href="https://github.com/lizhongyu-space/lizhongyu-space.github.io" target="_blank" rel="noopener">https://github.com/lizhongyu-space/lizhongyu-space.github.io.git</a></li>
+      <!-- (ii.) 邮箱（点击会打开邮件软件） -->
+      <li><span class="no">(ii.)</span>Email：<a href="mailto:lzy2504@outlook.com">lzy2504@outlook.com</a></li>
+      <!-- (iii.) Apple 信息（只显示账号，不做链接） -->
+      <li><span class="no">(iii.)</span>Apple message：lzy2504@outlook.com</li>
+    </ul>
+
+    <!-- 这一段是：关于这个网站的说明 -->
+    <h2>Something about this website</h2>
+    <p>The webpage you are currently visiting is a personal website about Li Zhongyu, hosted on GitHub and built with HTML, JS, and CSS. It was first published to the public on October 1, 2026, and will be maintained using ChatGPT, Claude, and Copilot. Please do not attack it maliciously. The purpose of this site is for personal programming learning and sharing a personal introduction for Postcrossing. Anyway, I'm really glad to meet you this way! Wishing you all the best in your future work and life.</p>
+  </section>
+</main>
+
+<!-- 这一段是：加载全站脚本（生成左侧导航和页脚） -->
+<script src="js/main.js"></script>
+</body>
+</html>
