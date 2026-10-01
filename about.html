@@ -10,10 +10,36 @@
 .bio p + p { margin-top: 1em; }
 main.about.narrow { max-width: 900px; }
 .about .bio p { max-width: none; }
-.about .bilingual-title { margin-bottom: 1.5em; }
-.about .lang-block + .lang-block { margin-top: 3em; padding-top: 2.5em; border-top: 1px solid rgba(127,127,127,.18); }
-.about .lang-label { font-size: .75em; letter-spacing: .12em; opacity: .55; margin-bottom: 1.2em; }
-.about h2 { margin-bottom: .8em; }
+
+.about .about-lang {
+  display: none;
+}
+
+html[lang="en"] .about .about-lang-en,
+html[lang="zh-CN"] .about .about-lang-zh {
+  display: block;
+}
+
+.about .about-title {
+  margin-bottom: 1.5em;
+}
+
+.about .about-title h2 {
+  margin-bottom: .25em;
+  font-size: 1.55rem;
+  font-weight: 700;
+}
+
+.about .about-title p {
+  margin-top: 0;
+}
+
+.about .about-lang h2 {
+  margin-top: 2.2em;
+  margin-bottom: .8em;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
 </style>
 </head>
 
@@ -33,22 +59,20 @@ main.about.narrow { max-width: 900px; }
 
     <p class="tags">Biology · Photography · Computing · Postcrossing</p>
 
-    <div class="bilingual-title">
+    <div class="about-title">
       <h2>Like an autobiography? Not quite.</h2>
       <p class="muted">像是自传吗？但又不完全是</p>
     </div>
 
     <div class="bio">
-      <div class="lang-block">
-        <p class="lang-label">ENGLISH</p>
-
-        <p>My name is Li Zhongyu. I was born in Nanjing, China, and, just like everyone else, I'm simply an ordinary person. I'm currently a high school student, and biology is one of my favorite subjects. 🧬</p>
+      <div class="about-lang about-lang-en" lang="en">
+        <p>My name is Li Zhongyu. I was born in Nanjing, China, and, just like everyone else, I'm simply an ordinary person. I'm currently a high school student, and biology is one of my favorite subjects.</p>
 
         <h2>My childhood</h2>
         <p>I was born in 2010, so perhaps the word “childhood” is not quite the perfect choice here. But let me use it for now.</p>
         <p>I wasn't a very good student when I was younger. In fact, there was even a time when getting into high school seemed uncertain. Education in China can be a high-pressure experience, both for parents and for students. When I was little, my parents didn't place many demands on my grades. The simplest reason was that I didn't really want to study.</p>
         <p>Instead, my parents took me traveling during almost every winter and summer holiday. Before I finished primary school, I had already visited more than ten cities across China, and I had also spent nearly a month traveling in the United States. At the time, I didn't think much of these experiences. Looking back, however, they had a much greater influence on me than I realized.</p>
-        <p>Then, near the end of primary school, when I was ten, I became fascinated by computers. My parents supported me wholeheartedly. 💻</p>
+        <p>Then, near the end of primary school, when I was ten, I became fascinated by computers. My parents supported me wholeheartedly.</p>
 
         <h2>A few things about how I learned computing</h2>
         <p>Unlike what many people might expect, I didn't start with software. My first steps were actually in hardware.</p>
@@ -56,7 +80,7 @@ main.about.narrow { max-width: 900px; }
         <p>During middle school, I joined a school club where my hardware programming received more systematic training. In 2022, I won the first national gold medal of my life in a national middle-school competition focused on open-source hardware design and applications. After that, I took part in a number of provincial and city-level competitions and had the chance to achieve a few more results along the way.</p>
 
         <h2>High school begins</h2>
-        <p>In China, high school can be a demanding journey. Toward the end of middle school, I finally began taking my studies seriously and was admitted to a key high school in my hometown. Even my parents were a little surprised — they had never expected that I would make it there.</p>
+        <p>In China, high school can be a demanding journey. Toward the end of middle school, I finally began taking my studies seriously and was admitted to a key high school in my hometown. Even my parents were a little surprised — they had never expected me to make it there.</p>
         <p>Although I'm a boy, making friends has never been something I'm particularly good at. Most of the time, I enjoy being on my own, although sometimes I still want to connect with other people.</p>
         <p>That was one of the reasons I joined Postcrossing, a project that connects people around the world by exchanging postcards through the traditional postal system. By sending postcards to people in different countries and receiving theirs in return, I gradually began to see a much wider world. Unfortunately, I lost access to my previous account, so I can't show you all the exchanges I had there.</p>
         <p>After starting high school, I stopped writing code for quite a long time. But eventually, a rather bold idea began to come back to me.</p>
@@ -64,13 +88,13 @@ main.about.narrow { max-width: 900px; }
         <h2>A bold idea</h2>
         <p>One day, while writing a postcard to another Postcrossing member, I read the self-introduction of an experienced member. Honestly, her introduction wasn't very different from anyone else's — it was mostly about her interests and everyday life. But at the end, she had added a Google Sheet, and it immediately caught my attention.</p>
         <p>Through a public Google Sheet, she clearly showed the countries she had exchanged postcards with and the types of postcards she had received and sent. It gave me an idea: <em>why not build my own personal website?</em></p>
-        <p>Then people from different parts of the world could simply click a link and get to know me. And that was how this website was born. 🌍</p>
+        <p>Then people from different parts of the world could simply click a link and get to know me. And that was how this website was born.</p>
 
         <h2>I want it to be a little different</h2>
         <p>Once the idea appeared, I thought about it for a long time. A website that only displays information about me would be, well, a little boring. So I decided to build some small projects that could actually mean something.</p>
         <p>That was how <strong>Global View</strong> came to life.</p>
         <p>My original idea was to let people upload their own photos. But I eventually realized that GitHub Pages only provides static website hosting, so that idea had to be abandoned. Instead, supporters can send me photos by email, and I can upload them to the website myself. This also gives me a chance to review what gets published.</p>
-        <p>The website has only just launched — perhaps it will still be less than a month old when you discover it. That is exactly why it needs your support. I built this website simply because I genuinely love the idea behind it. If you are willing to send me a photo from your country by email or through another way, even just one photo, that would mean a lot to me. It would be one of the greatest ways to support both me and this little website. 📷</p>
+        <p>The website has only just launched — perhaps it will still be less than a month old when you discover it. That is exactly why it needs your support. I built this website simply because I genuinely love the idea behind it. If you are willing to send me a photo from your country by email or through another way, even just one photo, that would mean a lot to me. It would be one of the greatest ways to support both me and this little website.</p>
 
         <h2>One last thing</h2>
         <p>My father once told me, “I hope you can always keep doing what you love.” I have tried to live by those words ever since.</p>
@@ -81,16 +105,14 @@ main.about.narrow { max-width: 900px; }
         <p>Li Zhongyu</p>
       </div>
 
-      <div class="lang-block">
-        <p class="lang-label">中文</p>
-
-        <p>我的名字叫做 Li Zhongyu，出生在中国南京。和大家一样，我就是一个普通人。我现在正在读高中，学习的选科是生物，而我也确实很喜欢这门科目。🧬</p>
+      <div class="about-lang about-lang-zh" lang="zh-CN">
+        <p>我的名字叫做 Li Zhongyu，出生在中国南京。和大家一样，我就是一个普通人。我现在正在读高中，学习的选科是生物，而我也确实很喜欢这门科目。</p>
 
         <h2>我的童年</h2>
         <p>虽然我出生在 2010 年，“童年”这个词放在这里似乎有些不太合适，但也允许我暂且这么称呼它吧。</p>
         <p>我小时候成绩很差，甚至一度都有可能考不上高中。在中国，教育是一件压力很大的事情，对家长如此，对学生也是如此。小时候，我的父母基本没有对我的学习提出太多要求。说到底，最根本的原因还是因为那时候的我压根不想学习。</p>
         <p>不过，每年的寒暑假，我的父母都会带我出去旅行。在小学毕业之前，我已经去过中国十多个城市，也曾经在美国旅行了将近一个月。这些经历在当时的我看来似乎没什么特别，但现在回头看，它们对我之后的发展产生了非常大的影响。</p>
-        <p>终于，在小学快要结束的时候，也就是我十岁那年，我开始迷上了计算机。我的父母也非常支持我。💻</p>
+        <p>终于，在小学快要结束的时候，也就是我十岁那年，我开始迷上了计算机。我的父母也非常支持我。</p>
 
         <h2>一些我学习计算机的小事</h2>
         <p>和很多人想象的不一样，我最开始学习的并不是软件，而是硬件。</p>
@@ -106,13 +128,13 @@ main.about.narrow { max-width: 900px; }
         <h2>一个大胆的想法</h2>
         <p>有一次，我在给一位 Postcrossing 成员写明信片的时候，读到了她的个人简介。说实话，她的简介其实和其他人并没有太大区别，主要也是介绍自己的兴趣和生活。但在简介的最后，她放上了一个 Google 表格，这一下深深吸引了我的注意。</p>
         <p>她通过一个公开的 Google 表格链接，清晰地向别人展示自己曾经交流过的国家，以及收到和寄出的明信片类型。这让我产生了一个大胆的想法：<em>为什么不做一个属于自己的个人网站呢？</em></p>
-        <p>这样，来自世界不同国家的人，只需要点击一个网址，就可以认识我。于是，这个网站诞生了。🌍</p>
+        <p>这样，来自世界不同国家的人，只需要点击一个网址，就可以认识我。于是，这个网站诞生了。</p>
 
         <h2>我希望它能变得与众不同</h2>
         <p>这个大胆的想法出现之后，我认真想了很久。如果只是一个单纯展示个人信息的网站，确实太无聊了。所以，我决定做一些真正有意义的小项目。</p>
         <p><strong>Global View</strong> 就这样诞生了。</p>
         <p>我最开始的设想，是让大家自行上传照片。但后来我发现，因为我使用的是 GitHub Pages，它只能提供静态网站托管，因此这个想法最终只能告一段落。替代方案是让支持者通过邮件把照片发给我，再由我从后台上传到网站。这样一来，也正好可以起到一定的审核作用。</p>
-        <p>虽然现在这个网站才刚刚发布——也许你看到它的时候，它甚至还不到一个月大——但也正因为如此，它才更加需要你的支持。我搭建这个网站，完全是因为我真的热爱这件事情。如果你愿意通过邮件或者其他方式给我发送一张来自你所在国家的照片，哪怕只有一张，对我来说都意味着很多。这不仅是对我的认可，也是对这个小小网站最大的支持。📷</p>
+        <p>虽然现在这个网站才刚刚发布——也许你看到它的时候，它甚至还不到一个月大——但也正因为如此，它才更加需要你的支持。我搭建这个网站，完全是因为我真的热爱这件事情。如果你愿意通过邮件或者其他方式给我发送一张来自你所在国家的照片，哪怕只有一张，对我来说都意味着很多。这不仅是对我的认可，也是对这个小小网站最大的支持。</p>
 
         <h2>关于我最后想说的话</h2>
         <p>我爸爸曾经对我说过一句话：“希望你能一直坚持你所热爱的事。”这句话，我一直在努力践行。</p>
