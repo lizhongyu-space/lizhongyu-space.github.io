@@ -40,7 +40,7 @@
     ["Records", "记录"], ["Date", "日期"], ["Country", "国家"], ["Type", "类型"], ["Postcard ID", "明信片编号"], ["Status", "状态"],
     ["Front", "正面"], ["Back", "背面"], ["Click for all records", "点击查看全部记录"],
 
-    ["Illustrate", "说明"], ["Contact me →", "联系我 →"],
+    ["Illustrate", "说明"], ["Get in touch →", "联系我 →"],
     ["Global View is a collection of photographs from different places around the world, taken by different people.",
      "Global View 汇集了来自世界各地、由不同人拍摄的照片。"],
     ["Choose how you want to browse: by country, or by person.", "你可以选择按国家或按人物浏览。"],
