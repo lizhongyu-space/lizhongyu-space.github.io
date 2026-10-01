@@ -13,7 +13,8 @@ const label = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 const el = (tag, attrs = {}) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; };
 const dot = (status) => `<span class="dot ${status}"></span>${label(status)}`;
 const sw = (type) => `<i class="sw ${type === "sent" ? "sent" : "recv"}"></i>${label(type)}`;
-const byDate = (a, b) => (a.date < b.date ? 1 : -1);
+const primaryDate = (p) => p.type === "sent" ? p.sentDate : p.receivedDate;
+const byDate = (a, b) => primaryDate(a) < primaryDate(b) ? 1 : -1;
 
 // ---- 1) 地图底图 ----
 svg.appendChild(el("path", { d: WORLD_MAP.land, class: "land" }));
@@ -33,16 +34,16 @@ Object.values(groups).forEach((g) => {
   const target = project(g.lon, g.lat);
   const dlon = g.lon - HOME.lon;
   let tx = target[0], shift = 0;
-  if (dlon > 180) { tx -= MW; shift = MW; }          // 向西走更近
-  else if (dlon < -180) { tx += MW; shift = -MW; }   // 向东走更近
+  if (dlon > 180) { tx -= MW; shift = MW; }
+  else if (dlon < -180) { tx += MW; shift = -MW; }
   g.records.forEach((p) => {
     const sent = p.type === "sent";
     const [ax, ay] = sent ? home : [tx, target[1]];
     const [bx, by] = sent ? [tx, target[1]] : home;
     const dx = bx - ax, dy = by - ay, len = Math.hypot(dx, dy) || 1;
     let nx = dy / len, ny = -dx / len;
-    if (ny > 0) { nx = -nx; ny = -ny; }              // 弧线总是向上拱
-    const k = sent ? 0.2 : 0.34;                     // 同一国家的发送 / 接收两条线拱度不同，避免重叠
+    if (ny > 0) { nx = -nx; ny = -ny; }
+    const k = sent ? 0.2 : 0.34;
     const cx = (ax + bx) / 2 + nx * len * k, cy = (ay + by) / 2 + ny * len * k;
     const d = `M${ax.toFixed(1)} ${ay.toFixed(1)}Q${cx.toFixed(1)} ${cy.toFixed(1)} ${bx.toFixed(1)} ${by.toFixed(1)}`;
     const attrs = { d, class: "arc " + (sent ? "sent" : "recv") };
@@ -53,7 +54,6 @@ Object.values(groups).forEach((g) => {
 svg.appendChild(el("circle", { cx: home[0], cy: home[1], r: 3, class: "home" }));
 
 // ---- 4) 地点节点：平时隐藏，Hover 时才显示 ----
-const thumb = (src, txt) => (src ? `<img src="${src}" alt="${txt}">` : `<div class="ph">${txt}</div>`);
 const nodes = el("g"); svg.appendChild(nodes);
 Object.values(groups).forEach((g) => {
   const [x, y] = project(g.lon, g.lat);
@@ -68,8 +68,9 @@ const showCard = (node) => {
   const g = groups[node.dataset.code], p = g.records[0];
   cardEl.innerHTML =
     `<div class="pc-card-h"><span>${flag(g.code)} ${g.country}</span>${g.records.length > 1 ? `<span class="muted">${g.records.length} cards</span>` : ""}</div>` +
-    `<div class="pc-thumbs">${thumb(p.front, "Front")}</div>` +
-    `<div class="pc-meta">${sw(p.type)} · ${p.date}</div><div class="pc-id">${p.id}</div>` +
+    `<div class="pc-meta">${sw(p.type)} · ${primaryDate(p)}</div>` +
+    `<div class="pc-id">${p.id}</div>` +
+    `<div class="muted small">${p.member}</div>` +
     (g.records.length > 1 ? `<div class="muted small">Click for all records</div>` : "");
   cardEl.hidden = false;
   const wr = wrap.getBoundingClientRect(), nr = node.querySelector(".pin").getBoundingClientRect();
@@ -90,9 +91,9 @@ nodes.addEventListener("focusout", hideCard);
 const openDetail = (code) => {
   const g = groups[code];
   detail.innerHTML = `<h3>${flag(g.code)} ${g.country}</h3>` + g.records.map((p) =>
-    `<article class="pc-rec"><div class="pc-rec-h"><span>${sw(p.type)}</span><span>${p.date}</span><span>${p.id}</span><span>${dot(p.status)}</span></div>` +
-    `<div class="pc-rec-img">${thumb(p.front, "Front")}</div>` +
-    (p.note ? `<p class="muted">${p.note}</p>` : "") + `</article>`).join("");
+    `<article class="pc-rec"><div class="pc-rec-h"><span>${sw(p.type)}</span><span>${p.id}</span><span>${dot(p.status)}</span></div>` +
+    `<p><strong>${p.member}</strong></p>` +
+    `<p class="muted">Sent: ${p.sentDate}<br>Received: ${p.receivedDate}</p></article>`).join("");
   modal.hidden = false;
   hideCard();
 };
@@ -103,8 +104,7 @@ document.addEventListener("keydown", (e) => { if (e.key === "Escape") modal.hidd
 
 // ---- 7) Records 表格 ----
 document.getElementById("recordsBody").innerHTML = [...postcards].sort(byDate).map((p) =>
-  `<tr data-code="${p.code}"><td>${p.date}</td><td>${flag(p.code)} ${p.country}</td><td>${label(p.type)}</td><td>${p.id}</td><td>${dot(p.status)}</td></tr>`).join("");
-
+  `<tr data-code="${p.code}"><td>${primaryDate(p)}</td><td>${flag(p.code)} ${p.country}</td><td>${label(p.type)}</td><td>${p.id}</td><td>${dot(p.status)}</td></tr>`).join("");
 
 // ---- 8) Hover Records：鼠标移到表格行时，地图上的对应地点同步放大 ----
 const rows = document.querySelectorAll("#recordsBody tr");
