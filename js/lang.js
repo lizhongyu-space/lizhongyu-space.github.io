@@ -16,7 +16,7 @@
 
   const PAIRS = [
     ["About", "关于"], ["Gallery", "相册"], ["Postcrossing", "明信片交换"], ["Global View", "全球视野"], ["Contact", "联系"],
-    ["Keep Exploring.", "继续探索。"], ["Made with curiosity.", "带着好奇心制作。"],
+    ["Keep Exploring.", "继续探索。"],
 
     ["High School Student", "高中生"], ["Nanjing, China", "中国南京"],
     ["Biology · Photography · Computing · Postcrossing", "生物 · 摄影 · 计算机 · 明信片交换"],
@@ -36,11 +36,11 @@
     ["No photos in this category yet.", "这个分类下还没有照片。"],
 
     ["Sent", "寄出"], ["Received", "收到"], ["Pending", "等待中"], ["Expired", "已过期"],
-    ["Hover a place for a preview · click for details", "将鼠标移到地点上预览 · 点击查看详情"],
+    ["Hover over a place for a preview · click for details", "将鼠标移到地点上预览 · 点击查看详情"],
     ["Records", "记录"], ["Date", "日期"], ["Country", "国家"], ["Type", "类型"], ["Postcard ID", "明信片编号"], ["Status", "状态"],
-    ["Front", "正面"], ["Back", "背面"], ["Click for all records", "点击查看全部记录"],
+    ["Front", "正面"], ["Click for all records", "点击查看全部记录"],
 
-    ["Illustrate", "说明"], ["Get in touch →", "联系我 →"],
+    ["Illustrate", "说明"], ["Get in touch →", "联系 →"],
     ["Global View is a collection of photographs from different places around the world, taken by different people.",
      "Global View 汇集了来自世界各地、由不同人拍摄的照片。"],
     ["Choose how you want to browse: by country, or by person.", "你可以选择按国家或按人物浏览。"],
@@ -51,14 +51,14 @@
     ["Browse photos by where they were taken", "按拍摄地点浏览照片"], ["Browse photos by who took them", "按拍摄者浏览照片"],
     ["← Change", "← 更改"], ["Short description of this photo.", "这张照片的简短说明。"],
 
-    ["Contact", "联系"], ["Get in touch", "联系我"],
+    ["Contact", "联系"], ["Get in touch", "联系"],
     ["I'd love to hear from you. If you'd like to say hello, share something for Global View, or contribute to the site, you can reach me here:",
      "很高兴收到你的消息。如果你想和我打个招呼、为 Global View 分享一些内容，或者参与这个网站，可以通过下面的方式联系我："],
     ["GitHub:", "GitHub："], ["Email:", "邮箱："], ["Apple Messages:", "Apple 信息："],
     ["A little about this site", "关于这个网站"],
     ["💻 This is my personal website, hosted on GitHub Pages and built with HTML, CSS, and JavaScript. I first published it on October 1, 2026, and I'm building it as a small space to learn, experiment, and share the things I'm interested in. I also use it to document my Postcrossing hobby and, through Global View, collect photographs from people I've met along the way. The site is still very much a work in progress — and that's part of the fun. 🌱",
      "💻 这是我的个人网站，托管在 GitHub Pages 上，使用 HTML、CSS 和 JavaScript 构建。它于 2026 年 10 月 1 日首次公开，我把它当作一个学习、尝试和分享兴趣的小空间，也会在这里记录我的 Postcrossing 爱好，并通过 Global View 收集一路上认识的人分享的照片。这个网站还在不断完善中——而这本身也是乐趣的一部分。🌱"],
-    ["Share ↗", "分享 ↗"], ["Message copied ✓", "已复制 ✓"],
+    ["Share ↗", "分享 ↗"], ["Message copied ✓", "已复制 ✓"], ["English", "English"], ["中文", "中文"],
 
     ["This page doesn't exist.", "这个页面不存在。"], ["← Back to About", "← 返回关于页"]
   ];
@@ -130,10 +130,39 @@
   const ctrl = document.createElement("div");
   ctrl.className = "top-ctrl";
   ctrl.setAttribute("data-no-i18n", "");
-  ctrl.innerHTML = `<button type="button" id="langBtn" aria-label="Language"></button><button type="button" id="themeBtn" aria-label="Theme"></button>`;
+  ctrl.innerHTML = `
+    <div class="lang-menu">
+      <button type="button" id="langBtn" aria-label="Language" aria-haspopup="true" aria-expanded="false"></button>
+      <div class="lang-options" id="langOptions" hidden>
+        <button type="button" data-lang="en">English</button>
+        <button type="button" data-lang="zh">中文</button>
+      </div>
+    </div>
+    <button type="button" id="themeBtn" aria-label="Theme"></button>`;
   document.body.appendChild(ctrl);
   const save = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
-  ctrl.querySelector("#langBtn").addEventListener("click", () => { lang = lang === "en" ? "zh" : "en"; save("lang", lang); applyLang(); });
+  const langBtn = ctrl.querySelector("#langBtn");
+  const langOptions = ctrl.querySelector("#langOptions");
+  langBtn.addEventListener("click", () => {
+    const open = langOptions.hidden;
+    langOptions.hidden = !open;
+    langBtn.setAttribute("aria-expanded", String(open));
+  });
+  langOptions.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-lang]");
+    if (!b) return;
+    lang = b.dataset.lang;
+    save("lang", lang);
+    langOptions.hidden = true;
+    langBtn.setAttribute("aria-expanded", "false");
+    applyLang();
+  });
+  document.addEventListener("click", (e) => {
+    if (!ctrl.contains(e.target)) {
+      langOptions.hidden = true;
+      langBtn.setAttribute("aria-expanded", "false");
+    }
+  });
   ctrl.querySelector("#themeBtn").addEventListener("click", () => { theme = theme === "dark" ? "light" : "dark"; save("theme", theme); applyTheme(); applyLang(); });
 
   applyTheme();
