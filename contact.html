@@ -10,14 +10,17 @@
 <style>
 main.contact.narrow { max-width: 900px; }       /* 页面内容宽度（数字越大，每行字越多） */
 .contact h1, .contact h2 { font-size: 26px; }   /* 两个标题（Contact me! 和 Something about this website）使用同样的大小，想改大小只改这个数字 */
-.contact h1 { margin-bottom: 16px; }            /* Contact me! 标题下方的间距 */
-.contact h2 { margin: 56px 0 12px; }            /* Something about this website 标题上下的间距 */
+.contact h1 { margin-bottom: 16px; }
+.contact h2 { margin: 56px 0 12px; }
 .contact p { max-width: none; }                  /* 取消段落宽度限制，让文字铺满上面设置的宽度 */
 .contact .ways { list-style: none; padding: 0; margin: 20px 0 0; }
 .contact .ways li { margin-bottom: 18px; }       /* 三种联系方式之间的间距 */
 .contact .ways .no { color: var(--muted); margin-right: 8px; }   /* (i.) (ii.) (iii.) 序号的颜色 */
 .contact a { border-bottom: 1px solid var(--border); transition: border-color .2s; word-break: break-all; }
 .contact a:hover { border-color: var(--text); }  /* 鼠标移到链接上时，下划线变深 */
+.share-box { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }   /* 页面最下方的分享区域 */
+.share-btn { margin: 0; background: none; font: inherit; font-size: 14px; letter-spacing: .12em; color: var(--text); cursor: pointer; }   /* Share 按钮（样式沿用全站 .btn） */
+#shareMsg { font-size: 13px; }                   /* 点击后出现的提示文字（例如 Message copied） */
 </style>
 </head>
 
@@ -25,25 +28,54 @@ main.contact.narrow { max-width: 900px; }       /* 页面内容宽度（数字�
 <!-- 左侧导航栏和页脚由 js/main.js 自动生成，不用在这里写 -->
 <main class="contact narrow">
   <section>
+    <!-- 这一段是：页面小标题 CONTACT -->
+    <p class="label">CONTACT</p>
+
     <!-- 这一段是：Contact me! 标题 + 说明 + 三种联系方式 -->
     <h1>Contact me!</h1>
     <p>If you want to get in touch with me, upload your content on this website, or contribute to this site, there are several ways to do it:</p>
     <ul class="ways">
-      <!-- (i.) GitHub 仓库链接（和前面的文字在同一行） -->
-      <li><span class="no">(i.)</span>🔗My repository on GitHub: <a href="https://github.com/lizhongyu-space/lizhongyu-space.github.io" target="_blank" rel="noopener">https://github.com/lizhongyu-space/lizhongyu-space.github.io.git</a></li>
+      <!-- (i.) GitHub 仓库链接 -->
+      <li><span class="no">(i.)</span>on GitHub to support me: <a href="https://github.com/lizhongyu-space/lizhongyu-space.github.io" target="_blank" rel="noopener">https://github.com/lizhongyu-space/lizhongyu-space.github.io.git</a></li>
       <!-- (ii.) 邮箱（点击会打开邮件软件） -->
-      <li><span class="no">(ii.)</span>📩Email:<a href="mailto:lzy2504@outlook.com">lzy2504@outlook.com</a></li>
+      <li><span class="no">(ii.)</span>Email：<a href="mailto:lzy2504@outlook.com">lzy2504@outlook.com</a></li>
       <!-- (iii.) Apple 信息（只显示账号，不做链接） -->
-      <li><span class="no">(iii.)</span>📄Apple message:lzy2504@outlook.com</li>
+      <li><span class="no">(iii.)</span>Apple message：lzy2504@outlook.com</li>
     </ul>
 
     <!-- 这一段是：关于这个网站的说明 -->
     <h2>Something about this website</h2>
     <p>💻The webpage you are currently visiting is a personal website about Li Zhongyu, hosted on GitHub and built with HTML, JS, and CSS. 🎉🎉🎉It was first published to the public on October 1, 2026, and will be maintained using ChatGPT, Claude, and Copilot. Please do not attack it maliciously. The purpose of this site is for personal programming learning and sharing a personal introduction for Postcrossing. Anyway, I'm really glad to meet you this way! Wishing you all the best in your future work and life.</p>
+
+    <!-- 这一段是：Share 分享选项（页面最下方）。点击后：手机 / Mac 上会弹出系统自带的分享菜单；不支持时会自动复制整段文字 -->
+    <div class="share-box">
+      <button class="btn share-btn" id="shareBtn" type="button">Share ↗</button>
+      <span class="muted" id="shareMsg" aria-live="polite"></span>
+    </div>
   </section>
 </main>
 
 <!-- 这一段是：加载全站脚本（生成左侧导航和页脚） -->
 <script src="js/main.js"></script>
+
+<!-- 这一段是：Share 按钮的功能。想改分享的内容，只改下面 SHARE_TITLE / SHARE_TEXT / SHARE_MESSAGE 三项 -->
+<script>
+const SHARE_TITLE = "支持我的网站";                                       // 分享内容的标题
+const SHARE_TEXT = "在我网站的global view部分展示你拍的照片";             // 分享时的第一句话（简短的一句）
+const SHARE_MESSAGE = "你好，欢迎访问我的网站https://lizhongyu-space.github.io/about.html 。我的网站刚刚建立，我们设立了global view栏目，主要针对post crossing成员。我们希望你能上传一张你在你们国家拍摄的照片（任何照片都可以，但请是你所拍摄的，不要提交网上下载的照片），可以上传到作者的邮箱📮：lzy2504@outlook.com,或者访问我们网站获得详细信息。我们希望你发来的内容包含以下内容：照片，你的一段阐述，你希望展示的你的昵称，地理位置（你也可以选择不上传）。如果你上传的照片在3张及以内，我们会把他放到汇编合集中，如果你的照片在3张以上，我们会为你专门开辟一个部分来展示，名称使用你在邮件中上传的昵称。网站刚刚建立，希望你的支持";   // 分享的那一大段正文
+
+const SHARE = { title: SHARE_TITLE, text: SHARE_TEXT + "\n\n" + SHARE_MESSAGE };   // 实际分享出去的内容 = 第一句话 + 空一行 + 正文
+const shareBtn = document.getElementById("shareBtn");
+const shareMsg = document.getElementById("shareMsg");
+const say = (t) => { shareMsg.textContent = t; setTimeout(() => (shareMsg.textContent = ""), 2500); };   // 显示提示文字，2.5 秒后消失
+shareBtn.addEventListener("click", async () => {
+  if (navigator.share) {                                           // 优先：调用系统自带的分享菜单
+    try { await navigator.share(SHARE); } catch (e) { /* 用户点了取消，不用处理 */ }
+    return;
+  }
+  try { await navigator.clipboard.writeText(SHARE.text); say("Message copied ✓"); }   // 备选：把整段文字复制到剪贴板
+  catch (e) { window.prompt("Copy this message:", SHARE.text); }                      // 再备选：弹出一个小窗口，让访客手动复制
+});
+</script>
 </body>
 </html>

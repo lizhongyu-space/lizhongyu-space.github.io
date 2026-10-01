@@ -15,3 +15,14 @@ const globalPhotos = [
   { id: 7, image: "", ratio: "1/1", country: "France",  code: "FR", person: "Person A", place: "Paris",     date: "2026-09-08", note: "Short description of this photo." },
   { id: 8, image: "", ratio: "3/4", country: "France",  code: "FR", person: "Person B", place: "Lyon",      date: "2026-09-09", note: "Short description of this photo." }
 ];
+
+// ===== 各个国家在地图上的位置（用首都的经纬度代表这个国家）=====
+// 格式：国家名: { lat: 纬度, lon: 经度 }。北纬 / 东经用正数，南纬 / 西经用负数。
+// 国家名必须和上面照片数据里的 country 写得一模一样。新增一个国家的照片时，也要在这里补一行，否则该国家旁边不会显示地图。
+const countryLocations = {
+  "Japan":   { lat: 35.68, lon: 139.69 },   // 东京
+  "Germany": { lat: 52.52, lon: 13.40 },    // 柏林
+  "USA":     { lat: 38.90, lon: -77.04 },   // 华盛顿
+  "Finland": { lat: 60.17, lon: 24.94 },    // 赫尔辛基
+  "France":  { lat: 48.86, lon: 2.35 }      // 巴黎
+};

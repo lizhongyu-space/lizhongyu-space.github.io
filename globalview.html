@@ -51,6 +51,24 @@
 .gv-group { padding: 32px 0 8px; }
 .gv-group h2 { font-size: 24px; margin-bottom: 18px; }                                                          /* 每一组的标题（国家名或人名） */
 .gv-view[hidden] { display: none; }
+
+/* ---- 以后加新国家要注意：在 globalphotos.js 里新增某个国家的照片时，
+也要在最下面的 countryLocations 里补一行，国家名必须和照片数据里的 country 写得一模一样。
+比如加巴西，就要写一行 "Brazil": { lat: -15.79, lon: -47.88 },（巴西利亚）。
+如果漏了这一行，这个国家的照片照常显示，只是右边没有地图，页面不会出错。 ---- */
+
+/* ---- 4) 每个国家右侧的小地图（只在"按国家"分类时出现） ---- */
+.gv-row.has-map { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 32px; align-items: start; }   /* 左边照片，右边 280px 宽的地图（想改地图大小就改这个 280px） */
+.gv-row.has-map .masonry { column-count: 3; }                                                                   /* 有地图时，照片墙变成 3 列 */
+.gv-map { position: sticky; top: 24px; border: 1px solid var(--border); background: #e9e7e0; }                  /* 小地图的外框（照片很多时，地图会跟着页面滚动停在旁边） */
+.gv-coord { padding: 8px 12px; font-size: 12px; letter-spacing: .12em; color: var(--muted); background: var(--background);
+  border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }                                 /* 地图顶部的经纬度文字 */
+.gv-map svg { display: block; width: 100%; height: auto; }
+.gv-cross { stroke: var(--text); stroke-width: .5; opacity: .35; stroke-dasharray: 3 3; }                       /* 穿过位置的十字虚线（经线和纬线） */
+.gv-pin { fill: var(--text); }                                                                                  /* 位置小圆点 */
+.gv-ring { fill: none; stroke: var(--text); stroke-width: 1.2; }                                                /* 位置外圈 */
+@media (max-width: 1100px) { .gv-row.has-map .masonry { column-count: 2; } }                                    /* 屏幕较窄时，照片墙改成 2 列 */
+@media (max-width: 900px) { .gv-row.has-map { grid-template-columns: 1fr; } .gv-map { position: static; order: -1; } }   /* 屏幕很窄时，地图移到照片上方 */
 </style>
 </head>
 
@@ -109,7 +127,8 @@
   <button class="lb-next" aria-label="Next">›</button>
 </div>
 
-<!-- 这一段是：加载脚本（照片数据 → 全站导航 → 本页逻辑） -->
+<!-- 这一段是：加载脚本（世界地图数据 → 照片数据 → 全站导航 → 本页逻辑） -->
+<script src="js/worldmap.js"></script>
 <script src="js/globalphotos.js"></script>
 <script src="js/main.js"></script>
 <script src="js/globalview.js"></script>

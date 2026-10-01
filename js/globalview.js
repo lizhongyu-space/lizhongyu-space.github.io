@@ -24,6 +24,25 @@
   // 2) 国旗：根据两位国家代码生成国旗符号
   const flag = (code) => [...code.toUpperCase()].map((c) => String.fromCodePoint(127397 + c.charCodeAt(0))).join("");
 
+  // 2.5) 小地图：把世界地图只截取"这个国家附近"的一块，标出位置，并在顶部写出经纬度
+  //      世界地图的图形数据只放进页面一次（#gvWorld），每个国家的小地图都引用它，不会重复占用空间
+  document.body.insertAdjacentHTML("beforeend",
+    `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="gvWorld">` +
+    `<path class="land" d="${WORLD_MAP.land}"/><path class="borders" d="${WORLD_MAP.borders}"/></g></defs></svg>`);
+  const fmt = (lat, lon) =>   // 经纬度显示格式，例如 35.68° N, 139.69° E
+    `${Math.abs(lat).toFixed(2)}° ${lat >= 0 ? "N" : "S"}, ${Math.abs(lon).toFixed(2)}° ${lon >= 0 ? "E" : "W"}`;
+  const miniMap = (loc) => {
+    const { w: MW, h: MH, latTop, latBottom } = WORLD_MAP;
+    const px = (loc.lon + 180) / 360 * MW, py = (latTop - loc.lat) / (latTop - latBottom) * MH;   // 国家位置在世界地图上的坐标
+    const vw = 300, vh = 200;                                                                    // 小地图截取的范围大小（数字越小，放大越多）
+    const vx = Math.max(0, Math.min(px - vw / 2, MW - vw)), vy = Math.max(0, Math.min(py - vh / 2, MH - vh));
+    return `<aside class="gv-map"><div class="gv-coord">${fmt(loc.lat, loc.lon)}</div>` +
+      `<svg viewBox="${vx.toFixed(1)} ${vy.toFixed(1)} ${vw} ${vh}" role="img" aria-label="Map location">` +
+      `<use href="#gvWorld"/>` +
+      `<line class="gv-cross" x1="${vx}" x2="${vx + vw}" y1="${py}" y2="${py}"/><line class="gv-cross" x1="${px}" x2="${px}" y1="${vy}" y2="${vy + vh}"/>` +
+      `<circle class="gv-ring" cx="${px}" cy="${py}" r="8"/><circle class="gv-pin" cx="${px}" cy="${py}" r="3"/></svg></aside>`;
+  };
+
   // 3) 选好分类后，生成真正的照片页面（按国家 / 按人名分组）
   const render = (mode) => {
     const byCountry = mode === "country";
@@ -43,7 +62,9 @@
           (p.image ? `<img src="${p.image}" alt="${p.place}" loading="lazy">` : "") +
           `<figcaption>${p.place}</figcaption></figure>`;
       }).join("");
-      return `<div class="gv-group"><h2>${head} <span class="muted small">${list.length}</span></h2><div class="masonry">${cards}</div></div>`;
+      const loc = byCountry ? countryLocations[name] : null;   // 只有"按国家"分类时，才在右侧显示小地图
+      return `<div class="gv-group"><h2>${head} <span class="muted small">${list.length}</span></h2>` +
+        `<div class="gv-row${loc ? " has-map" : ""}"><div class="masonry">${cards}</div>${loc ? miniMap(loc) : ""}</div></div>`;
     }).join("");
     choice.hidden = true;
     view.hidden = false;
