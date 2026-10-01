@@ -80,6 +80,11 @@
     <div class="gv-choice" id="gvChoice" hidden>
       <button class="gv-big" type="button" data-mode="country"><strong>By Country</strong><span>Browse photos by where they were taken</span></button>
       <button class="gv-big" type="button" data-mode="person"><strong>By Person</strong><span>Browse photos by who took them</span></button>
+      <div class="gv-share">
+        <span>Have a photo you'd like to share with Global View?</span>
+        <button class="btn gv-share-btn" id="gvShareBtn" type="button">Share a photo ↗</button>
+        <span class="gv-share-msg" id="gvShareMsg" aria-live="polite"></span>
+      </div>
     </div>
 
     <!-- 这一段是：第 3 步——真正的照片页面（选好分类后出现） -->
@@ -115,7 +120,7 @@
       <p>Would you like to share a photo from where you are? You're very welcome to get in touch.</p>
     </div>
     <!-- 弹窗底部：跳转到 Contact 页面的选项 -->
-    <div class="mac-foot"><a class="btn" href="contact.html">Get in touch →</a></div>
+    <div class="mac-foot"><button class="btn" id="gvIntroShare" type="button">Share a photo ↗</button></div>
   </div>
 </div>
 
@@ -132,5 +137,36 @@
 <script src="js/globalphotos.js"></script>
 <script src="js/main.js"></script>
 <script src="js/globalview.js"></script>
+<script>
+const GV_SHARE = {
+  en: {
+    title: "Share a photo for Global View",
+    text: "Hi! I'd like to share a photo for the Global View section of your website: https://lizhongyu-space.github.io/globalview.html\n\nI'm sending an original photo that I took. It can be a place, a landscape, a street, a small everyday moment, or anything else that feels meaningful to me. If useful, I've also included a short note, the name or nickname you'd like to use, and the location.\n\nMy name or nickname: [your name]\nLocation: [optional]\nNote: [optional]\n\nI'm sending this to lzy2504@outlook.com. Thank you for creating this space for people to share a little piece of where they are!"
+  },
+  zh: {
+    title: "为 Global View 分享一张照片",
+    text: "你好！我想为你网站的 Global View 分享一张我拍摄的照片：https://lizhongyu-space.github.io/globalview.html\n\n这是一张我自己拍摄的照片，可以是一个地方、风景、街道、日常生活中的小瞬间，或者任何对我来说有意义的画面。如果方便，我也会附上一点简短说明，以及希望你使用的姓名或昵称和拍摄地点。\n\n我的姓名或昵称：[填写姓名或昵称]\n地点：[可选]\n说明：[可选]\n\n我会把这些内容发送到 lzy2504@outlook.com。谢谢你创建这样一个让大家分享自己所在之处的空间！"
+  }
+};
+const gvShare = document.getElementById("gvShareBtn");
+const gvIntroShare = document.getElementById("gvIntroShare");
+const gvShareMsg = document.getElementById("gvShareMsg");
+async function shareGV(){
+  const data = GV_SHARE[localStorage.getItem("lang") === "zh" ? "zh" : "en"];
+  if (navigator.share) {
+    try { await navigator.share(data); } catch (e) {}
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(data.text);
+    gvShareMsg.textContent = localStorage.getItem("lang") === "zh" ? "已复制 ✓" : "Message copied ✓";
+    setTimeout(() => gvShareMsg.textContent = "", 2500);
+  } catch (e) {
+    window.prompt(localStorage.getItem("lang") === "zh" ? "复制这段消息：" : "Copy this message:", data.text);
+  }
+}
+gvShare?.addEventListener("click", shareGV);
+gvIntroShare?.addEventListener("click", shareGV);
+</script>
 </body>
 </html>
