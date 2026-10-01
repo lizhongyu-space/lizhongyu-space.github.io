@@ -48,6 +48,8 @@
     ["Below the enlarged photo you'll find when and where it was taken, and a short note about it.", "放大照片后，你可以看到它的拍摄时间、地点，以及一段简短的说明。"],
     ["Would you like to share a photo from where you are? You're very welcome to get in touch.", "如果你愿意分享一张你所在地方拍摄的照片，欢迎来联系我。"],
     ["By Country", "按国家"], ["By Person", "按人物"],
+    ["Have a photo you'd like to share with Global View?", "有一张照片想分享给 Global View 吗？"],
+    ["Share a photo ↗", "分享照片 ↗"],
     ["Browse photos by where they were taken", "按拍摄地点浏览照片"], ["Browse photos by who took them", "按拍摄者浏览照片"],
     ["← Change", "← 更改"], ["Short description of this photo.", "这张照片的简短说明。"],
 
