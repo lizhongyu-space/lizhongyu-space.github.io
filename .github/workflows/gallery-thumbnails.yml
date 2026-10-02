@@ -1,4 +1,4 @@
-name: Generate Gallery Thumbnails
+name: Generate Gallery Image Derivatives
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 jobs:
-  thumbnails:
+  derivatives:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,7 +28,7 @@ jobs:
       - name: Sync with latest main
         run: git pull --rebase origin main
 
-      - name: Generate WebP thumbnails
+      - name: Generate Gallery derivatives
         run: |
           python <<'PY'
           from pathlib import Path
@@ -38,38 +38,58 @@ jobs:
           pillow_heif.register_heif_opener()
 
           source_root = Path("gallery")
-          target_root = Path("gallery-thumbs")
+          thumb_root = Path("gallery-thumbs")
+          display_root = Path("gallery-display")
           extensions = {".jpg", ".jpeg", ".png", ".heic", ".heif", ".webp"}
+
+          expected_thumbs = set()
+          expected_display = set()
 
           for source in source_root.rglob("*"):
               if not source.is_file() or source.suffix.lower() not in extensions:
                   continue
 
               relative = source.relative_to(source_root)
-              target = target_root / relative.with_suffix(".webp")
-              target.parent.mkdir(parents=True, exist_ok=True)
+              thumb = thumb_root / relative.with_suffix(".webp")
+              display = display_root / relative.with_suffix(".webp")
+              expected_thumbs.add(thumb)
+              expected_display.add(display)
+              thumb.parent.mkdir(parents=True, exist_ok=True)
+              display.parent.mkdir(parents=True, exist_ok=True)
 
               try:
                   with Image.open(source) as image:
                       image = ImageOps.exif_transpose(image)
                       if image.mode not in ("RGB", "RGBA"):
                           image = image.convert("RGBA" if "A" in image.getbands() else "RGB")
-                      image.thumbnail((1200, 1200), Image.Resampling.LANCZOS)
-                      image.save(target, "WEBP", quality=82, method=6)
+
+                      thumb_image = image.copy()
+                      thumb_image.thumbnail((1200, 1200), Image.Resampling.LANCZOS)
+                      thumb_image.save(thumb, "WEBP", quality=82, method=6)
+
+                      display_image = image.copy()
+                      display_image.thumbnail((2400, 2400), Image.Resampling.LANCZOS)
+                      display_image.save(display, "WEBP", quality=85, method=6)
               except Exception as exc:
                   print(f"Skipping {source}: {exc}")
 
-          print("Thumbnail generation complete.")
+          for root, expected in ((thumb_root, expected_thumbs), (display_root, expected_display)):
+              if root.exists():
+                  for old in root.rglob("*"):
+                      if old.is_file() and old not in expected:
+                          old.unlink()
+
+          print("Gallery derivative generation complete.")
           PY
 
-      - name: Commit thumbnails
+      - name: Commit derivatives
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add gallery-thumbs
+          git add gallery-thumbs gallery-display
           if git diff --cached --quiet; then
-            echo "No thumbnail changes."
+            echo "No derivative changes."
             exit 0
           fi
-          git commit -m "Generate Gallery thumbnails"
+          git commit -m "Generate Gallery image derivatives"
           git push
