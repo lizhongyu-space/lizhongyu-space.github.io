@@ -35,22 +35,15 @@ toggle.addEventListener("click", () => {
 syncToggle();
 
 // 2) 照片卡片模板
-// Gallery 卡片使用独立的小型 WebP 缩略图；点击后再加载原始照片。
-const imageUrl = (p) => p.image ? encodeURI(p.image) : "";
+// Gallery 只加载小型 WebP 缩略图；点击照片只展示元数据，不加载大图。
 const thumbUrl = (p) => {
   if (!p.image) return "";
   const path = p.image.replace(/^gallery\//, "gallery-thumbs/");
   return encodeURI(path.replace(/\.[^.]+$/, ".webp"));
 };
-const displayUrl = (p) => {
-  if (!p.image) return "";
-  const path = p.image.replace(/^gallery\//, "gallery-display/");
-  return encodeURI(path.replace(/\.[^.]+$/, ".webp"));
-};
-
 const card = (p, i) =>
   `<figure class="card" data-i="${i}" tabindex="0">` +
-  (p.image ? `<img src="${thumbUrl(p)}" data-full-src="${displayUrl(p)}" data-original-src="${imageUrl(p)}" alt="${p.title}" loading="lazy" decoding="async">` : "") +
+  (p.image ? `<img src="${thumbUrl(p)}" alt="${p.title}" loading="lazy" decoding="async">` : "") +
   `</figure>`;
 
 // 3) Gallery 页面：分类筛选 + 照片墙 + Lightbox
@@ -148,18 +141,8 @@ if (gallery) {
     if (!list.length) return;
     cur = (i + list.length) % list.length;
     const p = list[cur];
-    lb.querySelector(".lb-img").innerHTML = p.image
-      ? `<img src="${displayUrl(p)}" data-original-src="${imageUrl(p)}" alt="${escapeHtml(p.title)}">`
-      : `<div class="ph" style="aspect-ratio:${p.ratio}"></div>`;
     lb.querySelector(".lb-info").innerHTML =
       `<h3>${escapeHtml(p.location || "未记录地点")}</h3><p>${escapeHtml(p.date || "Date not specified")}</p><p class="small">${escapeHtml(p.title || "")}</p>${photoDescription(p)}`;
-    const lbImage = lb.querySelector(".lb-img img");
-    if (lbImage) {
-      lbImage.addEventListener("error", () => {
-        const original = lbImage.dataset.originalSrc;
-        if (original && lbImage.src !== original) lbImage.src = original;
-      }, { once: true });
-    }
     lb.hidden = false;
   };
   const open = (e) => {
