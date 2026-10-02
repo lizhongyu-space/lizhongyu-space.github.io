@@ -82,8 +82,8 @@ const galleryMapMarkup = (list, selectedKey = "") => {
   const points = locations.map(loc => {
     const p = galleryMapProjection(loc.lat, loc.lon);
     return `<g class="gallery-map-point${selectedKey===loc.key?" active":""}" tabindex="0" role="button" data-location-key="${loc.key}" aria-label="${loc.name}">
-      <circle class="halo" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="7"/>
-      <circle class="dot" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.2"/>
+      <circle class="halo" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="5"/>
+      <circle class="dot" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="2.2"/>
     </g>`;
   }).join("");
   const graticules = [20,30,40,50].map(lat => {
