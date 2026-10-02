@@ -71,7 +71,7 @@
     view.hidden = false;
     window.scrollTo(0, 0);
   };
-  choice.addEventListener("click", (e) => { const b = e.target.closest(".gv-big"); if (b) render(b.dataset.mode); });
+  choice.addEventListener("click", (e) => { const b = e.target.closest(".gv-big"); if (b) { currentMode = b.dataset.mode; render(b.dataset.mode); } });
 
   window.addEventListener("site-language-change", () => { if (currentMode) render(currentMode); });
 
