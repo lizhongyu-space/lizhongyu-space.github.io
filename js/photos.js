@@ -77,8 +77,8 @@ const photos = [
     "location": "北京市",
     "date": "2024年07月27日",
     "capturedAt": "2024-07-27T15:21:05+08:00",
-    "description": "这张照片拍于北京，记录古都城市风景与旅途中遇见的一处景象。",
-    "descriptionEn": "Taken in Beijing, this photo captures the historic city's landscape and a scene from the journey."
+    "description": "这张照片拍摄于首都北京，展示清华大学校园，也记录天安门与国家博物院的场景。",
+    "descriptionEn": "Taken in Beijing, this photo shows the campus of Tsinghua University, along with Tiananmen and the National Museum of China."
   },
   {
     "id": 8,
@@ -88,8 +88,8 @@ const photos = [
     "location": "北京市",
     "date": "2024年07月27日",
     "capturedAt": "2024-07-27T15:35:13+08:00",
-    "description": "这张照片拍于北京，记录古都城市风景与旅途中遇见的一处景象。",
-    "descriptionEn": "Taken in Beijing, this photo captures the historic city's landscape and a scene from the journey."
+    "description": "这张照片拍摄于首都北京，展示清华大学校园，也记录天安门与国家博物院的场景。",
+    "descriptionEn": "Taken in Beijing, this photo shows the campus of Tsinghua University, along with Tiananmen and the National Museum of China."
   },
   {
     "id": 9,
@@ -99,8 +99,8 @@ const photos = [
     "location": "北京市",
     "date": "2024年07月27日",
     "capturedAt": "2024-07-27T16:27:15+08:00",
-    "description": "这张照片拍于北京，记录古都城市风景与旅途中遇见的一处景象。",
-    "descriptionEn": "Taken in Beijing, this photo captures the historic city's landscape and a scene from the journey."
+    "description": "这张照片拍摄于首都北京，展示清华大学校园，也记录天安门与国家博物院的场景。",
+    "descriptionEn": "Taken in Beijing, this photo shows the campus of Tsinghua University, along with Tiananmen and the National Museum of China."
   },
   {
     "id": 10,
@@ -110,8 +110,8 @@ const photos = [
     "location": "北京市",
     "date": "2024年07月27日",
     "capturedAt": "2024-07-27T16:30:36+08:00",
-    "description": "这张照片拍于北京，记录古都城市风景与旅途中遇见的一处景象。",
-    "descriptionEn": "Taken in Beijing, this photo captures the historic city's landscape and a scene from the journey."
+    "description": "这张照片拍摄于首都北京，展示清华大学校园，也记录天安门与国家博物院的场景。",
+    "descriptionEn": "Taken in Beijing, this photo shows the campus of Tsinghua University, along with Tiananmen and the National Museum of China."
   },
   {
     "id": 11,
@@ -121,8 +121,8 @@ const photos = [
     "location": "北京市",
     "date": "2024年07月28日",
     "capturedAt": "2024-07-28T11:51:13+08:00",
-    "description": "这张照片拍于北京，记录古都城市风景与旅途中遇见的一处景象。",
-    "descriptionEn": "Taken in Beijing, this photo captures the historic city's landscape and a scene from the journey."
+    "description": "这张照片拍摄于首都北京，展示清华大学校园，也记录天安门与国家博物院的场景。",
+    "descriptionEn": "Taken in Beijing, this photo shows the campus of Tsinghua University, along with Tiananmen and the National Museum of China."
   },
   {
     "id": 12,
@@ -132,8 +132,8 @@ const photos = [
     "location": "北京市",
     "date": "2024年07月28日",
     "capturedAt": "2024-07-28T13:54:17+08:00",
-    "description": "这张照片拍于北京，记录古都城市风景与旅途中遇见的一处景象。",
-    "descriptionEn": "Taken in Beijing, this photo captures the historic city's landscape and a scene from the journey."
+    "description": "这张照片拍摄于首都北京，展示清华大学校园，也记录天安门与国家博物院的场景。",
+    "descriptionEn": "Taken in Beijing, this photo shows the campus of Tsinghua University, along with Tiananmen and the National Museum of China."
   },
   {
     "id": 13,
@@ -143,8 +143,8 @@ const photos = [
     "location": "北京市",
     "date": "2024年07月28日",
     "capturedAt": "2024-07-28T13:56:54+08:00",
-    "description": "这张照片拍于北京，记录古都城市风景与旅途中遇见的一处景象。",
-    "descriptionEn": "Taken in Beijing, this photo captures the historic city's landscape and a scene from the journey."
+    "description": "这张照片拍摄于首都北京，展示清华大学校园，也记录天安门与国家博物院的场景。",
+    "descriptionEn": "Taken in Beijing, this photo shows the campus of Tsinghua University, along with Tiananmen and the National Museum of China."
   },
   {
     "id": 14,
@@ -154,8 +154,8 @@ const photos = [
     "location": "北京市",
     "date": "2024年07月29日",
     "capturedAt": "2024-07-29T05:13:07+08:00",
-    "description": "这张照片拍于北京，记录古都城市风景与旅途中遇见的一处景象。",
-    "descriptionEn": "Taken in Beijing, this photo captures the historic city's landscape and a scene from the journey."
+    "description": "这张照片拍摄于首都北京，展示清华大学校园，也记录天安门与国家博物院的场景。",
+    "descriptionEn": "Taken in Beijing, this photo shows the campus of Tsinghua University, along with Tiananmen and the National Museum of China."
   },
   {
     "id": 15,
@@ -165,8 +165,8 @@ const photos = [
     "location": "南京",
     "date": "2026年03月02日",
     "capturedAt": "2026-03-02T21:45:18+08:00",
-    "description": "这张照片拍于南京，记录城市生活中的一处风景与旅途中的日常瞬间。",
-    "descriptionEn": "Taken in Nanjing, this photo captures an everyday city scene and a moment from the journey."
+    "description": "南京是我目前居住的地方，位于长江附近，也展示了夫子庙、玄武湖等地方的风景。",
+    "descriptionEn": "Nanjing is where I currently live, near the Yangtze River, and this photo set also shows places such as Fuzimiao and Xuanwu Lake."
   },
   {
     "id": 16,
@@ -176,8 +176,8 @@ const photos = [
     "location": "南京市",
     "date": "2025年06月25日",
     "capturedAt": "2025-06-25T08:59:52+08:00",
-    "description": "这张照片拍于南京，记录城市生活中的一处风景与旅途中的日常瞬间。",
-    "descriptionEn": "Taken in Nanjing, this photo captures an everyday city scene and a moment from the journey."
+    "description": "南京是我目前居住的地方，位于长江附近，也展示了夫子庙、玄武湖等地方的风景。",
+    "descriptionEn": "Nanjing is where I currently live, near the Yangtze River, and this photo set also shows places such as Fuzimiao and Xuanwu Lake."
   },
   {
     "id": 17,
@@ -187,8 +187,8 @@ const photos = [
     "location": "南京市",
     "date": "2025年06月25日",
     "capturedAt": "2025-06-25T10:43:04+08:00",
-    "description": "这张照片拍于南京，记录城市生活中的一处风景与旅途中的日常瞬间。",
-    "descriptionEn": "Taken in Nanjing, this photo captures an everyday city scene and a moment from the journey."
+    "description": "南京是我目前居住的地方，位于长江附近，也展示了夫子庙、玄武湖等地方的风景。",
+    "descriptionEn": "Nanjing is where I currently live, near the Yangtze River, and this photo set also shows places such as Fuzimiao and Xuanwu Lake."
   },
   {
     "id": 18,
@@ -198,8 +198,8 @@ const photos = [
     "location": "南京市",
     "date": "2026年03月03日",
     "capturedAt": "2026-03-03T19:58:00+08:00",
-    "description": "这张照片拍于南京，记录城市生活中的一处风景与旅途中的日常瞬间。",
-    "descriptionEn": "Taken in Nanjing, this photo captures an everyday city scene and a moment from the journey."
+    "description": "南京是我目前居住的地方，位于长江附近，也展示了夫子庙、玄武湖等地方的风景。",
+    "descriptionEn": "Nanjing is where I currently live, near the Yangtze River, and this photo set also shows places such as Fuzimiao and Xuanwu Lake."
   },
   {
     "id": 19,
@@ -209,8 +209,8 @@ const photos = [
     "location": "南京市",
     "date": "2026年03月03日",
     "capturedAt": "2026-03-03T20:24:28+08:00",
-    "description": "这张照片拍于南京，记录城市生活中的一处风景与旅途中的日常瞬间。",
-    "descriptionEn": "Taken in Nanjing, this photo captures an everyday city scene and a moment from the journey."
+    "description": "南京是我目前居住的地方，位于长江附近，也展示了夫子庙、玄武湖等地方的风景。",
+    "descriptionEn": "Nanjing is where I currently live, near the Yangtze River, and this photo set also shows places such as Fuzimiao and Xuanwu Lake."
   },
   {
     "id": 20,
@@ -220,8 +220,8 @@ const photos = [
     "location": "南京市",
     "date": "2026年03月03日",
     "capturedAt": "2026-03-03T20:36:56+08:00",
-    "description": "这张照片拍于南京，记录城市生活中的一处风景与旅途中的日常瞬间。",
-    "descriptionEn": "Taken in Nanjing, this photo captures an everyday city scene and a moment from the journey."
+    "description": "南京是我目前居住的地方，位于长江附近，也展示了夫子庙、玄武湖等地方的风景。",
+    "descriptionEn": "Nanjing is where I currently live, near the Yangtze River, and this photo set also shows places such as Fuzimiao and Xuanwu Lake."
   },
   {
     "id": 21,
@@ -231,8 +231,8 @@ const photos = [
     "location": "南京市",
     "date": "2026年07月02日",
     "capturedAt": "2026-07-02T20:55:33+08:00",
-    "description": "这张照片拍于南京，记录城市生活中的一处风景与旅途中的日常瞬间。",
-    "descriptionEn": "Taken in Nanjing, this photo captures an everyday city scene and a moment from the journey."
+    "description": "南京是我目前居住的地方，位于长江附近，也展示了夫子庙、玄武湖等地方的风景。",
+    "descriptionEn": "Nanjing is where I currently live, near the Yangtze River, and this photo set also shows places such as Fuzimiao and Xuanwu Lake."
   },
   {
     "id": 22,
@@ -242,8 +242,8 @@ const photos = [
     "location": "南京市",
     "date": "2026年07月02日",
     "capturedAt": "2026-07-02T20:56:47+08:00",
-    "description": "这张照片拍于南京，记录城市生活中的一处风景与旅途中的日常瞬间。",
-    "descriptionEn": "Taken in Nanjing, this photo captures an everyday city scene and a moment from the journey."
+    "description": "南京是我目前居住的地方，位于长江附近，也展示了夫子庙、玄武湖等地方的风景。",
+    "descriptionEn": "Nanjing is where I currently live, near the Yangtze River, and this photo set also shows places such as Fuzimiao and Xuanwu Lake."
   },
   {
     "id": 23,
@@ -440,8 +440,8 @@ const photos = [
     "location": "威海",
     "date": "2026年08月20日",
     "capturedAt": "2026-08-20T19:39:21+08:00",
-    "description": "这张照片拍于威海，记录海滨城市的海岸、建筑与夜晚的城市风景。",
-    "descriptionEn": "Taken in Weihai, this photo captures the coastal city, its shoreline, buildings, and evening scenery."
+    "description": "这张照片拍于威海，是中国海岸线最东端，记录海滨城市的海岸、建筑与夜晚风景。",
+    "descriptionEn": "Taken in Weihai, at the easternmost end of China's coastline, this photo records the coast, buildings, and nighttime scenery of the seaside city."
   },
   {
     "id": 41,
@@ -451,8 +451,8 @@ const photos = [
     "location": "威海",
     "date": "2026年08月20日",
     "capturedAt": "2026-08-20T19:39:30+08:00",
-    "description": "这张照片拍于威海，记录海滨城市的海岸、建筑与夜晚的城市风景。",
-    "descriptionEn": "Taken in Weihai, this photo captures the coastal city, its shoreline, buildings, and evening scenery."
+    "description": "这张照片拍于威海，是中国海岸线最东端，记录海滨城市的海岸、建筑与夜晚风景。",
+    "descriptionEn": "Taken in Weihai, at the easternmost end of China's coastline, this photo records the coast, buildings, and nighttime scenery of the seaside city."
   },
   {
     "id": 42,
@@ -462,8 +462,8 @@ const photos = [
     "location": "威海",
     "date": "2026年08月20日",
     "capturedAt": "2026-08-20T19:41:06+08:00",
-    "description": "这张照片拍于威海，记录海滨城市的海岸、建筑与夜晚的城市风景。",
-    "descriptionEn": "Taken in Weihai, this photo captures the coastal city, its shoreline, buildings, and evening scenery."
+    "description": "这张照片拍于威海，是中国海岸线最东端，记录海滨城市的海岸、建筑与夜晚风景。",
+    "descriptionEn": "Taken in Weihai, at the easternmost end of China's coastline, this photo records the coast, buildings, and nighttime scenery of the seaside city."
   },
   {
     "id": 43,
@@ -473,8 +473,8 @@ const photos = [
     "location": "威海",
     "date": "2026年08月20日",
     "capturedAt": "2026-08-20T19:42:00+08:00",
-    "description": "这张照片拍于威海，记录海滨城市的海岸、建筑与夜晚的城市风景。",
-    "descriptionEn": "Taken in Weihai, this photo captures the coastal city, its shoreline, buildings, and evening scenery."
+    "description": "这张照片拍于威海，是中国海岸线最东端，记录海滨城市的海岸、建筑与夜晚风景。",
+    "descriptionEn": "Taken in Weihai, at the easternmost end of China's coastline, this photo records the coast, buildings, and nighttime scenery of the seaside city."
   },
   {
     "id": 44,
@@ -484,8 +484,8 @@ const photos = [
     "location": "威海",
     "date": "2026年08月20日",
     "capturedAt": "2026-08-20T19:42:41+08:00",
-    "description": "这张照片拍于威海，记录海滨城市的海岸、建筑与夜晚的城市风景。",
-    "descriptionEn": "Taken in Weihai, this photo captures the coastal city, its shoreline, buildings, and evening scenery."
+    "description": "这张照片拍于威海，是中国海岸线最东端，记录海滨城市的海岸、建筑与夜晚风景。",
+    "descriptionEn": "Taken in Weihai, at the easternmost end of China's coastline, this photo records the coast, buildings, and nighttime scenery of the seaside city."
   },
   {
     "id": 45,
@@ -495,8 +495,8 @@ const photos = [
     "location": "威海市",
     "date": "2026年08月18日",
     "capturedAt": "2026-08-18T22:26:06+08:00",
-    "description": "这张照片拍于威海，记录海滨城市的海岸、建筑与夜晚的城市风景。",
-    "descriptionEn": "Taken in Weihai, this photo captures the coastal city, its shoreline, buildings, and evening scenery."
+    "description": "这张照片拍于威海，是中国海岸线最东端，记录海滨城市的海岸、建筑与夜晚风景。",
+    "descriptionEn": "Taken in Weihai, at the easternmost end of China's coastline, this photo records the coast, buildings, and nighttime scenery of the seaside city."
   },
   {
     "id": 46,
@@ -506,8 +506,8 @@ const photos = [
     "location": "威海市",
     "date": "2026年08月18日",
     "capturedAt": "2026-08-18T22:26:18+08:00",
-    "description": "这张照片拍于威海，记录海滨城市的海岸、建筑与夜晚的城市风景。",
-    "descriptionEn": "Taken in Weihai, this photo captures the coastal city, its shoreline, buildings, and evening scenery."
+    "description": "这张照片拍于威海，是中国海岸线最东端，记录海滨城市的海岸、建筑与夜晚风景。",
+    "descriptionEn": "Taken in Weihai, at the easternmost end of China's coastline, this photo records the coast, buildings, and nighttime scenery of the seaside city."
   },
   {
     "id": 47,
@@ -517,8 +517,8 @@ const photos = [
     "location": "威海市",
     "date": "2026年08月18日",
     "capturedAt": "2026-08-18T22:26:47+08:00",
-    "description": "这张照片拍于威海，记录海滨城市的海岸、建筑与夜晚的城市风景。",
-    "descriptionEn": "Taken in Weihai, this photo captures the coastal city, its shoreline, buildings, and evening scenery."
+    "description": "这张照片拍于威海，是中国海岸线最东端，记录海滨城市的海岸、建筑与夜晚风景。",
+    "descriptionEn": "Taken in Weihai, at the easternmost end of China's coastline, this photo records the coast, buildings, and nighttime scenery of the seaside city."
   },
   {
     "id": 48,
@@ -528,8 +528,8 @@ const photos = [
     "location": "威海市",
     "date": "2026年08月19日",
     "capturedAt": "2026-08-19T23:02:18+08:00",
-    "description": "这张照片拍于威海，记录海滨城市的海岸、建筑与夜晚的城市风景。",
-    "descriptionEn": "Taken in Weihai, this photo captures the coastal city, its shoreline, buildings, and evening scenery."
+    "description": "这张照片拍于威海，是中国海岸线最东端，记录海滨城市的海岸、建筑与夜晚风景。",
+    "descriptionEn": "Taken in Weihai, at the easternmost end of China's coastline, this photo records the coast, buildings, and nighttime scenery of the seaside city."
   },
   {
     "id": 49,
@@ -539,8 +539,8 @@ const photos = [
     "location": "泰安市",
     "date": "2026年02月16日",
     "capturedAt": "2026-02-16T20:26:55+08:00",
-    "description": "这张照片拍于山东旅途中，记录泰安及周边城市与沿途遇见的风景。",
-    "descriptionEn": "Taken during a trip through Shandong, this photo captures Tai'an and scenes along the journey."
+    "description": "这组照片记录中国最重要的节日春节，人们燃放烟花庆祝，也拍摄了泰安的自然风光。",
+    "descriptionEn": "This photo set records the Spring Festival, one of China's most important traditional festivals, including fireworks celebrations and natural scenery in Tai'an."
   },
   {
     "id": 50,
@@ -550,8 +550,8 @@ const photos = [
     "location": "泰安市",
     "date": "2026年02月16日",
     "capturedAt": "2026-02-16T20:26:54+08:00",
-    "description": "这张照片拍于山东旅途中，记录泰安及周边城市与沿途遇见的风景。",
-    "descriptionEn": "Taken during a trip through Shandong, this photo captures Tai'an and scenes along the journey."
+    "description": "这组照片记录中国最重要的节日春节，人们燃放烟花庆祝，也拍摄了泰安的自然风光。",
+    "descriptionEn": "This photo set records the Spring Festival, one of China's most important traditional festivals, including fireworks celebrations and natural scenery in Tai'an."
   },
   {
     "id": 51,
@@ -561,8 +561,8 @@ const photos = [
     "location": "泰安市",
     "date": "2026年02月16日",
     "capturedAt": "2026-02-16T19:46:24+08:00",
-    "description": "这张照片拍于山东旅途中，记录泰安及周边城市与沿途遇见的风景。",
-    "descriptionEn": "Taken during a trip through Shandong, this photo captures Tai'an and scenes along the journey."
+    "description": "这组照片记录中国最重要的节日春节，人们燃放烟花庆祝，也拍摄了泰安的自然风光。",
+    "descriptionEn": "This photo set records the Spring Festival, one of China's most important traditional festivals, including fireworks celebrations and natural scenery in Tai'an."
   },
   {
     "id": 52,
@@ -572,8 +572,8 @@ const photos = [
     "location": "泰安市",
     "date": "2026年02月16日",
     "capturedAt": "2026-02-16T19:46:26+08:00",
-    "description": "这张照片拍于山东旅途中，记录泰安及周边城市与沿途遇见的风景。",
-    "descriptionEn": "Taken during a trip through Shandong, this photo captures Tai'an and scenes along the journey."
+    "description": "这组照片记录中国最重要的节日春节，人们燃放烟花庆祝，也拍摄了泰安的自然风光。",
+    "descriptionEn": "This photo set records the Spring Festival, one of China's most important traditional festivals, including fireworks celebrations and natural scenery in Tai'an."
   },
   {
     "id": 53,
@@ -583,8 +583,8 @@ const photos = [
     "location": "泰安市与济南市",
     "date": "2026年02月18日",
     "capturedAt": "2026-02-18T17:59:30+08:00",
-    "description": "这张照片拍于山东旅途中，记录泰安及周边城市与沿途遇见的风景。",
-    "descriptionEn": "Taken during a trip through Shandong, this photo captures Tai'an and scenes along the journey."
+    "description": "这组照片记录中国最重要的节日春节，人们燃放烟花庆祝，也拍摄了泰安的自然风光。",
+    "descriptionEn": "This photo set records the Spring Festival, one of China's most important traditional festivals, including fireworks celebrations and natural scenery in Tai'an."
   },
   {
     "id": 54,
@@ -594,8 +594,8 @@ const photos = [
     "location": "泰安市与济南市",
     "date": "2026年02月18日",
     "capturedAt": "2026-02-18T18:00:28+08:00",
-    "description": "这张照片拍于山东旅途中，记录泰安及周边城市与沿途遇见的风景。",
-    "descriptionEn": "Taken during a trip through Shandong, this photo captures Tai'an and scenes along the journey."
+    "description": "这组照片记录中国最重要的节日春节，人们燃放烟花庆祝，也拍摄了泰安的自然风光。",
+    "descriptionEn": "This photo set records the Spring Festival, one of China's most important traditional festivals, including fireworks celebrations and natural scenery in Tai'an."
   },
   {
     "id": 55,
@@ -605,8 +605,8 @@ const photos = [
     "location": "泰安市与济南市",
     "date": "2026年02月18日",
     "capturedAt": "2026-02-18T18:14:01+08:00",
-    "description": "这张照片拍于山东旅途中，记录泰安及周边城市与沿途遇见的风景。",
-    "descriptionEn": "Taken during a trip through Shandong, this photo captures Tai'an and scenes along the journey."
+    "description": "这组照片记录中国最重要的节日春节，人们燃放烟花庆祝，也拍摄了泰安的自然风光。",
+    "descriptionEn": "This photo set records the Spring Festival, one of China's most important traditional festivals, including fireworks celebrations and natural scenery in Tai'an."
   },
   {
     "id": 56,
@@ -616,8 +616,8 @@ const photos = [
     "location": "泰安市与济南市",
     "date": "2026年02月18日",
     "capturedAt": "2026-02-18T18:15:40+08:00",
-    "description": "这张照片拍于山东旅途中，记录泰安及周边城市与沿途遇见的风景。",
-    "descriptionEn": "Taken during a trip through Shandong, this photo captures Tai'an and scenes along the journey."
+    "description": "这组照片记录中国最重要的节日春节，人们燃放烟花庆祝，也拍摄了泰安的自然风光。",
+    "descriptionEn": "This photo set records the Spring Festival, one of China's most important traditional festivals, including fireworks celebrations and natural scenery in Tai'an."
   },
   {
     "id": 57,
@@ -627,8 +627,8 @@ const photos = [
     "location": "泰安市与济南市",
     "date": "2026年02月18日",
     "capturedAt": "2026-02-18T18:33:29+08:00",
-    "description": "这张照片拍于山东旅途中，记录泰安及周边城市与沿途遇见的风景。",
-    "descriptionEn": "Taken during a trip through Shandong, this photo captures Tai'an and scenes along the journey."
+    "description": "这组照片记录中国最重要的节日春节，人们燃放烟花庆祝，也拍摄了泰安的自然风光。",
+    "descriptionEn": "This photo set records the Spring Festival, one of China's most important traditional festivals, including fireworks celebrations and natural scenery in Tai'an."
   },
   {
     "id": 58,
@@ -682,8 +682,8 @@ const photos = [
     "location": "泰安市",
     "date": "2026年07月18日",
     "capturedAt": "2026-07-18T17:25:51+08:00",
-    "description": "这张照片拍于泰山，记录登山途中山体、天空与傍晚的自然风景。",
-    "descriptionEn": "Taken on Mount Tai, this photo captures the mountains, sky, and evening scenery along the climb."
+    "description": "这组照片记录中国最重要的节日春节，人们燃放烟花庆祝，也拍摄了泰安的自然风光。",
+    "descriptionEn": "This photo set records the Spring Festival, one of China's most important traditional festivals, including fireworks celebrations and natural scenery in Tai'an."
   },
   {
     "id": 67,
@@ -693,8 +693,8 @@ const photos = [
     "location": "泰安市",
     "date": "2026年07月18日",
     "capturedAt": "2026-07-18T17:26:03+08:00",
-    "description": "这张照片拍于泰山，记录登山途中山体、天空与傍晚的自然风景。",
-    "descriptionEn": "Taken on Mount Tai, this photo captures the mountains, sky, and evening scenery along the climb."
+    "description": "这组照片记录中国最重要的节日春节，人们燃放烟花庆祝，也拍摄了泰安的自然风光。",
+    "descriptionEn": "This photo set records the Spring Festival, one of China's most important traditional festivals, including fireworks celebrations and natural scenery in Tai'an."
   },
   {
     "id": 68,
@@ -704,8 +704,8 @@ const photos = [
     "location": "泰安市",
     "date": "2026年07月18日",
     "capturedAt": "2026-07-18T17:30:03+08:00",
-    "description": "这张照片拍于泰山，记录登山途中山体、天空与傍晚的自然风景。",
-    "descriptionEn": "Taken on Mount Tai, this photo captures the mountains, sky, and evening scenery along the climb."
+    "description": "这组照片记录中国最重要的节日春节，人们燃放烟花庆祝，也拍摄了泰安的自然风光。",
+    "descriptionEn": "This photo set records the Spring Festival, one of China's most important traditional festivals, including fireworks celebrations and natural scenery in Tai'an."
   },
   {
     "id": 69,
@@ -715,8 +715,8 @@ const photos = [
     "location": "泰安市",
     "date": "2026年07月18日",
     "capturedAt": "2026-07-18T17:30:15+08:00",
-    "description": "这张照片拍于泰山，记录登山途中山体、天空与傍晚的自然风景。",
-    "descriptionEn": "Taken on Mount Tai, this photo captures the mountains, sky, and evening scenery along the climb."
+    "description": "这组照片记录中国最重要的节日春节，人们燃放烟花庆祝，也拍摄了泰安的自然风光。",
+    "descriptionEn": "This photo set records the Spring Festival, one of China's most important traditional festivals, including fireworks celebrations and natural scenery in Tai'an."
   },
   {
     "id": 70,
@@ -726,8 +726,8 @@ const photos = [
     "location": "泰安市",
     "date": "2026年07月18日",
     "capturedAt": "2026-07-18T17:30:32+08:00",
-    "description": "这张照片拍于泰山，记录登山途中山体、天空与傍晚的自然风景。",
-    "descriptionEn": "Taken on Mount Tai, this photo captures the mountains, sky, and evening scenery along the climb."
+    "description": "这组照片记录中国最重要的节日春节，人们燃放烟花庆祝，也拍摄了泰安的自然风光。",
+    "descriptionEn": "This photo set records the Spring Festival, one of China's most important traditional festivals, including fireworks celebrations and natural scenery in Tai'an."
   },
   {
     "id": 71,
