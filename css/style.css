@@ -1,200 +1,472 @@
-/* ===== 全站样式：想改颜色/字体，只改这里的变量 ===== */
-:root{
-  --background:#f2f1ed; --text:#242424; --muted:#7a7a75; --border:#d9d7cf; --accent:#4f6358;
-  --serif:"Iowan Old Style","Songti SC","Noto Serif SC",Georgia,serif;
-  --sans:-apple-system,"PingFang SC","Helvetica Neue",Arial,sans-serif;
-  --width:1200px;
-  --nav-w:220px; --nav-w-collapsed:56px;
-  /* 地图连接线颜色：蓝 = 发送，红 = 接收（只用于地图） */
-  --map-sent:#2f6fe0; --map-recv:#d64545;
-  /* 表格状态小圆点颜色（与地图颜色是两套不同含义） */
-  --st-received:#3c9a5f; --st-sent:#4a90d9; --st-pending:#d9a520; --st-expired:#b5b5b0;
-}
-*{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth}
-body{background:var(--background);color:var(--text);font:16px/1.8 var(--sans);animation:fade .8s ease both;
-  padding-left:var(--nav-w);transition:padding-left .25s ease;min-height:100vh}
-html.nav-collapsed body{padding-left:var(--nav-w-collapsed)}
-@keyframes fade{from{opacity:0}}
-a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.3}
-main{max-width:var(--width);margin:0 auto;padding:0 32px}
-section{padding:56px 0}
-.muted{color:var(--muted)}
-.small{font-size:12px}
-.narrow{max-width:700px}
-.label{font-size:12px;letter-spacing:.24em;color:var(--muted);margin-bottom:28px}
 
-/* 左侧竖直导航：展开 220px / 收缩 56px，始终固定在页面左边 */
-.side{position:fixed;left:0;top:0;bottom:0;width:var(--nav-w);z-index:20;display:flex;flex-direction:column;
-  padding:18px 0;background:var(--background);border-right:1px solid var(--border);overflow:hidden;transition:width .25s ease}
-html.nav-collapsed .side{width:var(--nav-w-collapsed)}
-.side-top{display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 22px;height:40px;margin-bottom:28px}
-.logo{font-family:var(--serif);font-size:18px;letter-spacing:.06em;white-space:nowrap}
-.side-toggle{width:32px;height:32px;flex:none;border:1px solid var(--border);border-radius:2px;background:none;color:var(--text);
-  font-size:18px;line-height:1;cursor:pointer;transition:background .2s}
-.side-toggle:hover{background:rgba(0,0,0,.05)}
-.side nav{display:flex;flex-direction:column}
-.side nav a{display:flex;align-items:center;height:42px;padding:0 22px;font-size:13px;letter-spacing:.16em;color:var(--muted);
-  border-left:2px solid transparent;white-space:nowrap;transition:color .2s}
-.side nav a:hover{color:var(--text)}
-.side nav a.active{color:var(--text);border-left-color:var(--accent)}
-.side .ab{display:none;width:100%;text-align:center;font-size:14px;letter-spacing:0}
-html.nav-collapsed .side-top{justify-content:center;padding:0}
-html.nav-collapsed .logo,html.nav-collapsed .side .lbl{display:none}
-html.nav-collapsed .side nav a{padding:0;justify-content:center}
-html.nav-collapsed .side .ab{display:block}
+/* =========================================================
+   LI ZHONGYU · Global Visual System
+   Phase 4 — Minimal Editorial
+   Palette: Cool White · Silver Gray · Muted Blue
+   ========================================================= */
 
-/* 按钮 */
-.btn{display:inline-block;margin-top:12px;padding:10px 26px;border:1px solid var(--text);border-radius:2px;transition:background .2s,color .2s}
-.btn:hover{background:var(--text);color:var(--background)}
+:root {
+  --bg: #f5f7fa;
+  --surface: #ffffff;
+  --surface-soft: #eef2f6;
 
-/* Welcome：极简黑屏 + 终端感打字机 */
-body[data-page=welcome]{background:#000;padding-left:0;overflow:hidden}
-.wl{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;color:#e8e6df;
-  opacity:1;transition:opacity 1s ease}
-.wl-terminal{font-family:"SFMono-Regular","SF Mono",Menlo,Monaco,Consolas,"Liberation Mono",monospace;
-  font-size:clamp(15px,2vw,20px);font-weight:400;letter-spacing:.01em;line-height:1.5;
-  white-space:pre}
-.wl-prompt{color:#8f8f8a}
-.wl-cursor{display:inline-block;width:.52em;height:1.05em;margin-left:.12em;background:#e8e6df;
-  vertical-align:-.16em;animation:terminalCursor .8s steps(1,end) infinite}
-@keyframes terminalCursor{50%{opacity:0}}
-.wl-skip{position:absolute;right:28px;bottom:24px;font-size:12px;letter-spacing:.2em;color:#8a8a84;opacity:.7}
-@media(prefers-reduced-motion:reduce){
-  .wl-cursor{animation:none}
+  --text: #20252b;
+  --text-secondary: #68727d;
+  --text-muted: #98a1ab;
+
+  --line: #dce2e8;
+  --line-strong: #cbd3dc;
+
+  --accent: #527da8;
+  --accent-soft: #e8f0f7;
+  --accent-hover: #3f678d;
+
+  --shadow-soft: 0 8px 30px rgba(42, 54, 68, 0.06);
+  --shadow-hover: 0 14px 38px rgba(42, 54, 68, 0.10);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  --content-width: 1180px;
+  --transition: 180ms ease;
 }
 
-/* About：简洁个人主页 */
-.identity{display:flex;align-items:center;gap:18px;margin-bottom:28px}
-.avatar{width:64px;height:64px;border-radius:50%;border:1px solid var(--border);object-fit:cover;flex:none}
-.identity h1{font-size:26px;letter-spacing:.06em;line-height:1.2}
-.identity p{font-size:14px;line-height:1.6}
-.tags{font-size:14px;letter-spacing:.06em;margin-bottom:48px}
-.about h2{margin:0 0 12px;font-size:22px}
-.about p:not(.muted){max-width:60ch}
-
-/* Gallery 分类 */
-.filters{display:flex;flex-wrap:wrap;gap:8px 28px;margin-bottom:32px}
-.chip{background:none;border:0;border-bottom:1px solid transparent;padding:2px 0;font:inherit;font-size:13px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--muted);cursor:pointer;transition:color .2s}
-.chip:hover{color:var(--text)}
-.chip.active{color:var(--text);border-color:var(--accent)}
-
-/* Gallery 中国地图：总览 + 分类位置 */
-
-/* 照片墙（瀑布流）：列数随屏幕宽度自动变化 */
-.masonry{column-count:2;column-gap:20px}
- .card{break-inside:avoid;margin-bottom:16px;position:relative;overflow:hidden;cursor:pointer;background:#e3e1da;border:1px solid var(--border);min-height:120px}
-.card img{width:100%;height:auto;display:block;transition:transform .5s}
-.card:hover img{transform:scale(1.02)}
-.card figcaption{display:none}
-
-@media(max-width:1200px){.masonry{column-count:2}}
-@media(max-width:900px){.masonry{column-count:2}}
-
-/* 照片信息面板（不加载大图） */
-.lightbox{position:fixed;inset:0;z-index:50;background:rgba(20,20,20,.92);display:flex;align-items:center;
-  justify-content:center;gap:12px;padding:16px;animation:fade .25s ease}
-.lightbox[hidden]{display:none}
-.lb-box{max-width:min(900px,80vw);max-height:92vh;overflow:auto;color:#eee}
-.lb-img img,.lb-img .ph{max-width:100%;max-height:68vh;width:auto;height:auto;display:block;margin:0 auto}
-.lb-img .ph{width:min(560px,70vw);background:#3a3a38}
-.lb-info{padding-top:14px;font-size:14px;line-height:1.7}
-.lb-info h3{font-size:22px}
-.lightbox button{background:none;border:0;color:#eee;font-size:38px;cursor:pointer;padding:8px 14px;line-height:1}
-.lb-close{position:absolute;top:8px;right:12px}
-
-/* Postcrossing：上半部分地图 */
-.pc-top{padding-bottom:24px}
-.map-wrap{position:relative;border:1px solid var(--border);background:#e9e7e0}
-#worldMap{display:block;width:100%;height:auto}
-.land{fill:#d3d1c7}
-.borders{fill:none;stroke:#e9e7e0;stroke-width:.5}
-.arc{fill:none;stroke-width:1.3;opacity:.8}
-.arc.sent{stroke:var(--map-sent)}
-.arc.recv{stroke:var(--map-recv)}
-.arrow.sent{fill:var(--map-sent)}
-.arrow.recv{fill:var(--map-recv)}
-.home{fill:var(--text)}
-.node{cursor:pointer;outline:none}
-.node .hit{fill:transparent}
-.node .pin{fill:var(--text);opacity:0;transition:opacity .15s}
-.node:hover .pin,.node:focus .pin,.node.active .pin{opacity:1}.node.active{transform-box:fill-box;transform-origin:center;transform:scale(1.8);transition:transform .2s ease}
-.legend{display:flex;flex-wrap:wrap;gap:8px 28px;align-items:center;margin-top:14px;font-size:13px}
-.sw{display:inline-block;width:18px;height:3px;border-radius:2px;margin-right:8px;vertical-align:middle}
-.sw.sent{background:var(--map-sent)}
-.sw.recv{background:var(--map-recv)}
-
-/* Hover 预览卡 */
-.pc-card{position:absolute;z-index:5;width:230px;padding:12px;background:var(--background);border:1px solid var(--border);
-  box-shadow:0 6px 24px rgba(0,0,0,.12);pointer-events:none;font-size:13px;line-height:1.6}
-.pc-card[hidden]{display:none}
-.pc-card-h{display:flex;justify-content:space-between;font-family:var(--serif);font-size:16px;margin-bottom:8px}
-.pc-thumbs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
-.pc-thumbs img,.pc-thumbs .ph{width:100%;aspect-ratio:3/2;object-fit:cover;display:flex;align-items:center;justify-content:center}
-.ph{background:#e3e1da;border:1px solid var(--border);color:var(--muted);font-size:11px;letter-spacing:.12em}
-.pc-id{color:var(--muted);font-size:12px}
-
-/* Click 详情 */
-.pc-modal{position:fixed;inset:0;z-index:60;background:rgba(20,20,20,.6);display:flex;align-items:center;justify-content:center;padding:24px;animation:fade .2s ease}
-.pc-modal[hidden]{display:none}
-.pc-panel{position:relative;width:min(640px,100%);max-height:88vh;overflow:auto;padding:28px;background:var(--background);border:1px solid var(--border)}
-.pc-panel h3{font-size:24px;margin-bottom:16px}
-.pc-close{position:absolute;top:8px;right:12px;background:none;border:0;font-size:30px;line-height:1;cursor:pointer;color:var(--text)}
-.pc-rec{padding:16px 0;border-top:1px solid var(--border)}
-.pc-rec-h{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:13px;margin-bottom:12px}
-.pc-rec-img{display:grid;grid-template-columns:1fr;gap:10px}
-.pc-rec-img img,.pc-rec-img .ph{width:100%;aspect-ratio:3/2;object-fit:cover;display:flex;align-items:center;justify-content:center}
-
-/* Postcrossing：下半部分 Records 表格 */
-.pc-records{padding-top:32px}
-.pc-records h2{font-size:24px;margin-bottom:16px}
-.table-scroll{overflow-x:auto}
-.records{width:100%;border-collapse:collapse;font-size:14px}
-.records th{text-align:left;font-weight:400;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.records th,.records td{padding:12px 16px 12px 0;border-bottom:1px solid var(--border);white-space:nowrap}
-.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;background:var(--st-expired)}
-.dot.received{background:var(--st-received)}
-.dot.sent{background:var(--st-sent)}
-.dot.pending{background:var(--st-pending)}
-.dot.expired{background:var(--st-expired)}
-
-/* 404 / 页脚 */
-.center{text-align:center;min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px}
-.center h1{font-size:96px}
-footer{text-align:center;padding:48px 24px;color:var(--muted);font-size:14px;border-top:1px solid var(--border);margin-top:40px;line-height:1.6}
-
-/* 小屏幕：展开的导航盖在内容上方，不再把内容挤走 */
-@media(max-width:720px){
-
-  html:not(.nav-collapsed) body{padding-left:var(--nav-w-collapsed)}
-  html:not(.nav-collapsed) .side{box-shadow:4px 0 24px rgba(0,0,0,.12)}
-  main{padding:0 20px}
-  section{padding:40px 0}
-  .masonry{column-count:2;column-gap:10px}.card{margin-bottom:10px;min-height:90px}
+* {
+  box-sizing: border-box;
 }
-@media(max-width:380px){.masonry{column-count:1}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-/* Gallery photo details: metadata-only modal, no large image requests */
-.photo-intro{margin:10px 0 16px;line-height:1.7;font-size:.98rem}\n.photo-metadata{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.22);font-size:12px;line-height:1.55}
-.photo-metadata p{display:grid;grid-template-columns:108px minmax(0,1fr);gap:12px;margin:0 0 8px}
-.photo-metadata span{color:#c2c2bc}
-.photo-metadata strong{font-weight:500;overflow-wrap:anywhere}
-.photo-metadata-note{display:block!important;margin-top:14px!important;color:var(--muted);font-size:11px;line-height:1.6}
-@media(max-width:600px){.photo-metadata p{grid-template-columns:1fr;gap:2px}}
+html {
+  scroll-behavior: smooth;
+}
 
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "SF Pro Text",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+}
 
-/* Gallery coordinate hover/focus menu: choose a map provider without exposing exact GPS */
-.coordinate-map-list{display:block}
-.coordinate-map-group{position:relative;display:inline-block;margin:0 2px}
-.coordinate-map-value{display:inline-block;color:inherit;border-bottom:1px dashed currentColor;cursor:help;outline-offset:3px}
-.coordinate-map-menu{display:none;position:absolute;left:0;top:calc(100% + 7px);z-index:80;min-width:220px;padding:10px 12px;background:#fff;color:#242424;border:1px solid #d9d7cf;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.18);font-size:12px;font-weight:400;line-height:1.6;white-space:nowrap}
-.coordinate-map-menu::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
-.coordinate-map-group:hover .coordinate-map-menu,.coordinate-map-group:focus-within .coordinate-map-menu{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
-.coordinate-map-menu>span{flex-basis:100%;color:#666}
-.coordinate-map-menu a{display:inline-block;padding:3px 6px;border:1px solid #d9d7cf;border-radius:4px;text-decoration:none;color:#242424}
-.coordinate-map-menu a:hover,.coordinate-map-menu a:focus-visible{background:#f2f1ed;border-color:#7a7a75}
-@media(max-width:600px){.coordinate-map-menu{position:static;margin-top:6px;white-space:normal;min-width:0;box-shadow:none}.coordinate-map-group:hover .coordinate-map-menu,.coordinate-map-group:focus-within .coordinate-map-menu{display:flex}}
+/* =========================================================
+   Links
+   ========================================================= */
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition:
+    color var(--transition),
+    opacity var(--transition);
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* =========================================================
+   Main layout
+   ========================================================= */
+
+main {
+  width: min(
+    calc(100% - 64px),
+    var(--content-width)
+  );
+  margin: 0 auto;
+  padding: 96px 0 120px;
+}
+
+main > section {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 56px;
+}
+
+/* =========================================================
+   Typography
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 0;
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1.15;
+}
+
+h2 {
+  font-size: 28px;
+  line-height: 1.25;
+}
+
+h3 {
+  font-size: 21px;
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+.label {
+  margin-bottom: 18px;
+  color: var(--accent);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+
+button {
+  font: inherit;
+}
+
+button,
+.chip {
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+/* =========================================================
+   Cards / surfaces
+   ========================================================= */
+
+.card,
+.pc-card,
+.gv-group,
+.records,
+.lightbox .lb-box {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+}
+
+/* =========================================================
+   Gallery filters
+   ========================================================= */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 28px 0 34px;
+}
+
+.filters .chip {
+  padding: 8px 15px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.filters .chip:hover {
+  border-color: var(--line-strong);
+  background: var(--surface-soft);
+  color: var(--text);
+}
+
+.filters .chip.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+/* =========================================================
+   Gallery
+   ========================================================= */
+
+.masonry {
+  column-gap: 18px;
+}
+
+.masonry > * {
+  margin-bottom: 18px;
+  break-inside: avoid;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.masonry img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition:
+    transform 300ms ease,
+    filter 300ms ease;
+}
+
+.masonry > *:hover img {
+  transform: scale(1.015);
+  filter: brightness(0.97);
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   Postcrossing
+   ========================================================= */
+
+.records {
+  overflow: hidden;
+}
+
+.records table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.records th {
+  background: var(--surface-soft);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.records th,
+.records td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.records tr:last-child td {
+  border-bottom: 0;
+}
+
+.records tr:hover td {
+  background: #fafbfd;
+}
+
+/* =========================================================
+   Pills
+   ========================================================= */
+
+.status,
+.type,
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 4px 10px;
+
+  border: 1px solid var(--line);
+  border-radius: 999px;
+
+  background: var(--surface-soft);
+  color: var(--text-secondary);
+
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   Global View
+   ========================================================= */
+
+.gv-group {
+  padding: 22px;
+}
+
+.gv-group + .gv-group {
+  margin-top: 14px;
+}
+
+.gv-group:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-hover);
+}
+
+/* =========================================================
+   Contact
+   ========================================================= */
+
+.contact.narrow {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact .ways {
+  margin: 30px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact .ways li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.contact .ways li:last-child {
+  border-bottom: 0;
+}
+
+.contact .no {
+  display: inline-block;
+  width: 34px;
+  color: var(--text-muted);
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+}
+
+/* =========================================================
+   Lightbox
+   ========================================================= */
+
+.lightbox {
+  background: rgba(27, 33, 40, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.lightbox .lb-box {
+  border: 0;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+}
+
+.lb-close,
+.lb-prev,
+.lb-next {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.10);
+  color: #fff;
+  backdrop-filter: blur(8px);
+}
+
+.lb-close:hover,
+.lb-prev:hover,
+.lb-next:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* =========================================================
+   Top controls
+   ========================================================= */
+
+.top-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.top-ctrl button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--text-secondary);
+  backdrop-filter: blur(12px);
+}
+
+.top-ctrl button:hover {
+  border-color: var(--line-strong);
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 800px) {
+  main {
+    width: min(
+      calc(100% - 28px),
+      var(--content-width)
+    );
+    padding: 64px 0 80px;
+  }
+
+  main > section {
+    padding: 32px 24px;
+    border-radius: var(--radius-md);
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  .filters {
+    gap: 6px;
+  }
+
+  .filters .chip {
+    padding: 7px 12px;
+  }
+
+  .records {
+    overflow-x: auto;
+  }
+}
+
+/* =========================================================
+   Dark mode
+   ========================================================= */
+
+html[data-theme="dark"] {
+  --bg: #161a1f;
+  --surface: #1d2228;
+  --surface-soft: #242b33;
+
+  --text: #edf1f5;
+  --text-secondary: #aab3bd;
+  --text-muted: #727c87;
+
+  --line: #303842;
+  --line-strong: #414c58;
+
+  --accent: #79a6d2;
+  --accent-soft: #253546;
+  --accent-hover: #9abde0;
+
+  --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.18);
+  --shadow-hover: 0 14px 38px rgba(0, 0, 0, 0.26);
+}
+
+html[data-theme="dark"] .top-ctrl button {
+  background: rgba(29, 34, 40, 0.86);
+}
+
+html[data-theme="dark"] .records tr:hover td {
+  background: #20262d;
+}
+
