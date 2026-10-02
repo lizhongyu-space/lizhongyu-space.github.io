@@ -82,6 +82,30 @@ body[data-page=welcome]{background:#000;padding-left:0;overflow:hidden}
 .chip:hover{color:var(--text)}
 .chip.active{color:var(--text);border-color:var(--accent)}
 
+/* Gallery 中国地图：总览 + 分类位置 */
+.gallery-map-section{padding:8px 0 42px}
+.gallery-map-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:14px}
+.gallery-map-head .label{margin-bottom:0}
+.gallery-map-note{font-size:12px;color:var(--muted)}
+.gallery-map{position:relative;border:1px solid var(--border);background:#e9e7e0;overflow:hidden}
+.gallery-map svg{display:block;width:100%;height:auto}
+.gallery-map-land{fill:#d3d1c7}
+.gallery-map-border{fill:none;stroke:#e9e7e0;stroke-width:.55}
+.gallery-map-graticule{stroke:var(--border);stroke-width:.5;stroke-dasharray:3 4;opacity:.7}
+.gallery-map-point{cursor:pointer}
+.gallery-map-point .dot{fill:var(--text);stroke:var(--background);stroke-width:1.5;transition:transform .15s,opacity .15s}
+.gallery-map-point .halo{fill:none;stroke:var(--text);stroke-width:1;opacity:0;transition:opacity .15s}
+.gallery-map-point:hover .halo,.gallery-map-point:focus .halo,.gallery-map-point.active .halo{opacity:.45}
+.gallery-map-point:hover .dot,.gallery-map-point:focus .dot,.gallery-map-point.active .dot{transform-box:fill-box;transform-origin:center;transform:scale(1.45)}
+.gallery-map-card{position:absolute;z-index:4;width:220px;padding:13px 14px;background:var(--background);border:1px solid var(--border);box-shadow:0 8px 28px rgba(0,0,0,.12);pointer-events:none;font-size:13px;line-height:1.55}
+.gallery-map-card[hidden]{display:none}
+.gallery-map-card h3{font-size:18px;margin-bottom:4px}
+.gallery-map-coord{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.gallery-map-browse{display:block;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:11px;color:var(--muted);letter-spacing:.06em;pointer-events:auto;cursor:pointer}
+.gallery-map-browse:hover{color:var(--text)}
+.gallery-map-empty{padding:22px;text-align:center;color:var(--muted);font-size:13px;border:1px solid var(--border);background:#e9e7e0}
+.gallery-map-section[hidden]{display:none}
+
 /* 照片墙（瀑布流）：列数随屏幕宽度自动变化 */
 .masonry{column-count:4;column-gap:16px}
  .card{break-inside:avoid;margin-bottom:16px;position:relative;overflow:hidden;cursor:pointer;background:#e3e1da;border:1px solid var(--border);min-height:120px}
@@ -166,6 +190,9 @@ footer{text-align:center;padding:48px 24px;color:var(--muted);font-size:14px;bor
 
 /* 小屏幕：展开的导航盖在内容上方，不再把内容挤走 */
 @media(max-width:720px){
+  .gallery-map-section{padding-bottom:30px}
+  .gallery-map-card{width:190px}
+
   html:not(.nav-collapsed) body{padding-left:var(--nav-w-collapsed)}
   html:not(.nav-collapsed) .side{box-shadow:4px 0 24px rgba(0,0,0,.12)}
   main{padding:0 20px}
