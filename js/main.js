@@ -117,6 +117,7 @@ if (gallery) {
   let list = photos;   // 当前分类 / 地区下的照片
   let cur = 0;
   let locationFilter = "";
+  let currentCategory = "";
   const filters = document.getElementById("filters");
   const empty = document.getElementById("empty");
   const mapSection = document.createElement("section");
@@ -132,12 +133,14 @@ if (gallery) {
   const render = () => {
     gallery.innerHTML = list.map(card).join("");
     empty.hidden = list.length > 0;
+    mapSection.hidden = !currentCategory;
     renderMap();
   };
   filters.innerHTML = ["All", ...categories].map((c, i) =>
     `<button type="button" class="chip${i === 0 ? " active" : ""}" data-cat="${c}">${c}</button>`).join("");
   const applyCategory = (cat) => {
     locationFilter = "";
+    currentCategory = cat || "";
     filters.querySelectorAll(".chip").forEach((x) => x.classList.toggle("active", x.dataset.cat === (cat || "All")));
     list = cat ? photos.filter((p) => p.category === cat) : photos;
     render();
