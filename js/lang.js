@@ -62,7 +62,7 @@
      "💻 这是我的个人网站，托管在 GitHub Pages 上，使用 HTML、CSS 和 JavaScript 构建。它于 2026 年 10 月 1 日首次公开，我把它当作一个学习、尝试和分享兴趣的小空间，也会在这里记录我的 Postcrossing 爱好，并通过 Global View 收集一路上认识的人分享的照片。这个网站还在不断完善中——而这本身也是乐趣的一部分。🌱"],
     ["Share ↗", "分享 ↗"], ["Message copied ✓", "已复制 ✓"], ["English", "English"], ["中文", "中文"],
 
-    ["This page doesn't exist.", "这个页面不存在。"], ["← Back to About", "← 返回关于页"]
+    ["This page doesn't exist.", "这个页面不存在。"], ["← Back to About", "← 返回关于页"],
     ["拍摄地点", "Location"], ["位置参考坐标", "Reference coordinates"], ["拍摄时间", "Date taken"],
     ["原始文件名", "Original filename"], ["文件格式", "File format"],
     ["坐标为城市/地区级参考位置，并非照片原始准确GPS。原始 XMP 文件已移除", "Coordinates are city/region-level reference locations, not the photo's exact original GPS. The original XMP file has been removed."],
