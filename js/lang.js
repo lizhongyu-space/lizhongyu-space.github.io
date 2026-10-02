@@ -63,6 +63,23 @@
     ["Share ↗", "分享 ↗"], ["Message copied ✓", "已复制 ✓"], ["English", "English"], ["中文", "中文"],
 
     ["This page doesn't exist.", "这个页面不存在。"], ["← Back to About", "← 返回关于页"]
+    ["拍摄地点", "Location"], ["位置参考坐标", "Reference coordinates"], ["拍摄时间", "Date taken"],
+    ["原始文件名", "Original filename"], ["文件格式", "File format"],
+    ["坐标为城市/地区级参考位置，并非照片原始准确GPS。原始 XMP 文件已移除", "Coordinates are city/region-level reference locations, not the photo's exact original GPS. The original XMP file has been removed."],
+    ["未记录地点", "Location not recorded"], ["未记录", "Not recorded"],
+    ["未记录可确认的地区参考坐标", "No confirmed regional reference coordinates recorded"],
+    ["要在地图中查看此坐标？", "View these coordinates on a map?"],
+    ["上海", "Shanghai"], ["上海市", "Shanghai"],
+    ["北京", "Beijing"], ["北京市", "Beijing"],
+    ["南京", "Nanjing"], ["南京市", "Nanjing"],
+    ["天津研学", "Tianjin Study Trip"], ["天津市", "Tianjin"],
+    ["太子尖", "Taizijian"], ["太子尖周边", "Taizijian area"],
+    ["杭州", "Hangzhou"], ["杭州市", "Hangzhou"],
+    ["威海", "Weihai"], ["威海市", "Weihai"],
+    ["山东", "Shandong"], ["泰山", "Mount Tai"], ["泰安市", "Tai'an"],
+    ["济南市", "Jinan"], ["泰安市与济南市", "Tai'an and Jinan"],
+    ["我的学校", "My School"], ["连云港", "Lianyungang"], ["连云港市", "Lianyungang"],
+    ["香港", "Hong Kong"], ["澳门特别行政区", "Macao SAR"], ["澳门", "Macao"],
   ];
 
   const WORDS = [
@@ -84,6 +101,13 @@
     const m = o.match(/^(\s*)([\s\S]*?)(\s*)$/);
     const core = m[2].replace(/\s+/g, " ");
     if (!core) return o;
+    const cnDate = core.match(/^(\\d{4})年(\\d{2})月(\\d{2})日$/);
+    if (lang === "en" && cnDate) {
+      const [, y, mo, d] = cnDate;
+      const date = new Date(Number(y), Number(mo) - 1, Number(d));
+      const formatted = new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric" }).format(date);
+      return m[1] + formatted + m[3];
+    }
     if (lang === "en") return toEn.has(core) ? m[1] + toEn.get(core) + m[3] : o;
     if (toZh.has(core.toLowerCase())) return m[1] + toZh.get(core.toLowerCase()) + m[3];
     if (core.length < 90 && node.parentElement.closest(WORD_AREAS)) {
