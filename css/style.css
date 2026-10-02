@@ -185,3 +185,16 @@ footer{text-align:center;padding:48px 24px;color:var(--muted);font-size:14px;bor
 .photo-metadata strong{font-weight:500;overflow-wrap:anywhere}
 .photo-metadata-note{display:block!important;margin-top:14px!important;color:var(--muted);font-size:11px;line-height:1.6}
 @media(max-width:600px){.photo-metadata p{grid-template-columns:1fr;gap:2px}}
+
+
+/* Gallery coordinate hover/focus menu: choose a map provider without exposing exact GPS */
+.coordinate-map-list{display:block}
+.coordinate-map-group{position:relative;display:inline-block;margin:0 2px}
+.coordinate-map-value{display:inline-block;color:inherit;border-bottom:1px dashed currentColor;cursor:help;outline-offset:3px}
+.coordinate-map-menu{display:none;position:absolute;left:0;top:calc(100% + 7px);z-index:80;min-width:220px;padding:10px 12px;background:#fff;color:#242424;border:1px solid #d9d7cf;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.18);font-size:12px;font-weight:400;line-height:1.6;white-space:nowrap}
+.coordinate-map-menu::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px}
+.coordinate-map-group:hover .coordinate-map-menu,.coordinate-map-group:focus-within .coordinate-map-menu{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.coordinate-map-menu>span{flex-basis:100%;color:#666}
+.coordinate-map-menu a{display:inline-block;padding:3px 6px;border:1px solid #d9d7cf;border-radius:4px;text-decoration:none;color:#242424}
+.coordinate-map-menu a:hover,.coordinate-map-menu a:focus-visible{background:#f2f1ed;border-color:#7a7a75}
+@media(max-width:600px){.coordinate-map-menu{position:static;margin-top:6px;white-space:normal;min-width:0;box-shadow:none}.coordinate-map-group:hover .coordinate-map-menu,.coordinate-map-group:focus-within .coordinate-map-menu{display:flex}}
