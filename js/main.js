@@ -36,9 +36,9 @@ syncToggle();
 
 // 2) 照片卡片模板
 const card = (p, i) =>
-  `<figure class="card" data-i="${i}" tabindex="0" style="aspect-ratio:${p.ratio || "4/3"}">` +
+  `<figure class="card" data-i="${i}" tabindex="0">` +
   (p.image ? `<img src="${base}${p.image}" alt="${p.title}" loading="lazy">` : "") +
-  `<figcaption>${p.title}</figcaption></figure>`;
+  `</figure>`;
 
 // 3) Gallery 页面：分类筛选 + 照片墙 + Lightbox
 const gallery = document.getElementById("gallery");
@@ -66,10 +66,10 @@ if (gallery) {
     cur = (i + list.length) % list.length;
     const p = list[cur];
     lb.querySelector(".lb-img").innerHTML = p.image
-      ? `<img src="${p.image}" alt="${p.title}">`
+      ? `<img src="${base}${p.image}" alt="${p.title}">`
       : `<div class="ph" style="aspect-ratio:${p.ratio}"></div>`;
     lb.querySelector(".lb-info").innerHTML =
-      `<h3>${p.title}</h3><p>${p.location} · ${p.date}</p><p>From ${p.sender}</p><p>${p.description}</p>`;
+      `<h3>${p.location}</h3><p>${p.date || "Date not specified"}</p><p class="small">${p.title}</p>`;
     lb.hidden = false;
   };
   const open = (e) => { const c = e.target.closest(".card"); if (c) show(+c.dataset.i); };
