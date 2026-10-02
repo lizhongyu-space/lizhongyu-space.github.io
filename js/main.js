@@ -48,6 +48,64 @@ const displayUrl = (p) => {
   return encodeURI(path.replace(/\.[^.]+$/, ".webp"));
 };
 
+/* Gallery 中国地图：使用现有世界地图数据的中国区域投影，不新增外部地图服务。 */
+const galleryLocationDefs = [
+  { key:"beijing", name:"北京市", lat:39.9042, lon:116.4074, test:p=>/北京/.test(p.location||"") },
+  { key:"shanghai", name:"上海市", lat:31.2304, lon:121.4737, test:p=>/上海/.test(p.location||"") },
+  { key:"nanjing", name:"南京市", lat:32.0603, lon:118.7969, test:p=>/南京|我的学校/.test(p.location||"") },
+  { key:"tianjin", name:"天津市", lat:39.3434, lon:117.3616, test:p=>/天津/.test(p.location||"") },
+  { key:"hangzhou", name:"杭州市（太子尖）", lat:30.2741, lon:120.1551, test:p=>/杭州/.test(p.location||"") || p.category==="太子尖" },
+  { key:"weihai", name:"威海市", lat:37.5131, lon:122.1204, test:p=>/威海/.test(p.location||"") },
+  { key:"taian", name:"泰安市", lat:36.1949, lon:117.1291, test:p=>/泰安/.test(p.location||"") },
+  { key:"jinan", name:"济南市", lat:36.6512, lon:117.1201, test:p=>/济南/.test(p.location||"") },
+  { key:"lianyungang", name:"连云港市", lat:34.5967, lon:119.2229, test:p=>/连云港/.test(p.location||"") },
+  { key:"hongkong", name:"香港", lat:22.3193, lon:114.1694, test:p=>/香港/.test(p.location||"") },
+  { key:"macau", name:"澳门特别行政区", lat:22.1987, lon:113.5439, test:p=>/澳门/.test(p.location||"") }
+];
+const galleryMapFmt = (lat, lon) =>
+  `${Math.abs(lat).toFixed(4)}° ${lat >= 0 ? "N" : "S"}, ${Math.abs(lon).toFixed(4)}° ${lon >= 0 ? "E" : "W"}`;
+const galleryMapProjection = (lat, lon) => ({
+  x:(lon + 180) / 360 * WORLD_MAP.w,
+  y:(WORLD_MAP.latTop - lat) / (WORLD_MAP.latTop - WORLD_MAP.latBottom) * WORLD_MAP.h
+});
+const galleryMapLocations = (list) => galleryLocationDefs.map(def => ({
+  ...def,
+  photos:list.filter(def.test)
+})).filter(x => x.photos.length);
+const galleryMapMarkup = (list, selectedKey = "") => {
+  const locations = galleryMapLocations(list);
+  if (!locations.length) return '<div class="gallery-map-empty">No mapped photo locations yet.</div>';
+  const vx = (72 + 180) / 360 * WORLD_MAP.w;
+  const vy = (55 - WORLD_MAP.latTop) / (WORLD_MAP.latBottom - WORLD_MAP.latTop) * WORLD_MAP.h;
+  const vw = (136 - 72) / 360 * WORLD_MAP.w;
+  const vh = (55 - 18) / (WORLD_MAP.latTop - WORLD_MAP.latBottom) * WORLD_MAP.h;
+  const points = locations.map(loc => {
+    const p = galleryMapProjection(loc.lat, loc.lon);
+    return `<g class="gallery-map-point${selectedKey===loc.key?" active":""}" tabindex="0" role="button" data-location-key="${loc.key}" aria-label="${loc.name}">
+      <circle class="halo" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="7"/>
+      <circle class="dot" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.2"/>
+    </g>`;
+  }).join("");
+  const graticules = [20,30,40,50].map(lat => {
+    const y=galleryMapProjection(lat,72).y;
+    return `<line class="gallery-map-graticule" x1="${vx}" x2="${vx+vw}" y1="${y}" y2="${y}"/>`;
+  }).join("") + [80,100,120,140].map(lon => {
+    const x=galleryMapProjection(18,lon).x;
+    return `<line class="gallery-map-graticule" x1="${x}" x2="${x}" y1="${vy}" y2="${vy+vh}"/>`;
+  }).join("");
+  return `<svg viewBox="${vx.toFixed(1)} ${vy.toFixed(1)} ${vw.toFixed(1)} ${vh.toFixed(1)}" role="img" aria-label="China photo locations">
+    <path class="gallery-map-land" d="${WORLD_MAP.land}"/>
+    <path class="gallery-map-border" d="${WORLD_MAP.borders}"/>
+    ${graticules}${points}
+  </svg>
+  <div class="gallery-map-card" id="galleryMapCard" hidden>
+    <h3 id="galleryMapName"></h3>
+    <div class="gallery-map-coord" id="galleryMapCoord"></div>
+    <div class="gallery-map-coord" id="galleryMapCount"></div>
+    <button class="gallery-map-browse" id="galleryMapBrowse" type="button">浏览该地区</button>
+  </div>`;
+};
+
 const card = (p, i) =>
   `<figure class="card" data-i="${i}" tabindex="0">` +
   (p.image ? `<img src="${thumbUrl(p)}" data-full-src="${displayUrl(p)}" data-original-src="${imageUrl(p)}" alt="${p.title}" loading="lazy" decoding="async">` : "") +
@@ -56,22 +114,84 @@ const card = (p, i) =>
 // 3) Gallery 页面：分类筛选 + 照片墙 + Lightbox
 const gallery = document.getElementById("gallery");
 if (gallery) {
-  let list = photos;   // 当前分类下的照片
+  let list = photos;   // 当前分类 / 地区下的照片
   let cur = 0;
+  let locationFilter = "";
   const filters = document.getElementById("filters");
   const empty = document.getElementById("empty");
+  const mapSection = document.createElement("section");
+  mapSection.className = "gallery-map-section";
+  mapSection.innerHTML = `<div class="gallery-map-head"><p class="label">PHOTO LOCATIONS</p><span class="gallery-map-note">China</span></div><div class="gallery-map" id="galleryMap">${galleryMapMarkup(list)}</div>`;
+  gallery.parentElement.insertBefore(mapSection, filters);
+  const mapEl = () => document.getElementById("galleryMap");
+  const renderMap = () => {
+    const map = mapEl();
+    if (map) map.innerHTML = galleryMapMarkup(list, locationFilter);
+    bindMap();
+  };
   const render = () => {
     gallery.innerHTML = list.map(card).join("");
     empty.hidden = list.length > 0;
+    renderMap();
   };
   filters.innerHTML = ["All", ...categories].map((c, i) =>
     `<button type="button" class="chip${i === 0 ? " active" : ""}" data-cat="${c}">${c}</button>`).join("");
+  const applyCategory = (cat) => {
+    locationFilter = "";
+    filters.querySelectorAll(".chip").forEach((x) => x.classList.toggle("active", x.dataset.cat === (cat || "All")));
+    list = cat ? photos.filter((p) => p.category === cat) : photos;
+    render();
+  };
+  const applyLocation = (key) => {
+    const def = galleryLocationDefs.find(x => x.key === key);
+    if (!def) return;
+    locationFilter = key;
+    filters.querySelectorAll(".chip").forEach((x) => x.classList.toggle("active", x.dataset.cat === "All"));
+    list = photos.filter(def.test);
+    render();
+    document.getElementById("galleryMap")?.querySelector(`.gallery-map-point[data-location-key="${key}"]`)?.classList.add("active");
+    gallery.scrollIntoView({behavior:"smooth", block:"start"});
+  };
   filters.addEventListener("click", (e) => {
     const b = e.target.closest(".chip"); if (!b) return;
-    filters.querySelectorAll(".chip").forEach((x) => x.classList.toggle("active", x === b));
-    list = b.dataset.cat === "All" ? photos : photos.filter((p) => p.category === b.dataset.cat);
-    render();
+    applyCategory(b.dataset.cat === "All" ? "" : b.dataset.cat);
   });
+  let mapHideTimer = null;
+  const bindMap = () => {
+    const map = mapEl(), cardEl = document.getElementById("galleryMapCard");
+    if (!map || !cardEl) return;
+    const showLocation = (key, anchor) => {
+      const def = galleryLocationDefs.find(x => x.key === key);
+      if (!def) return;
+      const count = galleryMapLocations(list).find(x => x.key === key)?.photos.length || 0;
+      const rect = map.getBoundingClientRect(), a = anchor.getBoundingClientRect();
+      cardEl.querySelector("#galleryMapName").textContent = def.name;
+      cardEl.querySelector("#galleryMapCoord").textContent = galleryMapFmt(def.lat, def.lon);
+      cardEl.querySelector("#galleryMapCount").textContent = `${count} ${count === 1 ? "photo" : "photos"}`;
+      cardEl.hidden = false;
+      const left = Math.min(Math.max(a.left - rect.left + 12, 8), rect.width - cardEl.offsetWidth - 8);
+      const top = Math.min(Math.max(a.top - rect.top + 12, 8), rect.height - cardEl.offsetHeight - 8);
+      cardEl.style.left = left + "px";
+      cardEl.style.top = top + "px";
+      cardEl.dataset.locationKey = key;
+      map.querySelectorAll(".gallery-map-point").forEach(p => p.classList.toggle("active", p.dataset.locationKey === key));
+      clearTimeout(mapHideTimer);
+    };
+    const scheduleHide = () => { clearTimeout(mapHideTimer); mapHideTimer = setTimeout(() => { if (!cardEl.matches(":hover")) cardEl.hidden = true; }, 120); };
+    map.querySelectorAll(".gallery-map-point").forEach(point => {
+      point.addEventListener("mouseenter", () => showLocation(point.dataset.locationKey, point));
+      point.addEventListener("mouseleave", scheduleHide);
+      point.addEventListener("focus", () => showLocation(point.dataset.locationKey, point));
+      point.addEventListener("blur", scheduleHide);
+      point.addEventListener("click", () => showLocation(point.dataset.locationKey, point));
+    });
+    cardEl.addEventListener("mouseenter", () => clearTimeout(mapHideTimer));
+    cardEl.addEventListener("mouseleave", scheduleHide);
+    cardEl.querySelector("#galleryMapBrowse")?.addEventListener("click", () => {
+      applyLocation(cardEl.dataset.locationKey);
+      cardEl.hidden = true;
+    });
+  };
   render();
 
   const lb = document.getElementById("lightbox");
