@@ -9,6 +9,7 @@
   const lb = document.getElementById("lightbox");
   let flat = [];   // 当前页面上所有照片（按显示顺序），大图查看的上一张 / 下一张用它
   let cur = 0;
+  let currentMode = null;
 
   // 1) Illustrate 弹窗：红色按钮关闭（关闭后出现分类选择），绿色按钮放大 / 还原
   const closeIntro = () => { if (intro.hidden) return; intro.hidden = true; if (view.hidden) choice.hidden = false; };
@@ -72,6 +73,8 @@
   };
   choice.addEventListener("click", (e) => { const b = e.target.closest(".gv-big"); if (b) render(b.dataset.mode); });
 
+  window.addEventListener("site-language-change", () => { if (currentMode) render(currentMode); });
+
   // 4) "← Change"：回到分类选择
   document.getElementById("gvBack").addEventListener("click", () => {
     view.hidden = true; choice.hidden = false; lb.hidden = true;
@@ -81,12 +84,13 @@
   const show = (i) => {
     cur = (i + flat.length) % flat.length;
     const p = flat[cur];
+    const en = document.documentElement.lang !== "zh-CN";
     lb.querySelector(".lb-img").innerHTML = p.image
       ? `<img src="${p.image}" alt="${p.place}">`
       : `<div class="ph" style="aspect-ratio:${p.ratio}"></div>`;
     lb.querySelector(".lb-info").innerHTML =
       `<h3>${p.place}, ${p.country}</h3>` +
-      `<p>Date · ${p.date}</p><p>From · ${p.person}</p><p>${p.note}</p>`;
+      `<p>${en ? "Date" : "日期"} · ${p.date}</p><p>${en ? "From" : "来自"} · ${p.person}</p><p>${p.note}</p>`;
     lb.hidden = false;
   };
   const open = (e) => { const c = e.target.closest(".card"); if (c) show(+c.dataset.i); };
