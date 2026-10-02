@@ -141,8 +141,10 @@ if (gallery) {
     if (!list.length) return;
     cur = (i + list.length) % list.length;
     const p = list[cur];
+    const isEnglish = document.documentElement.lang !== "zh-CN";
+    const intro = isEnglish ? (p.descriptionEn || p.description || "A brief description of this photo.") : (p.description || p.descriptionEn || "这张照片的简短说明。");
     lb.querySelector(".lb-info").innerHTML =
-      `<h3>${escapeHtml(p.location || "未记录地点")}</h3><p>${escapeHtml(p.date || "Date not specified")}</p><p class="small">${escapeHtml(p.title || "")}</p>${photoDescription(p)}`;
+      `<h3>${escapeHtml(p.location || (isEnglish ? "Location not recorded" : "未记录地点"))}</h3><p>${escapeHtml(p.date || (isEnglish ? "Date not specified" : "未记录"))}</p><p class="small">${escapeHtml(p.title || "")}</p><p class="photo-intro">${escapeHtml(intro)}</p>${photoDescription(p)}`;
     lb.hidden = false;
   };
   const open = (e) => {
