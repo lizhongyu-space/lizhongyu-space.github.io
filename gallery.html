@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<!-- 【修改】默认语言改为 en，和网站默认英文一致 -->
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,18 +10,21 @@
 <body data-page="gallery">
 <main>
   <section>
+    <!-- 这一段是：页面标题、分类筛选按钮、照片墙、"该分类暂无照片"提示 -->
     <p class="label">MY GALLERY</p>
     <div id="filters" class="filters" role="tablist" aria-label="Categories"></div>
     <div id="gallery" class="masonry"></div>
     <p id="empty" class="muted" hidden>No photos in this category yet.</p>
   </section>
 </main>
+<!-- 这一段是：点击照片后弹出的信息框（关闭、上一张、下一张） -->
 <div id="lightbox" class="lightbox" hidden>
   <button class="lb-close" aria-label="Close">×</button>
   <button class="lb-prev" aria-label="Previous">‹</button>
   <div class="lb-box"><div class="lb-info"></div></div>
   <button class="lb-next" aria-label="Next">›</button>
 </div>
+<!-- 这一段是：加载照片数据和全站脚本 -->
 <script src="js/photos.js"></script>
 <script src="js/main.js?v=20261002-metadata-only"></script>
 </body>

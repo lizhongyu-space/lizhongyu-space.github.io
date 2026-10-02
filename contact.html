@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<!-- 【修改】默认语言改为 en（网站默认英文），切换语言时 lang.js 会自动改成 zh-CN 或 en -->
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact · LI ZHONGYU</title>
 <link rel="stylesheet" href="css/style.css">
 
+<!-- 这一段是：Contact 页面自己的样式（宽度、标题、联系方式列表、分享按钮） -->
 <style>
 main.contact.narrow { max-width: 900px; }
 .contact h1, .contact h2 { font-size: 26px; }
@@ -28,22 +30,26 @@ main.contact.narrow { max-width: 900px; }
   <section>
     <p class="label">CONTACT</p>
 
+    <!-- 这一段是：标题和开头的联系邀请。注意：这里的英文句子必须和 js/lang.js 词典里的完全一致，否则切换中文时不会被翻译 -->
     <h1>Get in touch</h1>
-    <p>I'd love to hear from you. If you'd like to ask me about something , share something for Global View, or contribute to the site, you can reach me here:</p>
+    <p>I'd love to hear from you. If you'd like to ask me about something, share something for Global View, or contribute to the site, you can reach me here:</p>
+
+    <!-- 这一段是：三种联系方式（GitHub、邮箱、Apple 信息） -->
     <ul class="ways">
       <li><span class="no">(i.)</span>GitHub: <a href="https://github.com/lizhongyu-space/lizhongyu-space.github.io" target="_blank" rel="noopener">lizhongyu-space/lizhongyu-space.github.io</a></li>
       <li><span class="no">(ii.)</span>Email: <a href="mailto:lzy2504@outlook.com">lzy2504@outlook.com</a></li>
       <li><span class="no">(iii.)</span>Apple Messages: lzy2504@outlook.com</li>
     </ul>
 
+    <!-- 这一段是：关于这个网站的介绍。英文句子同样必须和 js/lang.js 里的一致 -->
     <h2>A little about this site</h2>
     <p>💻 This is my personal website, hosted on GitHub Pages and built with HTML, CSS, and JavaScript. It existed on the world's internet on October 1, 2026, because that's the day its GitHub repository was first created, and I'm building it as a space to learn, experiment, and share the things I'm interested in. I also use it to document my Postcrossing hobby and, through Global View, collect photographs from people I've met along the way. The site is still very much a work in progress — and that's part of the fun. 🌱</p>
 
   </section>
 </main>
 
+<!-- 这一段是：加载全站脚本（导航、页脚，并由它再加载语言/主题切换） -->
 <script src="js/main.js"></script>
-
 
 </body>
 </html>
