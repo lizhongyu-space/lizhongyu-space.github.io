@@ -66,11 +66,11 @@ Object.values(groups).forEach((g) => {
 const showCard = (node) => {
   const g = groups[node.dataset.code], p = g.records[0];
   cardEl.innerHTML =
-    `<div class="pc-card-h"><span>${flag(g.flagCode)} ${g.country}</span>${g.records.length > 1 ? `<span class="muted">${g.records.length} cards</span>` : ""}</div>` +
+    `<div class="pc-card-h"><span>${flag(g.flagCode)} ${g.country}</span>${g.records.length > 1 ? `<span class="muted">${g.records.length} ${document.documentElement.lang !== "zh-CN" ? "cards" : "张"}</span>` : ""}</div>` +
     `<div class="pc-meta">${sw(p.type)} · ${primaryDate(p)}</div>` +
     `<div class="pc-id">${p.id}</div>` +
     `<div class="muted small">${p.member}</div>` +
-    (g.records.length > 1 ? `<div class="muted small">Click for all records</div>` : "");
+    (g.records.length > 1 ? `<div class="muted small">${document.documentElement.lang !== "zh-CN" ? "Click for all records" : "点击查看全部记录"}</div>` : "");
   cardEl.hidden = false;
   const wr = wrap.getBoundingClientRect(), nr = node.querySelector(".pin").getBoundingClientRect();
   const cw = cardEl.offsetWidth, ch = cardEl.offsetHeight;
@@ -92,7 +92,7 @@ const openDetail = (code) => {
   detail.innerHTML = `<h3>${flag(g.code)} ${g.country}</h3>` + g.records.map((p) =>
     `<article class="pc-rec"><div class="pc-rec-h"><span>${p.id}</span><span>${dot(p.type)}</span></div>` +
     `<p><strong>${p.member}</strong></p>` +
-    `<p class="muted">Sent: ${p.sentDate}<br>Received: ${p.receivedDate}</p></article>`).join("");
+    `<p class="muted">${document.documentElement.lang !== "zh-CN" ? "Sent" : "寄出"}: ${p.sentDate}<br>${document.documentElement.lang !== "zh-CN" ? "Received" : "收到"}: ${p.receivedDate}</p></article>`).join("");
   modal.hidden = false;
   hideCard();
 };
