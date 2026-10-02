@@ -35,14 +35,14 @@ toggle.addEventListener("click", () => {
 syncToggle();
 
 // 2) 照片卡片模板
-const imageUrl = (p) => p.image ? encodeURI(new URL(p.image, document.baseURI).href) : "";
-const rawImageUrl = (p) => p.image
+// 图片统一从 GitHub Raw 读取，避免 GitHub Pages 对中文路径、空格和特殊字符的解析差异
+const imageUrl = (p) => p.image
   ? "https://raw.githubusercontent.com/lizhongyu-space/lizhongyu-space.github.io/main/" + p.image.split("/").map(encodeURIComponent).join("/")
   : "";
 
 const card = (p, i) =>
   `<figure class="card" data-i="${i}" tabindex="0">` +
-  (p.image ? `<img src="${imageUrl(p)}" data-raw-src="${rawImageUrl(p)}" alt="${p.title}" loading="lazy" onerror="if(this.dataset.rawSrc && this.src !== this.dataset.rawSrc){this.src=this.dataset.rawSrc;}">` : "") +
+  (p.image ? `<img src="${imageUrl(p)}" alt="${p.title}" loading="lazy">` : "") +
   `</figure>`;
 
 // 3) Gallery 页面：分类筛选 + 照片墙 + Lightbox
@@ -71,7 +71,7 @@ if (gallery) {
     cur = (i + list.length) % list.length;
     const p = list[cur];
     lb.querySelector(".lb-img").innerHTML = p.image
-      ? `<img src="${imageUrl(p)}" data-raw-src="${rawImageUrl(p)}" alt="${p.title}" onerror="if(this.dataset.rawSrc && this.src !== this.dataset.rawSrc){this.src=this.dataset.rawSrc;}">`
+      ? `<img src="${imageUrl(p)}" alt="${p.title}">`
       : `<div class="ph" style="aspect-ratio:${p.ratio}"></div>`;
     lb.querySelector(".lb-info").innerHTML =
       `<h3>${p.location}</h3><p>${p.date || "Date not specified"}</p><p class="small">${p.title}</p>`;
