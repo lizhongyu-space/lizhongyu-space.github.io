@@ -35,12 +35,17 @@ toggle.addEventListener("click", () => {
 syncToggle();
 
 // 2) 照片卡片模板
-// 图片直接使用 GitHub Pages 本站路径；encodeURI 处理中文目录、空格和特殊字符
+// Gallery 卡片使用独立的小型 WebP 缩略图；点击后再加载原始照片。
 const imageUrl = (p) => p.image ? encodeURI(p.image) : "";
+const thumbUrl = (p) => {
+  if (!p.image) return "";
+  const path = p.image.replace(/^gallery\//, "gallery-thumbs/");
+  return encodeURI(path.replace(/\.[^.]+$/, ".webp"));
+};
 
 const card = (p, i) =>
   `<figure class="card" data-i="${i}" tabindex="0">` +
-  (p.image ? `<img src="${imageUrl(p)}" alt="${p.title}">` : "") +
+  (p.image ? `<img src="${thumbUrl(p)}" data-full-src="${imageUrl(p)}" alt="${p.title}" loading="lazy" decoding="async">` : "") +
   `</figure>`;
 
 // 3) Gallery 页面：分类筛选 + 照片墙 + Lightbox
