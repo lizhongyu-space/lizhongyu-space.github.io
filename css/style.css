@@ -179,7 +179,7 @@ footer{text-align:center;padding:48px 24px;color:var(--muted);font-size:14px;bor
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* Gallery photo details: metadata-only modal, no large image requests */
-.photo-metadata{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.22);font-size:12px;line-height:1.55}
+.photo-intro{margin:10px 0 16px;line-height:1.7;font-size:.98rem}\n.photo-metadata{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.22);font-size:12px;line-height:1.55}
 .photo-metadata p{display:grid;grid-template-columns:108px minmax(0,1fr);gap:12px;margin:0 0 8px}
 .photo-metadata span{color:#c2c2bc}
 .photo-metadata strong{font-weight:500;overflow-wrap:anywhere}
