@@ -82,8 +82,9 @@ if (gallery) {
   const formatCoordinate = ({lat,lon}) =>
     `${Math.abs(lat).toFixed(4)}° ${lat >= 0 ? "N" : "S"}, ${Math.abs(lon).toFixed(4)}° ${lon >= 0 ? "E" : "W"}`;
   const photoDescription = (p) => {
-    const fileName = (p.image || "").split("/").pop() || p.title || "未记录";
-    const fileFormat = fileName.includes(".") ? fileName.split(".").pop().toUpperCase() : "未记录";
+    const en = document.documentElement.lang !== "zh-CN";
+    const fileName = (p.image || "").split("/").pop() || p.title || (en ? "Not recorded" : "未记录");
+    const fileFormat = fileName.includes(".") ? fileName.split(".").pop().toUpperCase() : (en ? "Not recorded" : "未记录");
     const refs = photoCoordinateRefs(p);
     const coordinateHtml = refs.length
       ? refs.map(ref => {
@@ -93,32 +94,65 @@ if (gallery) {
           const googleUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
           const appleUrl = `https://maps.apple.com/?ll=${encodeURIComponent(query)}&q=${encodeURIComponent(ref.name)}`;
           const bingUrl = `https://www.bing.com/maps?cp=${encodeURIComponent(`${lat}~${lon}`)}&lvl=12`;
+          const names = {
+            "泰安市": en ? "Tai'an" : "泰安市", "济南市": en ? "Jinan" : "济南市",
+            "澳门特别行政区": en ? "Macao SAR" : "澳门特别行政区", "香港": en ? "Hong Kong" : "香港",
+            "北京市": en ? "Beijing" : "北京市", "上海市": en ? "Shanghai" : "上海市",
+            "南京市": en ? "Nanjing" : "南京市", "天津市": en ? "Tianjin" : "天津市",
+            "太子尖周边": en ? "Taizijian area" : "太子尖周边", "杭州市": en ? "Hangzhou" : "杭州市",
+            "威海市": en ? "Weihai" : "威海市", "连云港市": en ? "Lianyungang" : "连云港市"
+          };
+          const displayName = names[ref.name] || ref.name;
+          const prompt = en ? "View these coordinates on a map?" : "要在地图中查看此坐标？";
           return `<span class="coordinate-map-group">
-            <span class="coordinate-map-value" tabindex="0" aria-label="查看${escapeHtml(ref.name)}地图：${escapeHtml(formatCoordinate(ref))}">${escapeHtml(ref.name)}：${escapeHtml(formatCoordinate(ref))}</span>
-            <span class="coordinate-map-menu" role="group" aria-label="选择地图网站">
-              <span>要在地图中查看此坐标？</span>
+            <span class="coordinate-map-value" tabindex="0" aria-label="${en ? "View " + escapeHtml(displayName) + " on a map: " + escapeHtml(formatCoordinate(ref)) : "查看" + escapeHtml(displayName) + "地图：" + escapeHtml(formatCoordinate(ref))}">${escapeHtml(displayName)}：${escapeHtml(formatCoordinate(ref))}</span>
+            <span class="coordinate-map-menu" role="group" aria-label="${en ? "Choose a map service" : "选择地图网站"}">
+              <span>${prompt}</span>
               <a href="${googleUrl}" target="_blank" rel="noopener noreferrer">Google Maps</a>
               <a href="${appleUrl}" target="_blank" rel="noopener noreferrer">Apple Maps</a>
               <a href="${bingUrl}" target="_blank" rel="noopener noreferrer">Microsoft Maps</a>
             </span>
           </span>`;
-        }).join("；")
-      : "未记录可确认的地区参考坐标";
+        }).join(en ? "; " : "；")
+      : (en ? "No confirmed regional reference coordinates recorded" : "未记录可确认的地区参考坐标");
     const captured = p.capturedAt
       ? p.capturedAt.replace("T", " ").replace(/[+-]\d{2}:\d{2}$/, "")
-      : (p.date || "未记录");
+      : (p.date || (en ? "Not recorded" : "未记录"));
+    const location = p.location || (en ? "Location not recorded" : "未记录地点");
+    const labels = en
+      ? ["Location", "Reference coordinates", "Date taken", "Original filename", "File format"]
+      : ["拍摄地点", "位置参考坐标", "拍摄时间", "原始文件名", "文件格式"];
+    const note = en
+      ? "Coordinates are city/region-level reference locations, not the photo's exact original GPS. The original XMP file has been removed."
+      : "坐标为城市/地区级参考位置，并非照片原始准确GPS。原始 XMP 文件已移除";
     return `<div class="photo-metadata">
-      <p><span>拍摄地点</span><strong>${escapeHtml(p.location || "未记录")}</strong></p>
-      <p><span>位置参考坐标</span><strong class="coordinate-map-list">${coordinateHtml}</strong></p>
-      <p><span>拍摄时间</span><strong>${escapeHtml(captured)}</strong></p>
-      <p><span>原始文件名</span><strong>${escapeHtml(fileName)}</strong></p>
-      <p><span>文件格式</span><strong>${escapeHtml(fileFormat)}</strong></p>
-      <p class="photo-metadata-note">坐标为城市/地区级参考位置，并非照片原始准确GPS。原始 XMP 文件已移除</p>
+      <p><span>${labels[0]}</span><strong>${escapeHtml(location)}</strong></p>
+      <p><span>${labels[1]}</span><strong class="coordinate-map-list">${coordinateHtml}</strong></p>
+      <p><span>${labels[2]}</span><strong>${escapeHtml(captured)}</strong></p>
+      <p><span>${labels[3]}</span><strong>${escapeHtml(fileName)}</strong></p>
+      <p><span>${labels[4]}</span><strong>${escapeHtml(fileFormat)}</strong></p>
+      <p class="photo-metadata-note">${note}</p>
     </div>`;
   };
 
-  filters.innerHTML = ["All", ...categories].map((c, i) =>
-    `<button type="button" class="chip${i === 0 ? " active" : ""}" data-cat="${escapeHtml(c)}">${escapeHtml(c)}</button>`).join("");
+  const categoryNames = {
+    "All": ["All", "全部"], "自然": ["Nature", "自然"], "城市": ["City", "城市"],
+    "旅行": ["Travel", "旅行"], "日常": ["Daily", "日常"], "其他": ["Other", "其他"],
+    "上海": ["Shanghai", "上海"], "北京": ["Beijing", "北京"], "南京": ["Nanjing", "南京"],
+    "天津研学": ["Tianjin Study Trip", "天津研学"], "太子尖": ["Taizijian", "太子尖"],
+    "威海": ["Weihai", "威海"], "山东": ["Shandong", "山东"], "泰山": ["Mount Tai", "泰山"],
+    "我的学校": ["My School", "我的学校"], "连云港": ["Lianyungang", "连云港"],
+    "香港": ["Hong Kong", "香港"]
+  };
+  const renderFilters = () => {
+    const en = document.documentElement.lang !== "zh-CN";
+    filters.innerHTML = ["All", ...categories].map((c, i) => {
+      const pair = categoryNames[c] || [c, c];
+      const label = en ? pair[0] : pair[1];
+      return `<button type="button" class="chip${i === 0 ? " active" : ""}" data-cat="${escapeHtml(c)}">${escapeHtml(label)}</button>`;
+    }).join("");
+  };
+  renderFilters();
 
   const render = () => {
     gallery.innerHTML = list.map(card).join("");
@@ -135,6 +169,7 @@ if (gallery) {
     applyCategory(b.dataset.cat === "All" ? "" : b.dataset.cat);
   });
   render();
+  window.addEventListener("site-language-change", renderFilters);
 
   const lb = document.getElementById("lightbox");
   const show = (i) => {
