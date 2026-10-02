@@ -9,10 +9,9 @@ const { w: MW, h: MH, latTop, latBottom } = WORLD_MAP;
 
 const project = (lon, lat) => [(lon + 180) / 360 * MW, (latTop - lat) / (latTop - latBottom) * MH];
 const flag = (code) => [...code.toUpperCase()].map((c) => String.fromCodePoint(127397 + c.charCodeAt(0))).join("");
-const label = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 const el = (tag, attrs = {}) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; };
-const dot = (status) => `<span class="dot ${status}"></span>${label(status)}`;
-const sw = (type) => `<i class="sw ${type === "sent" ? "sent" : "recv"}"></i>${label(type)}`;
+const dot = (status) => { const en = document.documentElement.lang !== "zh-CN"; const names = en ? {sent:"Sent", received:"Received"} : {sent:"寄出", received:"收到"}; return `<span class="dot ${status}"></span>${names[status] || status}`; };
+const sw = (type) => { const en = document.documentElement.lang !== "zh-CN"; const names = en ? {sent:"Sent", received:"Received"} : {sent:"寄出", received:"收到"}; return `<i class="sw ${type === "sent" ? "sent" : "recv"}"></i>${names[type] || type}`; };
 const primaryDate = (p) => p.type === "sent" ? p.sentDate : p.receivedDate;
 const byDate = (a, b) => primaryDate(a) < primaryDate(b) ? 1 : -1;
 
