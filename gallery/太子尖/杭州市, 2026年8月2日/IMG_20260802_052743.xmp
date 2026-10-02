@@ -1,0 +1,17 @@
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="XMP Core 6.0.0">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:exif="http://ns.adobe.com/exif/1.0/"
+            xmlns:photoshop="http://ns.adobe.com/photoshop/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/">
+         <exif:GPSLongitude>118.897919</exif:GPSLongitude>
+         <exif:GPSLongitudeRef>E</exif:GPSLongitudeRef>
+         <exif:GPSHPositioningError>1</exif:GPSHPositioningError>
+         <exif:GPSLatitudeRef>N</exif:GPSLatitudeRef>
+         <exif:GPSLatitude>30.175218999999998</exif:GPSLatitude>
+         <exif:GPSTimeStamp>2026-08-30T05:22:51Z</exif:GPSTimeStamp>
+         <photoshop:DateCreated>2026-08-02T05:27:43+08:00</photoshop:DateCreated>
+         <dc:description>_cuva</dc:description>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
