@@ -113,7 +113,7 @@ if (gallery) {
       <p><span>拍摄时间</span><strong>${escapeHtml(captured)}</strong></p>
       <p><span>原始文件名</span><strong>${escapeHtml(fileName)}</strong></p>
       <p><span>文件格式</span><strong>${escapeHtml(fileFormat)}</strong></p>
-      <p class="photo-metadata-note">坐标为城市/地区级参考位置，并非照片原始 GPS。XMP 中已保留的拍摄时间已用于此记录；原始 XMP 侧车文件已移除，未保留的字段不会被推测补写。</p>
+      <p class="photo-metadata-note">坐标为城市/地区级参考位置，并非照片原始准确GPS。原始 XMP 文件已移除</p>
     </div>`;
   };
 
