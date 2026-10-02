@@ -80,6 +80,7 @@
     ["济南市", "Jinan"], ["泰安市与济南市", "Tai'an and Jinan"],
     ["我的学校", "My School"], ["连云港", "Lianyungang"], ["连云港市", "Lianyungang"],
     ["香港", "Hong Kong"], ["澳门特别行政区", "Macao SAR"], ["澳门", "Macao"],
+    ["Russia", "俄罗斯"], ["Canada", "加拿大"], ["Italy", "意大利"], ["U.S.A.", "美国"], ["Türkiye", "土耳其"], ["U.K.", "英国"], ["Germany", "德国"], ["Czechia", "捷克"], ["Poland", "波兰"], ["Philippines", "菲律宾"], ["Taiwan", "台湾"], ["Slovakia", "斯洛伐克"], ["Japan", "日本"], ["USA", "美国"], ["Finland", "芬兰"], ["France", "法国"],
   ];
 
   const WORDS = [
