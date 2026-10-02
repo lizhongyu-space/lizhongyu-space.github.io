@@ -101,7 +101,7 @@
     const m = o.match(/^(\s*)([\s\S]*?)(\s*)$/);
     const core = m[2].replace(/\s+/g, " ");
     if (!core) return o;
-    const cnDate = core.match(/^(\\d{4})年(\\d{2})月(\\d{2})日$/);
+    const cnDate = core.match(/^(\d{4})年(\d{2})月(\d{2})日$/);
     if (lang === "en" && cnDate) {
       const [, y, mo, d] = cnDate;
       const date = new Date(Number(y), Number(mo) - 1, Number(d));
@@ -154,6 +154,8 @@
     ctrl.querySelector("#langBtn").textContent = lang === "en" ? "Language" : "语言";
     ctrl.querySelector("#themeBtn").textContent = (theme === "dark" ? "☀ " : "☾ ") + (theme === "dark" ? (lang === "en" ? "Light" : "浅色") : (lang === "en" ? "Dark" : "深色"));
     obs.observe(document.body, { childList: true, subtree: true });
+    window.siteLang = lang;
+    window.dispatchEvent(new CustomEvent("site-language-change", { detail: { lang } }));
   };
 
   const applyTheme = () => { root.dataset.theme = theme; };
