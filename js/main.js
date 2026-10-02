@@ -92,15 +92,31 @@ if (gallery) {
     const fileName = (p.image || "").split("/").pop() || p.title || "未记录";
     const fileFormat = fileName.includes(".") ? fileName.split(".").pop().toUpperCase() : "未记录";
     const refs = photoCoordinateRefs(p);
-    const coordinateText = refs.length
-      ? refs.map(ref => `${ref.name}：${formatCoordinate(ref)}`).join("；")
+    const coordinateHtml = refs.length
+      ? refs.map(ref => {
+          const lat = ref.lat.toFixed(4);
+          const lon = ref.lon.toFixed(4);
+          const query = `${lat},${lon}`;
+          const googleUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+          const appleUrl = `https://maps.apple.com/?ll=${encodeURIComponent(query)}&q=${encodeURIComponent(ref.name)}`;
+          const bingUrl = `https://www.bing.com/maps?cp=${encodeURIComponent(`${lat}~${lon}`)}&lvl=12`;
+          return `<span class="coordinate-map-group">
+            <span class="coordinate-map-value" tabindex="0" aria-label="查看${escapeHtml(ref.name)}地图：${escapeHtml(formatCoordinate(ref))}">${escapeHtml(ref.name)}：${escapeHtml(formatCoordinate(ref))}</span>
+            <span class="coordinate-map-menu" role="group" aria-label="选择地图网站">
+              <span>要在地图中查看此坐标？</span>
+              <a href="${googleUrl}" target="_blank" rel="noopener noreferrer">Google Maps</a>
+              <a href="${appleUrl}" target="_blank" rel="noopener noreferrer">Apple Maps</a>
+              <a href="${bingUrl}" target="_blank" rel="noopener noreferrer">Microsoft Maps</a>
+            </span>
+          </span>`;
+        }).join("；")
       : "未记录可确认的地区参考坐标";
     const captured = p.capturedAt
       ? p.capturedAt.replace("T", " ").replace(/[+-]\d{2}:\d{2}$/, "")
       : (p.date || "未记录");
     return `<div class="photo-metadata">
       <p><span>拍摄地点</span><strong>${escapeHtml(p.location || "未记录")}</strong></p>
-      <p><span>位置参考坐标</span><strong>${escapeHtml(coordinateText)}</strong></p>
+      <p><span>位置参考坐标</span><strong class="coordinate-map-list">${coordinateHtml}</strong></p>
       <p><span>拍摄时间</span><strong>${escapeHtml(captured)}</strong></p>
       <p><span>原始文件名</span><strong>${escapeHtml(fileName)}</strong></p>
       <p><span>文件格式</span><strong>${escapeHtml(fileFormat)}</strong></p>
