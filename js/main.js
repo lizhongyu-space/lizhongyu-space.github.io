@@ -122,7 +122,7 @@ if (gallery) {
   const mapSection = document.createElement("section");
   mapSection.className = "gallery-map-section";
   mapSection.innerHTML = `<div class="gallery-map-head"><p class="label">PHOTO LOCATIONS</p><span class="gallery-map-note">China</span></div><div class="gallery-map" id="galleryMap">${galleryMapMarkup(list)}</div>`;
-  gallery.parentElement.insertBefore(mapSection, filters);
+  filters.parentElement.insertBefore(mapSection, gallery);
   const mapEl = () => document.getElementById("galleryMap");
   const renderMap = () => {
     const map = mapEl();
