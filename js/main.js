@@ -35,14 +35,12 @@ toggle.addEventListener("click", () => {
 syncToggle();
 
 // 2) 照片卡片模板
-// 图片统一从 GitHub Raw 读取，避免 GitHub Pages 对中文路径、空格和特殊字符的解析差异
-const imageUrl = (p) => p.image
-  ? "https://raw.githubusercontent.com/lizhongyu-space/lizhongyu-space.github.io/main/" + p.image.split("/").map(encodeURIComponent).join("/")
-  : "";
+// 图片直接使用 GitHub Pages 本站路径；encodeURI 处理中文目录、空格和特殊字符
+const imageUrl = (p) => p.image ? encodeURI(p.image) : "";
 
 const card = (p, i) =>
   `<figure class="card" data-i="${i}" tabindex="0">` +
-  (p.image ? `<img src="${imageUrl(p)}" alt="${p.title}" loading="lazy">` : "") +
+  (p.image ? `<img src="${imageUrl(p)}" alt="${p.title}">` : "") +
   `</figure>`;
 
 // 3) Gallery 页面：分类筛选 + 照片墙 + Lightbox
