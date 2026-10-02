@@ -142,6 +142,11 @@
     obs.disconnect();
     root.lang = lang === "zh" ? "zh-CN" : "en";
     walk(document.body);
+    document.querySelectorAll(".filters .chip").forEach((chip) => {
+      const original = chip.dataset.cat || "";
+      const label = lang === "en" ? (toEn.get(original) || original) : (toZh.get(original.toLowerCase()) || original);
+      chip.textContent = label;
+    });
     document.querySelectorAll(".side nav a").forEach((a) => {
       const en = a.getAttribute("title"), ab = a.querySelector(".ab");
       if (ab && NAV_LETTERS[en]) ab.textContent = lang === "zh" ? NAV_LETTERS[en] : en[0];
