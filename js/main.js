@@ -75,10 +75,13 @@ const galleryMapLocations = (list) => galleryLocationDefs.map(def => ({
 const galleryMapMarkup = (list, selectedKey = "") => {
   const locations = galleryMapLocations(list);
   if (!locations.length) return '<div class="gallery-map-empty">No mapped photo locations yet.</div>';
-  const vx = (72 + 180) / 360 * WORLD_MAP.w;
-  const vy = (55 - WORLD_MAP.latTop) / (WORLD_MAP.latBottom - WORLD_MAP.latTop) * WORLD_MAP.h;
-  const vw = (136 - 72) / 360 * WORLD_MAP.w;
-  const vh = (55 - 18) / (WORLD_MAP.latTop - WORLD_MAP.latBottom) * WORLD_MAP.h;
+  // 东部中国局部视图：覆盖北京、江浙沪及其周边，避免展示不必要的远端区域。
+  const mapLonMin = 108, mapLonMax = 123;
+  const mapLatMin = 28, mapLatMax = 42;
+  const vx = (mapLonMin + 180) / 360 * WORLD_MAP.w;
+  const vy = (mapLatMax - WORLD_MAP.latTop) / (WORLD_MAP.latBottom - WORLD_MAP.latTop) * WORLD_MAP.h;
+  const vw = (mapLonMax - mapLonMin) / 360 * WORLD_MAP.w;
+  const vh = (mapLatMax - mapLatMin) / (WORLD_MAP.latTop - WORLD_MAP.latBottom) * WORLD_MAP.h;
   const points = locations.map(loc => {
     const p = galleryMapProjection(loc.lat, loc.lon);
     return `<g class="gallery-map-point${selectedKey===loc.key?" active":""}" tabindex="0" role="button" data-location-key="${loc.key}" aria-label="${loc.name}">
@@ -86,10 +89,10 @@ const galleryMapMarkup = (list, selectedKey = "") => {
       <circle class="dot" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="2.2"/>
     </g>`;
   }).join("");
-  const graticules = [20,30,40,50].map(lat => {
+  const graticules = [30,35,40].map(lat => {
     const y=galleryMapProjection(lat,72).y;
     return `<line class="gallery-map-graticule" x1="${vx}" x2="${vx+vw}" y1="${y}" y2="${y}"/>`;
-  }).join("") + [80,100,120,140].map(lon => {
+  }).join("") + [110,115,120].map(lon => {
     const x=galleryMapProjection(18,lon).x;
     return `<line class="gallery-map-graticule" x1="${x}" x2="${x}" y1="${vy}" y2="${vy+vh}"/>`;
   }).join("");
