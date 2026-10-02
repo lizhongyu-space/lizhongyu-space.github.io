@@ -492,38 +492,6 @@ const photos = [
     "date": "2026年3月26日"
   },
   {
-    "id": 62,
-    "image": "gallery/我的学校/南京市, 2026年3月28日/_MG_2509.JPG",
-    "title": "_MG_2509",
-    "category": "我的学校",
-    "location": "南京市",
-    "date": "2026年3月28日"
-  },
-  {
-    "id": 63,
-    "image": "gallery/我的学校/南京市, 2026年3月28日/_MG_2559.JPG",
-    "title": "_MG_2559",
-    "category": "我的学校",
-    "location": "南京市",
-    "date": "2026年3月28日"
-  },
-  {
-    "id": 64,
-    "image": "gallery/我的学校/南京市, 2026年3月28日/_MG_2561.JPG",
-    "title": "_MG_2561",
-    "category": "我的学校",
-    "location": "南京市",
-    "date": "2026年3月28日"
-  },
-  {
-    "id": 65,
-    "image": "gallery/我的学校/南京市, 2026年3月28日/_MG_2562.JPG",
-    "title": "_MG_2562",
-    "category": "我的学校",
-    "location": "南京市",
-    "date": "2026年3月28日"
-  },
-  {
     "id": 66,
     "image": "gallery/泰山/泰安市, 2026年7月18日/DJI_20260718_172551_Edit_Composited_Photo.jpg",
     "title": "DJI_20260718_172551_Edit_Composited_Photo",
