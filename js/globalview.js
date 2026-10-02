@@ -46,6 +46,7 @@
 
   // 3) 选好分类后，生成真正的照片页面（按国家 / 按人名分组）
   const render = (mode) => {
+    const en = document.documentElement.lang !== "zh-CN";
     const byCountry = mode === "country";
     const groups = new Map();   // 分组：组名 → 照片列表（按数据里出现的先后顺序）
     globalPhotos.forEach((p) => {
@@ -54,7 +55,7 @@
       groups.get(key).push(p);
     });
     flat = [];
-    label.textContent = "GLOBAL VIEW · " + (byCountry ? "BY COUNTRY" : "BY PERSON");
+    label.textContent = en ? "GLOBAL VIEW · " + (byCountry ? "BY COUNTRY" : "BY PERSON") : "全球视野 · " + (byCountry ? "按国家" : "按人物");
     groupsEl.innerHTML = [...groups].map(([name, list]) => {
       const head = byCountry ? `${flag(list[0].code)} ${name}` : name;   // 国家分组前面加国旗
       const cards = list.map((p) => {
