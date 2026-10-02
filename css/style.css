@@ -85,16 +85,16 @@ body[data-page=welcome]{background:#000;padding-left:0;overflow:hidden}
 /* Gallery 中国地图：总览 + 分类位置 */
 
 /* 照片墙（瀑布流）：列数随屏幕宽度自动变化 */
-.masonry{column-count:4;column-gap:16px}
+.masonry{column-count:3;column-gap:18px}
  .card{break-inside:avoid;margin-bottom:16px;position:relative;overflow:hidden;cursor:pointer;background:#e3e1da;border:1px solid var(--border);min-height:120px}
 .card img{width:100%;height:auto;display:block;transition:transform .5s}
 .card:hover img{transform:scale(1.02)}
 .card figcaption{display:none}
 
-@media(max-width:1200px){.masonry{column-count:3}}
+@media(max-width:1200px){.masonry{column-count:2}}
 @media(max-width:900px){.masonry{column-count:2}}
 
-/* 大图查看（Lightbox） */
+/* 照片信息面板（不加载大图） */
 .lightbox{position:fixed;inset:0;z-index:50;background:rgba(20,20,20,.92);display:flex;align-items:center;
   justify-content:center;gap:12px;padding:16px;animation:fade .25s ease}
 .lightbox[hidden]{display:none}
@@ -178,10 +178,10 @@ footer{text-align:center;padding:48px 24px;color:var(--muted);font-size:14px;bor
 @media(max-width:380px){.masonry{column-count:1}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-/* Gallery lightbox: per-photo location and retained metadata */
-.photo-metadata{margin-top:18px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;line-height:1.55}
+/* Gallery photo details: metadata-only modal, no large image requests */
+.photo-metadata{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.22);font-size:12px;line-height:1.55}
 .photo-metadata p{display:grid;grid-template-columns:108px minmax(0,1fr);gap:12px;margin:0 0 8px}
-.photo-metadata span{color:var(--muted)}
+.photo-metadata span{color:#c2c2bc}
 .photo-metadata strong{font-weight:500;overflow-wrap:anywhere}
 .photo-metadata-note{display:block!important;margin-top:14px!important;color:var(--muted);font-size:11px;line-height:1.6}
 @media(max-width:600px){.photo-metadata p{grid-template-columns:1fr;gap:2px}}
