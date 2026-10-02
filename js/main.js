@@ -120,12 +120,16 @@ if (gallery) {
   let currentCategory = "";
   const filters = document.getElementById("filters");
   const empty = document.getElementById("empty");
-  const mapSection = document.createElement("section");
-  mapSection.className = "gallery-map-section";
-  mapSection.innerHTML = `<div class="gallery-map-head"><p class="label">PHOTO LOCATIONS</p><span class="gallery-map-note">China</span></div><div class="gallery-map" id="galleryMap">${galleryMapMarkup(list)}</div>`;
-  filters.parentElement.insertBefore(mapSection, gallery);
-  const mapEl = () => document.getElementById("galleryMap");
+  let mapSection = null;
+  const ensureMapSection = () => {
+    if (mapSection) return;
+    mapSection = document.createElement("section");
+    mapSection.className = "gallery-map-section";
+    mapSection.innerHTML = `<div class="gallery-map-head"><p class="label">PHOTO LOCATIONS</p><span class="gallery-map-note">China</span></div><div class="gallery-map" id="galleryMap">${galleryMapMarkup(list)}</div>`;
+    filters.parentElement.insertBefore(mapSection, gallery);
+  };
   const renderMap = () => {
+    if (!mapSection) return;
     const map = mapEl();
     if (map) map.innerHTML = galleryMapMarkup(list, locationFilter);
     bindMap();
@@ -133,8 +137,13 @@ if (gallery) {
   const render = () => {
     gallery.innerHTML = list.map(card).join("");
     empty.hidden = list.length > 0;
-    mapSection.hidden = !currentCategory;
-    renderMap();
+    if (currentCategory) {
+      ensureMapSection();
+      renderMap();
+    } else if (mapSection) {
+      mapSection.remove();
+      mapSection = null;
+    }
   };
   filters.innerHTML = ["All", ...categories].map((c, i) =>
     `<button type="button" class="chip${i === 0 ? " active" : ""}" data-cat="${c}">${c}</button>`).join("");
