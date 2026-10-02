@@ -84,7 +84,7 @@ body[data-page=welcome]{background:#000;padding-left:0;overflow:hidden}
 
 /* 照片墙（瀑布流）：列数随屏幕宽度自动变化 */
 .masonry{column-count:4;column-gap:16px}
- .card{break-inside:avoid;margin-bottom:16px;position:relative;overflow:hidden;cursor:pointer;background:#e3e1da;border:1px solid var(--border)}
+ .card{break-inside:avoid;margin-bottom:16px;position:relative;overflow:hidden;cursor:pointer;background:#e3e1da;border:1px solid var(--border);min-height:120px}
 .card img{width:100%;height:auto;display:block;transition:transform .5s}
 .card:hover img{transform:scale(1.02)}
 .card figcaption{display:none}
@@ -170,7 +170,7 @@ footer{text-align:center;padding:48px 24px;color:var(--muted);font-size:14px;bor
   html:not(.nav-collapsed) .side{box-shadow:4px 0 24px rgba(0,0,0,.12)}
   main{padding:0 20px}
   section{padding:40px 0}
-  .masonry{column-count:2;column-gap:10px}.card{margin-bottom:10px}
+  .masonry{column-count:2;column-gap:10px}.card{margin-bottom:10px;min-height:90px}
 }
 @media(max-width:380px){.masonry{column-count:1}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
