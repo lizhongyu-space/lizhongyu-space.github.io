@@ -85,7 +85,7 @@ body[data-page=welcome]{background:#000;padding-left:0;overflow:hidden}
 /* Gallery 中国地图：总览 + 分类位置 */
 
 /* 照片墙（瀑布流）：列数随屏幕宽度自动变化 */
-.masonry{column-count:3;column-gap:18px}
+.masonry{column-count:2;column-gap:20px}
  .card{break-inside:avoid;margin-bottom:16px;position:relative;overflow:hidden;cursor:pointer;background:#e3e1da;border:1px solid var(--border);min-height:120px}
 .card img{width:100%;height:auto;display:block;transition:transform .5s}
 .card:hover img{transform:scale(1.02)}
