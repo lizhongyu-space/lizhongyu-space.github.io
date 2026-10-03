@@ -80,11 +80,15 @@
 .gv-share-backdrop[hidden] { display: none; }
 .gv-share-win { width: min(700px, 100%); max-height: 88vh; display: flex; flex-direction: column; background: var(--background); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 24px 70px rgba(0,0,0,.28); overflow: hidden; }
 .gv-share-body { padding: 28px 32px 18px; overflow: auto; flex: 1; }
-.gv-share-body h2 { font-size: 24px; margin-bottom: 18px; }
-.gv-share-body h3 { font-size: 14px; margin: 22px 0 8px; }
+.gv-share-body h2 { font-size: 28px; font-weight: 700; margin-bottom: 20px; line-height: 1.35; }
+.gv-share-body h3 { font-size: 16px; font-weight: 700; margin: 24px 0 10px; line-height: 1.5; }
 .gv-share-body p { max-width: none; margin: 0 0 10px; line-height: 1.8; }
 .gv-share-body ol { margin: 8px 0 16px; padding-left: 22px; }
 .gv-share-body li { margin-bottom: 10px; line-height: 1.75; }
+.gv-share-main-list { list-style-type: decimal; }
+.gv-share-main-list > li > ol { list-style-type: lower-alpha; margin: 8px 0 4px; padding-left: 24px; }
+.gv-share-main-list > li > ol > li { margin-bottom: 6px; }
+
 .gv-share-foot { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 32px; border-top: 1px solid var(--border); background: var(--surface-soft); }
 .gv-share-foot .btn { margin: 0; }
 .gv-share-status { color: var(--muted); font-size: 12px; }
@@ -160,10 +164,16 @@
         <p>点击页面下方的 <strong>Send</strong> 后，网站会复制一份提前准备好的邮件文案，并打开你设备的默认邮件 App。</p>
         <p>接下来，你只需要在邮件中附上你想分享的照片，并按照文案中的提示填写信息，然后发送即可。</p>
         <h3>二、不得不说的一些事</h3>
-        <ol>
-          <li>当你把照片发送给我后，我会默认你已经同意我将它上传到我的网站上。不过请放心，我不会将你发送来的照片用于这个网页以外的其他用途。</li>
+        <ol class="gv-share-main-list">
+          <li>上传即表示你同意我将照片展示在我的网站上。不过请放心，我不会将你发送来的照片用于这个网页以外的其他用途。</li>
           <li>你发送来的照片可能会被其他人下载。我会提醒访问者尊重你的版权，但有些事情无法完全避免，希望你能够理解。</li>
-          <li>你的隐私很重要。这个网站主要收录来自不同国家、由当地人拍摄的风景、建筑、自然、文化等内容。请不要把任何私人信息或其他不适合公开的内容上传给我。如果未来你希望自己的照片不再展示，也可以联系我，我会尽快将其撤下。</li>
+          <li>你的隐私很重要。
+            <ol>
+              <li>这个网站主要收录来自不同国家、由当地人拍摄的风景、建筑、自然、文化等内容。</li>
+              <li>请不要把任何私人信息或其他不适合公开的内容上传给我。</li>
+              <li>如果未来你希望自己的照片不再展示，也可以联系我，我会尽快将其撤下。</li>
+            </ol>
+          </li>
           <li>如果我认为你的照片严重不符合 Global View 的内容要求，我会通过邮件回复你。我保留不上传不符合要求照片的权利，但希望我们不会遇到这样的情况。</li>
         </ol>
         <p>就这么多。祝你生活顺利，天天都有好心情。</p>
@@ -174,10 +184,16 @@
         <p>When you click <strong>Send</strong> below, the website will copy a prepared email message and open your device's default mail app.</p>
         <p>All you need to do is attach the photo you would like to share, fill in the information requested in the message, and send the email.</p>
         <h3>2. A few things worth knowing</h3>
-        <ol>
-          <li>By sending a photo to me, you are giving permission for me to upload it to my website. Don't worry, though — I will not use the photo for anything outside this website.</li>
+        <ol class="gv-share-main-list">
+          <li>By sending a photo to me, you are giving permission for me to display it on my website. Don't worry, though — I will not use the photo for anything outside this website.</li>
           <li>Other people may be able to download the photo you send. I will remind visitors to respect your copyright, but some things cannot be completely prevented. I hope you understand.</li>
-          <li>Your privacy matters. Global View mainly collects landscapes, architecture, nature, culture, and similar content photographed by people in different countries. Please do not send me private information or anything that should not be made public. If you ever want your photo removed from the website, just contact me and I will take it down as soon as possible.</li>
+          <li>Your privacy matters.
+            <ol>
+              <li>Global View mainly collects landscapes, architecture, nature, culture, and similar content photographed by people in different countries.</li>
+              <li>Please do not send me private information or anything that should not be made public.</li>
+              <li>If you ever want your photo removed from the website, just contact me and I will take it down as soon as possible.</li>
+            </ol>
+          </li>
           <li>If I feel that a photo seriously does not meet the requirements for Global View, I will reply to you by email. I reserve the right not to upload photos that do not meet the requirements, although I hope we never have to do that.</li>
         </ol>
         <p>That's all. Wishing you all the best and a lovely day.</p>
