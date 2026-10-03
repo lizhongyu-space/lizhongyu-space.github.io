@@ -315,3 +315,61 @@ html[data-theme="dark"]{
 }
 /* About 正文专用字体:只对带有 courier 类名的段落生效 */
 main p.courier { font-family: 'Courier New', Courier, monospace; }
+
+/* =====================================================================
+   About 页面 · 正文设计规范（Editorial Archive）（追加在 style.css 最末尾）
+   范围：只作用于 About 页（所有规则都以 body[data-page=about] 开头），其他页面完全不受影响。
+   只改视觉：字体 / 字号 / 字重 / 行距 / 内容宽度 / 图片圆角 / 入场动效；不改 HTML、文字内容和 JS。
+   这一段会压过 about.html 里自带的样式（Courier New、700 粗体、900px 宽度）。
+   想退回去：删掉这一整段即可。
+   ===================================================================== */
+
+/* —— 1) 字体：整页等宽（按规范的字体栈，中文回落到苹方） —— */
+body[data-page=about]{
+  --about-mono:"SFMono-Regular",Consolas,"Liberation Mono","PingFang SC",monospace;
+}
+body[data-page=about] main.about,
+body[data-page=about] .about h1,
+body[data-page=about] .about h2,
+body[data-page=about] .about p,
+body[data-page=about] .about .bio p,
+body[data-page=about] .about .label,
+body[data-page=about] .about .tags{font-family:var(--about-mono)}
+
+/* —— 2) 内容宽度：阅读内容约 850px（规范：800–850px） —— */
+body[data-page=about] main.about.narrow{max-width:850px}
+body[data-page=about] .about .bio p{max-width:none}
+
+/* —— 3) 信息层级：Page Title → Section Heading → Body → Supporting —— */
+/* 小标签 ABOUT：10–11px，蓝色细节 */
+body[data-page=about] .about .label{font-size:11px;letter-spacing:.2em;font-weight:500;color:var(--accent)}
+/* 页面主标题（姓名）：明显但不巨大，Semibold */
+body[data-page=about] .about .identity h1{font-size:26px;font-weight:600;letter-spacing:.02em;line-height:1.25}
+/* 姓名下面的辅助说明：12–13px + 较低对比度 */
+body[data-page=about] .about .identity p{font-size:13px;line-height:1.6;color:var(--muted)}
+body[data-page=about] .about .tags{font-size:13px;letter-spacing:.04em;color:var(--muted);margin-bottom:44px}
+/* 文章大标题（"Like an autobiography? Not quite."）：Semibold，约 26px */
+body[data-page=about] .about .about-title h2{font-size:26px;font-weight:600;line-height:1.35;margin-bottom:.4em}
+/* 各小节标题：Semibold，22px（规范：区块标题 22–30px） */
+body[data-page=about] .about .about-lang h2{font-size:22px;font-weight:600;line-height:1.4;margin-top:2.4em;margin-bottom:.7em}
+/* 正文：Regular，15px，行距宽松以保证中文可读 */
+body[data-page=about] .about .bio p{font-size:15px;font-weight:400;line-height:1.95;letter-spacing:0}
+body[data-page=about] .about .bio p + p{margin-top:1em}
+/* 正文里的强调（Global View 字样）：Semibold + 蓝色，不用 Bold */
+body[data-page=about] .about .bio strong{font-weight:600;color:var(--accent)}
+body[data-page=about] .about .bio em{font-style:normal;color:var(--accent)}   /* 斜体在等宽字体里不好看，改成蓝色强调 */
+
+/* —— 4) 图片：12px 圆角 + 1px 极浅边框（头像也按规范统一为 12px） —— */
+   body[data-page=about] .about .avatar{border-radius:50%;border:1px solid var(--border)}
+
+/* —— 5) 入场动效：淡入 + 4px 轻微位移（时间短、不弹跳） —— */
+@keyframes aboutEnter{from{opacity:0;transform:translateY(4px)}}
+body[data-page=about] main.about{animation:aboutEnter .4s ease backwards}
+
+/* —— 6) 手机：左右留适当 padding，不出现横向滚动 —— */
+@media(max-width:720px){
+  body[data-page=about] .about .bio p{font-size:15px;line-height:1.9}
+  body[data-page=about] .about .about-title h2{font-size:22px}
+  body[data-page=about] .about .about-lang h2{font-size:19px}
+  body[data-page=about] .about .bio{overflow-wrap:anywhere}
+}
