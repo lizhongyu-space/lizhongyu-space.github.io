@@ -551,3 +551,15 @@ html[lang="zh-CN"] [data-intro-lang="en"]{display:none}
 .photo-download svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:600px){.editorial-intro{font-size:12px;margin-bottom:24px;padding-left:12px}}
 @media(prefers-reduced-motion:reduce){.photo-download{transition:none}}
+
+
+/* Editorial intros & location chips: subtle cold blue/gray surfaces */
+.editorial-intro{
+  background:var(--accent-soft);
+  border-radius:var(--radius-sm);
+  padding:12px 16px 12px 16px;
+  box-sizing:border-box;
+}
+html[data-theme="dark"] .editorial-intro{
+  background:color-mix(in srgb,var(--accent) 12%,var(--surface));
+}
