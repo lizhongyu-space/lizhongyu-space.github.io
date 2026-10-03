@@ -74,6 +74,21 @@
 .gv-ring { fill: none; stroke: var(--text); stroke-width: 1.2; }                                                /* 位置外圈 */
 @media (max-width: 1100px) { .gv-row.has-map .masonry { column-count: 2; } }                                    /* 屏幕较窄时，照片墙改成 2 列 */
 @media (max-width: 900px) { .gv-row.has-map { grid-template-columns: 1fr; } .gv-map { position: static; order: -1; } }   /* 屏幕很窄时，地图移到照片上方 */
+
+/* ---- Share a photo：说明弹窗（沿用 Illustrate 的 macOS 窗口风格） ---- */
+.gv-share-backdrop { position: fixed; inset: 0; z-index: 75; background: rgba(20,20,20,.45); backdrop-filter: blur(3px); display: flex; align-items: center; justify-content: center; padding: 24px; animation: fade .25s ease; }
+.gv-share-backdrop[hidden] { display: none; }
+.gv-share-win { width: min(700px, 100%); max-height: 88vh; display: flex; flex-direction: column; background: var(--background); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 24px 70px rgba(0,0,0,.28); overflow: hidden; }
+.gv-share-body { padding: 28px 32px 18px; overflow: auto; flex: 1; }
+.gv-share-body h2 { font-size: 24px; margin-bottom: 18px; }
+.gv-share-body h3 { font-size: 14px; margin: 22px 0 8px; }
+.gv-share-body p { max-width: none; margin: 0 0 10px; line-height: 1.8; }
+.gv-share-body ol { margin: 8px 0 16px; padding-left: 22px; }
+.gv-share-body li { margin-bottom: 10px; line-height: 1.75; }
+.gv-share-foot { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 32px; border-top: 1px solid var(--border); background: #e6e4dd; }
+.gv-share-foot .btn { margin: 0; }
+.gv-share-status { color: var(--muted); font-size: 12px; }
+@media (max-width: 600px) { .gv-share-body { padding: 22px 20px 14px; } .gv-share-foot { padding: 12px 20px; } }
 </style>
 </head>
 
@@ -129,6 +144,55 @@
   </div>
 </div>
 
+<!-- Share a photo 说明弹窗：点击 Share a photo 后出现，Send 才会复制文案并打开默认邮件 App -->
+<div class="gv-share-backdrop" id="gvShareModal" hidden>
+  <div class="gv-share-win" role="dialog" aria-modal="true" aria-labelledby="gvShareTitle">
+    <div class="mac-bar">
+      <div class="mac-dots">
+        <button class="mac-dot mac-close" id="gvShareClose" type="button" aria-label="Close">×</button>
+      </div>
+      <div class="mac-title">Share a photo</div>
+    </div>
+    <div class="gv-share-body">
+      <div data-share-lang="zh">
+        <h2 id="gvShareTitle">在分享之前，还有一些事需要你知道</h2>
+        <h3>一、正确的上传方式</h3>
+        <p>点击页面下方的 <strong>Send</strong> 后，网站会复制一份提前准备好的邮件文案，并打开你设备的默认邮件 App。</p>
+        <p>接下来，你只需要在邮件中附上你想分享的照片，并按照文案中的提示填写信息，然后发送即可。</p>
+        <h3>二、不得不说的一些事</h3>
+        <ol>
+          <li>当你把照片发送给我后，我会默认你已经同意我将它上传到我的网站上。不过请放心，我不会将你发送来的照片用于这个网页以外的其他用途。</li>
+          <li>你发送来的照片可能会被其他人下载。我会提醒访问者尊重你的版权，但有些事情无法完全避免，希望你能够理解。</li>
+          <li>你的隐私很重要。这个网站主要收录来自不同国家、由当地人拍摄的风景、建筑、自然、文化等内容。请不要把任何私人信息或其他不适合公开的内容上传给我。如果未来你希望自己的照片不再展示，也可以联系我，我会尽快将其撤下。</li>
+          <li>如果我认为你的照片严重不符合 Global View 的内容要求，我会通过邮件回复你。我保留不上传不符合要求照片的权利，但希望我们不会遇到这样的情况。</li>
+        </ol>
+        <p>就这么多。祝你生活顺利，天天都有好心情。</p>
+      </div>
+      <div data-share-lang="en" hidden>
+        <h2>Before you share, there are a few things you should know</h2>
+        <h3>1. How to send your photo</h3>
+        <p>When you click <strong>Send</strong> below, the website will copy a prepared email message and open your device's default mail app.</p>
+        <p>All you need to do is attach the photo you would like to share, fill in the information requested in the message, and send the email.</p>
+        <h3>2. A few things worth knowing</h3>
+        <ol>
+          <li>By sending a photo to me, you are giving permission for me to upload it to my website. Don't worry, though — I will not use the photo for anything outside this website.</li>
+          <li>Other people may be able to download the photo you send. I will remind visitors to respect your copyright, but some things cannot be completely prevented. I hope you understand.</li>
+          <li>Your privacy matters. Global View mainly collects landscapes, architecture, nature, culture, and similar content photographed by people in different countries. Please do not send me private information or anything that should not be made public. If you ever want your photo removed from the website, just contact me and I will take it down as soon as possible.</li>
+          <li>If I feel that a photo seriously does not meet the requirements for Global View, I will reply to you by email. I reserve the right not to upload photos that do not meet the requirements, although I hope we never have to do that.</li>
+        </ol>
+        <p>That's all. Wishing you all the best and a lovely day.</p>
+      </div>
+    </div>
+    <div class="gv-share-foot">
+      <span class="gv-share-status" id="gvSendStatus" aria-live="polite"></span>
+      <button class="btn" id="gvSendBtn" type="button">
+        <span data-share-lang="zh">Send ↗</span>
+        <span data-share-lang="en" hidden>Send ↗</span>
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- 这一段是：点击照片后的大图查看（样式沿用 Gallery 的 Lightbox） -->
 <div id="lightbox" class="lightbox" hidden>
   <button class="lb-close" aria-label="Close">×</button>
@@ -146,32 +210,60 @@
 const GV_SHARE = {
   en: {
     title: "Share a photo for Global View",
-    text: "Hi! I'd like to share a photo for the Global View section of your website: https://lizhongyu-space.github.io/globalview.html\n\nI'm sending an original photo that I took. It can be a place, a landscape, a street, a small everyday moment, or anything else that feels meaningful to me. If useful, I've also included a short note, the name or nickname you'd like to use, and the location.\n\nMy name or nickname: [your name]\nLocation: [optional]\nNote: [optional]\n\nI'm sending this to lzy2504@outlook.com. Thank you for creating this space for people to share a little piece of where they are!"
+    text: "Hi! I'd like to share a photo for the Global View section of your website: https://lizhongyu-space.github.io/globalview.html\n\nI'm sending a photo that I took myself. It can be a place, landscape, street, everyday moment, or anything else that feels meaningful to me.\n\nMy name or nickname: [your name or nickname]\nLocation: [optional]\nNote: [optional]\n\nI will attach my photo to this email and send it to lzy2504@outlook.com. Thank you for creating a space where people can share a little piece of where they live!"
   },
   zh: {
     title: "为 Global View 分享一张照片",
-    text: "你好！我想为你网站的 Global View 分享一张我拍摄的照片：https://lizhongyu-space.github.io/globalview.html\n\n这是一张我自己拍摄的照片，可以是一个地方、风景、街道、日常生活中的小瞬间，或者任何对我来说有意义的画面。如果方便，我也会附上一点简短说明，以及希望你使用的姓名或昵称和拍摄地点。\n\n我的姓名或昵称：[填写姓名或昵称]\n地点：[可选]\n说明：[可选]\n\n我会把这些内容发送到 lzy2504@outlook.com。谢谢你创建这样一个让大家分享自己所在之处的空间！"
+    text: "你好！我想为你网站的 Global View 分享一张我自己拍摄的照片：https://lizhongyu-space.github.io/globalview.html\n\n这可以是一处地方、一片风景、一条街道、一个日常瞬间，或者任何对你来说有意义的画面。\n\n我的姓名或昵称：[填写姓名或昵称]\n地点：[可选]\n说明：[可选]\n\n我会将照片作为附件添加到这封邮件，并发送至 lzy2504@outlook.com。谢谢你创建这样一个让大家分享自己所在之处的空间！"
   }
 };
+
 const gvShare = document.getElementById("gvShareBtn");
 const gvIntroShare = document.getElementById("gvIntroShare");
-const gvShareMsg = document.getElementById("gvShareMsg");
-async function shareGV(){
-  const data = GV_SHARE[localStorage.getItem("lang") === "zh" ? "zh" : "en"];
-  if (navigator.share) {
-    try { await navigator.share(data); } catch (e) {}
-    return;
-  }
+const gvShareModal = document.getElementById("gvShareModal");
+const gvShareClose = document.getElementById("gvShareClose");
+const gvSendBtn = document.getElementById("gvSendBtn");
+const gvSendStatus = document.getElementById("gvSendStatus");
+
+function setShareLanguage() {
+  const en = document.documentElement.lang !== "zh-CN";
+  document.querySelectorAll("[data-share-lang]").forEach((el) => {
+    el.hidden = (el.dataset.shareLang === "zh") !== !en;
+  });
+}
+
+function openShareModal() {
+  if (!gvShareModal) return;
+  setShareLanguage();
+  gvShareModal.hidden = false;
+}
+
+function closeShareModal() {
+  if (gvShareModal) gvShareModal.hidden = true;
+}
+
+async function sendGV() {
+  const lang = document.documentElement.lang === "zh-CN" ? "zh" : "en";
+  const data = GV_SHARE[lang];
   try {
     await navigator.clipboard.writeText(data.text);
-    gvShareMsg.textContent = localStorage.getItem("lang") === "zh" ? "已复制 ✓" : "Message copied ✓";
-    setTimeout(() => gvShareMsg.textContent = "", 2500);
+    if (gvSendStatus) gvSendStatus.textContent = lang === "zh" ? "文案已复制，正在打开邮件 App…" : "Message copied. Opening your mail app…";
   } catch (e) {
-    window.prompt(localStorage.getItem("lang") === "zh" ? "复制这段消息：" : "Copy this message:", data.text);
+    if (gvSendStatus) gvSendStatus.textContent = lang === "zh" ? "正在打开邮件 App…" : "Opening your mail app…";
   }
+  const mailto = "mailto:lzy2504@outlook.com?subject=" + encodeURIComponent(data.title) + "&body=" + encodeURIComponent(data.text);
+  setTimeout(() => { window.location.href = mailto; }, 120);
 }
-gvShare?.addEventListener("click", shareGV);
-gvIntroShare?.addEventListener("click", shareGV);
+
+gvShare?.addEventListener("click", openShareModal);
+gvIntroShare?.addEventListener("click", openShareModal);
+gvShareClose?.addEventListener("click", closeShareModal);
+gvShareModal?.addEventListener("click", (e) => { if (e.target === gvShareModal) closeShareModal(); });
+gvSendBtn?.addEventListener("click", sendGV);
+
+window.addEventListener("site-language-change", setShareLanguage);
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && gvShareModal && !gvShareModal.hidden) closeShareModal(); });
+setShareLanguage();
 </script>
 </body>
 </html>
