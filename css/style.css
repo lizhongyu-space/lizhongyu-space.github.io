@@ -517,3 +517,37 @@ body[data-page="about"] .about .signature,
 body[data-page="about"] .about .signature + p {
   font-family: var(--sans) !important;
 }
+
+
+/* Editorial quote-style introductions · Gallery & Postcrossing */
+.editorial-intro{
+  max-width:760px;
+  margin:0 0 30px;
+  padding:2px 0 2px 16px;
+  border-left:2px solid var(--accent);
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.85;
+}
+.editorial-intro p{margin:0}
+.editorial-intro a{
+  color:var(--accent);
+  text-decoration:underline;
+  text-decoration-color:color-mix(in srgb,var(--accent) 45%,transparent);
+  text-underline-offset:3px;
+}
+.editorial-intro a:hover{color:var(--accent-hover)}
+html[lang="en"] [data-intro-lang="zh"],
+html[lang="zh-CN"] [data-intro-lang="en"]{display:none}
+.pc-intro{margin-top:-6px;margin-bottom:26px}
+.photo-download{
+  display:inline-flex;align-items:center;gap:7px;
+  margin:0 0 14px;padding:7px 10px;
+  border:1px solid var(--border);border-radius:12px;
+  color:var(--text);font-size:12px;line-height:1.4;
+  text-decoration:none;transition:border-color .16s ease,color .16s ease,background-color .16s ease;
+}
+.photo-download:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.photo-download svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:600px){.editorial-intro{font-size:12px;margin-bottom:24px;padding-left:12px}}
+@media(prefers-reduced-motion:reduce){.photo-download{transition:none}}
