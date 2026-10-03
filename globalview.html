@@ -92,6 +92,8 @@
 .gv-share-foot { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 32px; border-top: 1px solid var(--border); background: var(--surface-soft); }
 .gv-share-foot .btn { margin: 0; }
 .gv-share-status { color: var(--muted); font-size: 12px; }
+.gv-share-fallback { display: none; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.gv-share-foot.sent .gv-share-fallback { display: inline; }
 @media (max-width: 600px) { .gv-share-body { padding: 22px 20px 14px; } .gv-share-foot { padding: 12px 20px; } }
 </style>
 </head>
@@ -201,6 +203,7 @@
     </div>
     <div class="gv-share-foot">
       <span class="gv-share-status" id="gvSendStatus" aria-live="polite"></span>
+      <span class="gv-share-fallback" id="gvShareFallback"><span data-share-lang="zh" hidden>如果没有自动跳转，文本已经复制完成，麻烦自行粘贴。</span><span data-share-lang="en" hidden>If the mail app does not open automatically, the message has already been copied — please paste it yourself.</span></span>
       <button class="btn" id="gvSendBtn" type="button">
         <span data-share-lang="zh">Send ↗</span>
         <span data-share-lang="en" hidden>Send ↗</span>
@@ -272,8 +275,10 @@ async function sendGV() {
   try {
     await navigator.clipboard.writeText(data.text);
     if (gvSendStatus) gvSendStatus.textContent = lang === "zh" ? "文案已复制，正在打开邮件 App…" : "Message copied. Opening your mail app…";
+    gvSendBtn?.closest(".gv-share-foot")?.classList.add("sent");
   } catch (e) {
     if (gvSendStatus) gvSendStatus.textContent = lang === "zh" ? "正在打开邮件 App…" : "Opening your mail app…";
+    gvSendBtn?.closest(".gv-share-foot")?.classList.add("sent");
   }
   const mailto = "mailto:lzy2504@outlook.com?subject=" + encodeURIComponent(data.title) + "&body=" + encodeURIComponent(data.text);
   setTimeout(() => { window.location.href = mailto; }, 120);
