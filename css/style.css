@@ -487,3 +487,33 @@ body:not([data-page="welcome"]) main{
     animation:none!important;
   }
 }
+
+
+/* =====================================================================
+   TYPOGRAPHY UNIFICATION · 2026-10-03
+   About 不再使用独立字体栈；整站统一使用 Design System 的 Monospace。
+   ===================================================================== */
+body[data-page="about"],
+body[data-page="about"] *,
+body[data-page="about"] button,
+body[data-page="about"] input,
+body[data-page="about"] textarea,
+body[data-page="about"] select {
+  font-family: var(--sans) !important;
+}
+
+/* About 的特殊排版只保留字号、字重、间距，不再改变字体 */
+body[data-page="about"] .about h1,
+body[data-page="about"] .about h2,
+body[data-page="about"] .about h3,
+body[data-page="about"] .about h4,
+body[data-page="about"] .about h5,
+body[data-page="about"] .about h6,
+body[data-page="about"] .about p,
+body[data-page="about"] .about .label,
+body[data-page="about"] .about .tags,
+body[data-page="about"] .about .bio,
+body[data-page="about"] .about .signature,
+body[data-page="about"] .about .signature + p {
+  font-family: var(--sans) !important;
+}
