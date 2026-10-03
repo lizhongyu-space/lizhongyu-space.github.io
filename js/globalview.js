@@ -89,8 +89,16 @@
     lb.querySelector(".lb-img").innerHTML = p.image
       ? `<img src="${p.image}" alt="${p.place}">`
       : `<div class="ph" style="aspect-ratio:${p.ratio}"></div>`;
+    const originalPath = p.image || "";
+    const originalExt = (originalPath.split(".").pop() || "jpg").split("?")[0];
+    const downloadBase = (p.place || p.country || (en ? "photo" : "照片")) + "-" + (p.date || (en ? "undated" : "未记录时间"));
+    const originalName = downloadBase.replace(/[\\/:*?"<>|]+/g, "-") + "." + originalExt;
+    const downloadLabel = en ? "Download original" : "下载原图";
+    const downloadControl = originalPath
+      ? `<a class="photo-download" href="${encodeURI(originalPath)}" download="${escapeHtml(originalName)}" aria-label="${downloadLabel}" title="${downloadLabel}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg><span>${downloadLabel}</span></a>`
+      : "";
     lb.querySelector(".lb-info").innerHTML =
-      `<h3>${p.place}, ${p.country}</h3>` +
+      `${downloadControl}<h3>${p.place}, ${p.country}</h3>` +
       `<p>${en ? "Date" : "日期"} · ${p.date}</p><p>${en ? "From" : "来自"} · ${p.person}</p><p>${p.note}</p>`;
     lb.hidden = false;
   };
