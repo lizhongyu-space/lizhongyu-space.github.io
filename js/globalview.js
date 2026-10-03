@@ -61,7 +61,7 @@
       const cards = list.map((p) => {
         const i = flat.push(p) - 1;
         return `<figure class="card" data-i="${i}" tabindex="0" style="aspect-ratio:${p.ratio || "4/3"}">` +
-          (p.image ? `<img src="${p.image}" alt="${p.place}" loading="lazy">` : "") +
+          (p.image ? `<img src="${p.image}" alt="${p.place}" loading="lazy" decoding="async">` : "") +
           `<figcaption>${p.place}</figcaption></figure>`;
       }).join("");
       const loc = byCountry ? countryLocations[name] : null;   // 只有"按国家"分类时，才在右侧显示小地图
