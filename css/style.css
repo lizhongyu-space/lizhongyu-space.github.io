@@ -313,3 +313,5 @@ html[data-theme="dark"]{
   --st-pending:#d9b86a;
   --st-expired:#707a84;
 }
+/* About 正文专用字体:只对带有 courier 类名的段落生效 */
+main p.courier { font-family: 'Courier New', Courier, monospace; }
