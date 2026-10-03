@@ -63,7 +63,7 @@
         const placeholder = en ? "No photo yet — looking forward to yours." : "暂时没有，期待你的上传";
         const imageContent = p.image
           ? `<img src="${p.image}" alt="${p.place}" loading="lazy" decoding="async">`
-          : `<div class="gv-photo-placeholder" role="img" aria-label="${placeholder}"><span>${placeholder}</span></div>`;
+          : `<div class="gv-photo-placeholder" role="img" aria-label="${placeholder}" style="display:flex;width:100%;height:100%;box-sizing:border-box;align-items:center;justify-content:center;padding:1rem;background:var(--surface-soft);color:var(--muted);text-align:center;font-size:clamp(12px,1.2vw,14px);line-height:1.6"><span>${placeholder}</span></div>`;
         return `<figure class="card" data-i="${i}" tabindex="0" style="aspect-ratio:${p.ratio || "4/3"}">` +
           imageContent +
           `<figcaption>${p.place}</figcaption></figure>`;
