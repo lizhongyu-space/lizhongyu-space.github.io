@@ -3,11 +3,6 @@
   const root = document.documentElement;
   const base = document.body.dataset.base || "";
 
-  const css = document.createElement("link");
-  css.rel = "stylesheet";
-  css.href = base + "css/theme.css";
-  document.head.appendChild(css);
-
   let lang = "en", theme = "light";
   try {
     lang = localStorage.getItem("lang") || "en";
