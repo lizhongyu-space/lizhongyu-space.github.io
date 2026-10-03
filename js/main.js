@@ -178,8 +178,14 @@ if (gallery) {
     const p = list[cur];
     const isEnglish = document.documentElement.lang !== "zh-CN";
     const intro = isEnglish ? (p.descriptionEn || p.description || "A brief description of this photo.") : (p.description || p.descriptionEn || "这张照片的简短说明。");
+    const originalPath = p.image || "";
+    const originalName = originalPath.split("/").pop() || p.title || "photo";
+    const downloadLabel = isEnglish ? "Download original" : "下载原图";
+    const downloadControl = originalPath
+      ? `<a class="photo-download" href="${"${encodeURI(originalPath)}"}" download="${"${escapeHtml(originalName)}"}" aria-label="${"${downloadLabel}"}" title="${"${downloadLabel}"}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg><span>${"${downloadLabel}"}</span></a>`
+      : "";
     lb.querySelector(".lb-info").innerHTML =
-      `<h3>${escapeHtml(p.location || (isEnglish ? "Location not recorded" : "未记录地点"))}</h3><p>${escapeHtml(p.date || (isEnglish ? "Date not specified" : "未记录"))}</p><p class="small">${escapeHtml(p.title || "")}</p><p class="photo-intro">${escapeHtml(intro)}</p>${photoDescription(p)}`;
+      `${"${downloadControl}"}<h3>${escapeHtml(p.location || (isEnglish ? "Location not recorded" : "未记录地点"))}</h3><p>${escapeHtml(p.date || (isEnglish ? "Date not specified" : "未记录"))}</p><p class="small">${escapeHtml(p.title || "")}</p><p class="photo-intro">${escapeHtml(intro)}</p>${photoDescription(p)}`;
     lb.hidden = false;
   };
   const open = (e) => {
