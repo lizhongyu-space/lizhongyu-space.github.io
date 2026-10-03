@@ -179,7 +179,9 @@ if (gallery) {
     const isEnglish = document.documentElement.lang !== "zh-CN";
     const intro = isEnglish ? (p.descriptionEn || p.description || "A brief description of this photo.") : (p.description || p.descriptionEn || "这张照片的简短说明。");
     const originalPath = p.image || "";
-    const originalName = originalPath.split("/").pop() || p.title || "photo";
+    const originalExt = (originalPath.split(".").pop() || "jpg").split("?")[0];
+    const downloadBase = (p.location || p.title || (isEnglish ? "photo" : "照片")) + "-" + (p.date || (isEnglish ? "undated" : "未记录时间"));
+    const originalName = downloadBase.replace(/[\\/:*?"<>|]+/g, "-") + "." + originalExt;
     const downloadLabel = isEnglish ? "Download original" : "下载原图";
     const downloadControl = originalPath
       ? `<a class="photo-download" href="${encodeURI(originalPath)}" download="${escapeHtml(originalName)}" aria-label="${downloadLabel}" title="${downloadLabel}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg><span>${downloadLabel}</span></a>`
