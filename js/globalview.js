@@ -60,8 +60,12 @@
       const head = byCountry ? `${flag(list[0].code)} ${name}` : name;   // 国家分组前面加国旗
       const cards = list.map((p) => {
         const i = flat.push(p) - 1;
+        const placeholder = en ? "No photo yet — looking forward to yours." : "暂时没有，期待你的上传";
+        const imageContent = p.image
+          ? `<img src="${p.image}" alt="${p.place}" loading="lazy" decoding="async">`
+          : `<div class="gv-photo-placeholder" role="img" aria-label="${placeholder}"><span>${placeholder}</span></div>`;
         return `<figure class="card" data-i="${i}" tabindex="0" style="aspect-ratio:${p.ratio || "4/3"}">` +
-          (p.image ? `<img src="${p.image}" alt="${p.place}" loading="lazy" decoding="async">` : "") +
+          imageContent +
           `<figcaption>${p.place}</figcaption></figure>`;
       }).join("");
       const loc = byCountry ? countryLocations[name] : null;   // 只有"按国家"分类时，才在右侧显示小地图
@@ -92,7 +96,7 @@
     const originalPath = p.image || "";
     const originalExt = (originalPath.split(".").pop() || "jpg").split("?")[0];
     const downloadBase = (p.place || p.country || (en ? "photo" : "照片")) + "-" + (p.date || (en ? "undated" : "未记录时间"));
-    const originalName = downloadBase.replace(/[\\/:*?"<>|]+/g, "-") + "." + originalExt;
+    const originalName = downloadBase.replace(/[\\\\/:*?"<>|]+/g, "-") + "." + originalExt;
     const downloadLabel = en ? "Download original" : "下载原图";
     const downloadControl = originalPath
       ? `<a class="photo-download" href="${encodeURI(originalPath)}" download="${escapeHtml(originalName)}" aria-label="${downloadLabel}" title="${downloadLabel}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg><span>${downloadLabel}</span></a>`
