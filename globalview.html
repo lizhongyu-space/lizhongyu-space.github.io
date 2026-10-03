@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Global View · LI ZHONGYU</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/theme.css">
 
 <!-- 这一段是：Global View 页面专属样式（只影响 globalview.html，不影响其他页面） -->
 <style>
@@ -137,10 +138,10 @@
 </div>
 
 <!-- 这一段是：加载脚本（世界地图数据 → 照片数据 → 全站导航 → 本页逻辑） -->
-<script src="js/worldmap.js"></script>
-<script src="js/globalphotos.js"></script>
-<script src="js/main.js"></script>
-<script src="js/globalview.js"></script>
+<script src="js/worldmap.js" defer></script>
+<script src="js/globalphotos.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/globalview.js" defer></script>
 <script>
 const GV_SHARE = {
   en: {
