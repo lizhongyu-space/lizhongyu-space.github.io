@@ -373,3 +373,117 @@ body[data-page=about] main.about{animation:aboutEnter .4s ease backwards}
   body[data-page=about] .about .about-lang h2{font-size:19px}
   body[data-page=about] .about .bio{overflow-wrap:anywhere}
 }
+
+/* =====================================================================
+   FINAL DESIGN SYSTEM CLEANUP · 2026-10-03
+   只收敛视觉规则，不改变页面结构、内容、数据或功能。
+   ===================================================================== */
+:root{
+  --sans:"SFMono-Regular","SF Mono",Menlo,Monaco,Consolas,"Liberation Mono","PingFang SC","Hiragino Sans GB","Microsoft YaHei",monospace;
+  --serif:"SFMono-Regular","SF Mono",Menlo,Monaco,Consolas,"Liberation Mono","PingFang SC","Hiragino Sans GB","Microsoft YaHei",monospace;
+  --width:900px;
+  --radius:12px;
+  --radius-sm:12px;
+  --radius-md:12px;
+  --radius-lg:12px;
+  --shadow-soft:0 4px 18px rgba(35,45,55,.045);
+  --shadow-hover:0 8px 24px rgba(35,45,55,.065);
+}
+
+/* 全站统一为 Monospace：标题、导航、正文、控件保持同一编辑感 */
+body,h1,h2,h3,h4,h5,h6,button,input,textarea,select,table{
+  font-family:var(--sans);
+}
+
+/* 侧边栏：比实验室更克制，不做明显滑入/弹跳 */
+body{
+  transition:padding-left .18s ease;
+}
+.side{
+  transition:width .18s ease;
+}
+.side-toggle{
+  border-radius:12px;
+  transition:background-color .16s ease,color .16s ease,border-color .16s ease;
+}
+.side nav a{
+  transition:color .16s ease,background-color .16s ease,border-color .16s ease;
+}
+.side nav a:hover{
+  transform:translateY(-1px);
+  transition:color .16s ease,background-color .16s ease,border-color .16s ease,transform .16s ease;
+}
+.side nav a.active{
+  color:var(--accent);
+}
+
+/* 编辑器风格控件：12px 圆角、1px 边框、克制反馈 */
+.btn{
+  border-radius:12px;
+  transition:background-color .16s ease,color .16s ease,border-color .16s ease,transform .16s ease;
+}
+.btn:hover{
+  transform:translateY(-1px);
+}
+.chip{
+  transition:color .16s ease,border-color .16s ease,transform .16s ease;
+}
+.chip:hover{
+  transform:translateY(-1px);
+}
+
+/* 内容表面：统一圆角与极轻阴影 */
+.card,.map-wrap,.pc-card,.pc-panel,.gv-map,#gvWin,.pc-modal .pc-panel{
+  border-radius:12px;
+}
+.card,.pc-card,.pc-panel,#gvWin{
+  box-shadow:var(--shadow-soft);
+}
+.card:hover,.pc-card:hover{
+  box-shadow:var(--shadow-hover);
+}
+
+/* 图片：统一 12px 圆角，但不改变原有尺寸与加载逻辑 */
+.card img,
+.pc-thumbs img,
+.pc-rec-img img,
+.avatar{
+  border-radius:12px;
+}
+.avatar{
+  border-radius:50%;
+}
+
+/* 极简表格：细分隔线 + 很淡的蓝色 hover，不改变现有字段 */
+.records tbody tr{
+  transition:background-color .16s ease;
+}
+.records tbody tr:hover{
+  background:var(--accent-soft);
+}
+
+/* 页面进入：轻微淡入 + 4px 位移；不做夸张移动 */
+@keyframes siteEnterFinal{
+  from{opacity:0;transform:translateY(4px)}
+  to{opacity:1;transform:translateY(0)}
+}
+body:not([data-page="welcome"]) main{
+  animation:siteEnterFinal .36s ease both;
+}
+
+/* 移动端抽屉：仅做克制的宽度变化，不增加滑入/弹跳动画 */
+@media(max-width:720px){
+  .side{
+    transition:width .18s ease,box-shadow .18s ease;
+  }
+}
+
+/* 减少动态效果设置仍然优先 */
+@media(prefers-reduced-motion:reduce){
+  body,.side,.side nav a,.btn,.chip,.card,.records tbody tr{
+    transition:none!important;
+  }
+  body:not([data-page="welcome"]) main{
+    animation:none!important;
+  }
+}
