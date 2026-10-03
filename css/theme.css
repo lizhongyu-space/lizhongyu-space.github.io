@@ -1,36 +1,37 @@
-/* ===== 主题样式：右上角切换按钮 + 深色模式（Dark）的颜色 =====
+/* ===== theme.css 主题样式：右上角切换按钮 + 深色模式（Dark）的颜色 =====
    这个文件由 js/lang.js 自动加载，不需要在 HTML 里手动引用。
-   浅色模式（Light）用的是 style.css 里原本的颜色；深色模式只是在这里把颜色换掉。 */
+   浅色模式的颜色在 style.css 最末尾的"视觉修复"那段；深色模式在这里把同名变量换成深色。 */
 
 /* ---- 1) 右上角的两个切换按钮（语言 + 主题），所有页面通用 ---- */
 .top-ctrl { position: fixed; top: 14px; right: 18px; z-index: 30; display: flex; gap: 8px; }
-.top-ctrl button { background: var(--background); color: var(--text); border: 1px solid var(--border); border-radius: 999px;
+.top-ctrl button { background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 999px;
   padding: 5px 14px; font: inherit; font-size: 12px; letter-spacing: .1em; line-height: 1.6; cursor: pointer; transition: border-color .2s; }
-.top-ctrl button:hover { border-color: var(--text); }   /* 鼠标移上去时，边框变深 */
+.top-ctrl button:hover { border-color: var(--accent); }   /* 鼠标移上去时，边框变成蓝色 */
 
-/* ---- 2) 深色模式：整站的基础颜色（想调深色模式的颜色，改这里） ---- */
+/* ---- 2) 深色模式：整站的基础颜色（想调深色模式的颜色，改这里）---- */
 html[data-theme="dark"] {
   color-scheme: dark;
-  --background: #171716;   /* 页面背景 */
-  --text: #e8e6df;         /* 主要文字 */
-  --muted: #a09e96;        /* 次要文字 */
-  --border: #34332f;       /* 边框线 */
-  --accent: #8fb09f;       /* 导航选中标记的颜色 */
+  --background: #15181b;     /* 页面背景 */
+  --surface: #1b1f23;        /* 内容区、导航栏、弹窗 */
+  --surface-soft: #22272c;   /* 次级背景 */
+  --text: #e6e9ed;           /* 主要文字 */
+  --muted: #98a1ab;          /* 次要文字 */
+  --text-muted: #707a84;     /* 辅助说明文字 */
+  --border: #2d333a;         /* 边框线 */
+  --border-strong: #3b434b;  /* 强调边框线 */
+  --accent: #8fb0cf;         /* 强调色：偏亮的冷蓝 */
+  --accent-soft: #232e3a;    /* 强调色的深底 */
+  --accent-hover: #a9c4dc;   /* 强调色悬停 */
+  --shadow-soft: 0 6px 24px rgba(0, 0, 0, .28);
+  --shadow-hover: 0 10px 30px rgba(0, 0, 0, .38);
 }
 
-/* ---- 3) 深色模式：style.css 里写死了颜色的地方，在这里逐个覆盖 ---- */
-html[data-theme="dark"] .side-toggle:hover { background: rgba(255, 255, 255, .08); }   /* 导航收缩按钮的悬停色 */
-html[data-theme="dark"] .card,
-html[data-theme="dark"] .ph { background: #262624; }                                    /* 照片占位块的底色 */
-html[data-theme="dark"] .map-wrap,
-html[data-theme="dark"] .gv-map { background: #1f1f1d; }                                /* 世界地图的底色 */
-html[data-theme="dark"] .land { fill: #34342f; }                                        /* 地图上的陆地颜色 */
-html[data-theme="dark"] .borders { stroke: #1f1f1d; }                                   /* 地图上的国界线颜色 */
-html[data-theme="dark"] .mac-bar,
-html[data-theme="dark"] .mac-foot { background: #222220; }                              /* Illustrate 弹窗的标题栏和底栏 */
-/* ---- Language selection menu ---- */
+/* ---- 3) 深色模式：style.css 里写死了颜色的地方，在这里单独覆盖 ---- */
+html[data-theme="dark"] .land { fill: #343c44; }   /* 地图上的陆地颜色 */
+
+/* ---- 4) 语言选择菜单（点"Language"后弹出的 English / 中文）---- */
 .lang-menu{position:relative}
-.lang-options{position:absolute;top:calc(100% + 6px);right:0;min-width:92px;padding:5px;background:var(--background);border:1px solid var(--border);box-shadow:0 8px 24px rgba(0,0,0,.10)}
+.lang-options{position:absolute;top:calc(100% + 6px);right:0;min-width:92px;padding:5px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);box-shadow:var(--shadow-soft)}
 .lang-options[hidden]{display:none}
-.lang-options button{display:block;width:100%;padding:6px 10px;border:0;border-radius:0;text-align:left;background:none;letter-spacing:.02em}
-.lang-options button:hover{background:var(--border)}
+.lang-options button{display:block;width:100%;padding:6px 10px;border:0;border-radius:var(--radius-sm);text-align:left;background:none;letter-spacing:.02em}
+.lang-options button:hover{background:var(--surface-soft)}
