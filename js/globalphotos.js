@@ -6,6 +6,8 @@
 // ratio 是照片宽高比（横图 "4/3"，竖图 "3/4"，方图 "1/1"），image 留空时显示灰色占位块。
 // 想新增一张照片：复制下面任意一行 { ... }, 粘贴在末尾，再修改里面的内容。
 const globalPhotos = [
+  { id: 9, image: "global_view_photo/china/pipi/拉普兰_20261004_014 拷贝.jpg", ratio: "4/3", country: "China", code: "CN", person: "pipi", place: "Qixia Mountain", placeZh: "栖霞山", date: "2026-10-04", note: "Photographed at Qixia Mountain on October 4, 2026.", noteZh: "拍摄于2026年10月4日，栖霞山。" },
+  { id: 10, image: "global_view_photo/china/pipi/拉普兰_20261004_016 拷贝.jpg", ratio: "4/3", country: "China", code: "CN", person: "pipi", place: "Qixia Mountain", placeZh: "栖霞山", date: "2026-10-04", note: "Photographed at Qixia Mountain on October 4, 2026.", noteZh: "拍摄于2026年10月4日，栖霞山。" },
   { id: 1, image: "", ratio: "3/4", country: "Japan",   code: "JP", person: "Person A", place: "Tokyo",     date: "2026-09-12", note: "Short description of this photo." },
   { id: 2, image: "", ratio: "4/3", country: "Japan",   code: "JP", person: "Person B", place: "Kyoto",     date: "2026-09-14", note: "Short description of this photo." },
   { id: 3, image: "", ratio: "1/1", country: "Germany", code: "DE", person: "Person A", place: "Berlin",    date: "2026-08-30", note: "Short description of this photo." },
@@ -24,5 +26,6 @@ const countryLocations = {
   "Germany": { lat: 52.52, lon: 13.40 },    // 柏林
   "USA":     { lat: 38.90, lon: -77.04 },   // 华盛顿
   "Finland": { lat: 60.17, lon: 24.94 },    // 赫尔辛基
-  "France":  { lat: 48.86, lon: 2.35 }      // 巴黎
+  "France":  { lat: 48.86, lon: 2.35 },      // 巴黎
+  "China":   { lat: 39.90, lon: 116.40 }       // 北京
 };
