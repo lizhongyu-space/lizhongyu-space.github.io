@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200">
+<rect width="900" height="1200" fill="#eef1f4"/>
+<rect x="58" y="58" width="784" height="1084" fill="none" stroke="#cbd2da" stroke-width="2"/>
+<text x="450" y="480" text-anchor="middle" fill="#20242a" font-family="Georgia, serif" font-size="52">PHILATELIC</text>
+<text x="450" y="548" text-anchor="middle" fill="#20242a" font-family="Georgia, serif" font-size="52">ALBUM 01</text>
+<line x1="250" y1="610" x2="650" y2="610" stroke="#557fa8" stroke-width="4"/>
+<text x="450" y="675" text-anchor="middle" fill="#69737e" font-family="Arial, sans-serif" font-size="24" letter-spacing="4">MY MUSEUM</text>
+<text x="450" y="1080" text-anchor="middle" fill="#9aa2ab" font-family="Arial, sans-serif" font-size="18">LI ZHONGYU · 2026</text>
+</svg>
