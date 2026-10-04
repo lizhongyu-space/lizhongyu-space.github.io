@@ -1,16 +1,16 @@
 /* My Museum — lightweight catalog; full scans load only after a click. */
 .museum-page{padding-bottom:72px}
 .museum-intro{max-width:760px;margin-bottom:30px}
-.museum-intro p[data-museum-lang]{display:none}
-html:not([lang="zh-CN"]) .museum-intro p[data-museum-lang="en"],
-html[lang="zh-CN"] .museum-intro p[data-museum-lang="zh"]{display:block}
+.museum-intro p[data-intro-lang]{display:none}
+html:not([lang="zh-CN"]) .museum-intro p[data-intro-lang="en"],
+html[lang="zh-CN"] .museum-intro p[data-intro-lang="zh"]{display:block}
 .museum-categories{display:flex;flex-wrap:wrap;gap:8px 28px;margin:0 0 34px}
 .museum-chip{appearance:none;background:none;border:0;border-bottom:1px solid transparent;padding:2px 0;font:inherit;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);cursor:pointer}
 .museum-chip:hover{color:var(--accent)}
 .museum-chip.active{color:var(--accent);border-bottom-color:var(--accent)}
-.museum-chip span[data-museum-lang]{display:none}
-html:not([lang="zh-CN"]) .museum-chip span[data-museum-lang="en"],
-html[lang="zh-CN"] .museum-chip span[data-museum-lang="zh"]{display:inline}
+.museum-chip span[data-intro-lang]{display:none}
+html:not([lang="zh-CN"]) .museum-chip span[data-intro-lang="en"],
+html[lang="zh-CN"] .museum-chip span[data-intro-lang="zh"]{display:inline}
 .museum-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 .museum-card{display:flex;flex-direction:column;min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-soft);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
 .museum-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover);border-color:var(--border-strong)}
