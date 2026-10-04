@@ -9,6 +9,18 @@
 
 <!-- 这一段是：Global View 页面专属样式（只影响 globalview.html，不影响其他页面） -->
 <style>
+/* ---- Global View 中英文显示：与全站语言切换保持一致 ---- */
+html[lang="en"] [data-gv-lang="zh"],
+html[lang="zh-CN"] [data-gv-lang="en"],
+html[lang="en"] [data-share-lang="zh"],
+html[lang="zh-CN"] [data-share-lang="en"]{display:none!important}
+
+/* ---- Global View 照片卡片：与 Gallery 使用同一套卡片 / 缩略图视觉 ---- */
+.gv-card img{width:100%;height:auto;display:block;object-fit:cover}
+.gv-card .gv-photo-placeholder{display:flex;width:100%;height:100%;box-sizing:border-box;align-items:center;justify-content:center;padding:1rem;background:var(--surface-soft);color:var(--muted);text-align:center;font-size:clamp(12px,1.2vw,14px);line-height:1.6}
+.gv-card figcaption{display:none}
+.gv-card{min-height:120px}
+
 /* ---- 1) Illustrate 弹窗（macOS 窗口风格） ---- */
 .mac-backdrop { position: fixed; inset: 0; z-index: 70; background: rgba(20,20,20,.45); backdrop-filter: blur(3px);
   display: flex; align-items: center; justify-content: center; padding: 24px; animation: fade .25s ease; }   /* 弹窗背后的半透明遮罩 */
