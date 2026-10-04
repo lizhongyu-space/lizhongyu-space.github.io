@@ -129,8 +129,9 @@
         const displayPlace = en ? (p.place || p.placeZh || "") : (p.placeZh || p.place || "");
         const i = flat.push(p) - 1;
         const placeholder = en ? "No photo yet — looking forward to yours." : "暂时没有，期待你的上传";
+        const thumbPath = p.thumbnail || p.image || "";
         const imageContent = p.image
-          ? `<img src="${encodeURI(p.image)}" alt="${escapeHtml(displayPlace)}" loading="lazy" decoding="async">`
+          ? `<img src="${encodeURI(thumbPath)}" data-original-src="${encodeURI(p.image)}" alt="${escapeHtml(displayPlace)}" loading="lazy" decoding="async">`
           : `<div class="gv-photo-placeholder" role="img" aria-label="${placeholder}"><span>${placeholder}</span></div>`;
         return `<figure class="card gv-card" data-i="${i}" tabindex="0" style="aspect-ratio:${p.ratio || "4/3"}">${imageContent}<figcaption>${escapeHtml(displayPlace)}</figcaption></figure>`;
       }).join("");
@@ -172,6 +173,7 @@
       ? (p.note || p.noteZh || "A brief description of this photo.")
       : (p.noteZh || p.note || "这张照片的简短说明。");
     const originalPath = p.image || "";
+    const displayPath = p.display || originalPath;
     const originalExt = (originalPath.split(".").pop() || "jpg").split("?")[0];
     const downloadBase = (en ? (p.place || p.placeZh || p.country || "photo") : (p.placeZh || p.place || "照片")) + "-" + (p.date || (en ? "undated" : "未记录时间"));
     const originalName = downloadBase.replace(/[\\/:*?"<>|]+/g, "-") + "." + originalExt;
@@ -183,7 +185,7 @@
     const place = en ? (p.place || p.placeZh || "Location not recorded") : (p.placeZh || p.place || "未记录地点");
     const country = en ? (p.country || "") : (p.countryZh || p.country || "");
     lb.querySelector(".lb-img").innerHTML = originalPath
-      ? `<img src="${encodeURI(originalPath)}" alt="${escapeHtml(place)}">`
+      ? `<img src="${encodeURI(displayPath)}" data-original-src="${encodeURI(originalPath)}" alt="${escapeHtml(place)}" decoding="async">`
       : `<div class="ph" style="aspect-ratio:${p.ratio || "4/3"}"></div>`;
 
     lb.querySelector(".lb-info").innerHTML =
@@ -200,10 +202,24 @@
     if (c) show(+c.dataset.i);
   };
 
+  groupsEl.addEventListener("error", e => {
+    const img = e.target;
+    if (img instanceof HTMLImageElement && img.dataset.originalSrc && img.src !== img.dataset.originalSrc) {
+      img.src = img.dataset.originalSrc;
+    }
+  }, true);
+
   groupsEl.addEventListener("click", open);
   groupsEl.addEventListener("keydown", e => {
     if (e.key === "Enter") open(e);
   });
+
+  lb.addEventListener("error", e => {
+    const img = e.target;
+    if (img instanceof HTMLImageElement && img.dataset.originalSrc && img.src !== img.dataset.originalSrc) {
+      img.src = img.dataset.originalSrc;
+    }
+  }, true);
 
   lb.addEventListener("click", e => {
     if (e.target === lb || e.target.matches(".lb-close")) lb.hidden = true;

@@ -8,8 +8,8 @@
 // ratio 是照片宽高比（横图 "4/3"，竖图 "3/4"，方图 "1/1"），image 留空时显示灰色占位块。
 // 想新增一张照片：复制下面任意一行 { ... }, 粘贴在末尾，再修改里面的内容。
 const globalPhotos = [
-  { id: 9, image: "global_view_photo/asia/china/pipi/拉普兰_20261004_014 拷贝.jpg", ratio: "4/3", country: "China", code: "CN", person: "pipi", place: "Qixia Mountain", placeZh: "栖霞山", countryZh: "中国", lat: 32.17, lon: 118.99, date: "2026-10-04", note: "Photographed at Qixia Mountain on October 4, 2026.", noteZh: "拍摄于2026年10月4日，栖霞山。" },
-  { id: 10, image: "global_view_photo/asia/china/pipi/拉普兰_20261004_016 拷贝.jpg", ratio: "4/3", country: "China", code: "CN", person: "pipi", place: "Qixia Mountain", placeZh: "栖霞山", countryZh: "中国", lat: 32.17, lon: 118.99, date: "2026-10-04", note: "Photographed at Qixia Mountain on October 4, 2026.", noteZh: "拍摄于2026年10月4日，栖霞山。" },
+  { id: 9, image: "global_view_photo/asia/china/pipi/拉普兰_20261004_014 拷贝.jpg", thumbnail: "global-view-thumbs/asia/china/pipi/拉普兰_20261004_014 拷贝.webp", display: "global-view-display/asia/china/pipi/拉普兰_20261004_014 拷贝.webp", ratio: "4/3", country: "China", code: "CN", person: "pipi", place: "Qixia Mountain", placeZh: "栖霞山", countryZh: "中国", lat: 32.17, lon: 118.99, date: "2026-10-04", note: "Photographed at Qixia Mountain on October 4, 2026.", noteZh: "拍摄于2026年10月4日，栖霞山。" },
+  { id: 10, image: "global_view_photo/asia/china/pipi/拉普兰_20261004_016 拷贝.jpg", thumbnail: "global-view-thumbs/asia/china/pipi/拉普兰_20261004_016 拷贝.webp", display: "global-view-display/asia/china/pipi/拉普兰_20261004_016 拷贝.webp", ratio: "4/3", country: "China", code: "CN", person: "pipi", place: "Qixia Mountain", placeZh: "栖霞山", countryZh: "中国", lat: 32.17, lon: 118.99, date: "2026-10-04", note: "Photographed at Qixia Mountain on October 4, 2026.", noteZh: "拍摄于2026年10月4日，栖霞山。" },
 ];
 
 // ===== 各个国家在地图上的位置（用首都的经纬度代表这个国家）=====
