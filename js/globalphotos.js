@@ -10,14 +10,6 @@
 const globalPhotos = [
   { id: 9, image: "global_view_photo/asia/china/pipi/拉普兰_20261004_014 拷贝.jpg", ratio: "4/3", country: "China", code: "CN", person: "pipi", place: "Qixia Mountain", placeZh: "栖霞山", countryZh: "中国", lat: 32.17, lon: 118.99, date: "2026-10-04", note: "Photographed at Qixia Mountain on October 4, 2026.", noteZh: "拍摄于2026年10月4日，栖霞山。" },
   { id: 10, image: "global_view_photo/asia/china/pipi/拉普兰_20261004_016 拷贝.jpg", ratio: "4/3", country: "China", code: "CN", person: "pipi", place: "Qixia Mountain", placeZh: "栖霞山", countryZh: "中国", lat: 32.17, lon: 118.99, date: "2026-10-04", note: "Photographed at Qixia Mountain on October 4, 2026.", noteZh: "拍摄于2026年10月4日，栖霞山。" },
-  { id: 1, image: "", ratio: "3/4", country: "Japan", countryZh: "日本", code: "JP", person: "Person A", place: "Tokyo",     date: "2026-09-12", note: "Short description of this photo." },
-  { id: 2, image: "", ratio: "4/3", country: "Japan", countryZh: "日本", code: "JP", person: "Person B", place: "Kyoto",     date: "2026-09-14", note: "Short description of this photo." },
-  { id: 3, image: "", ratio: "1/1", country: "Germany", countryZh: "德国", code: "DE", person: "Person A", place: "Berlin",    date: "2026-08-30", note: "Short description of this photo." },
-  { id: 4, image: "", ratio: "4/3", country: "Germany", countryZh: "德国", code: "DE", person: "Person C", place: "Munich",    date: "2026-08-31", note: "Short description of this photo." },
-  { id: 5, image: "", ratio: "3/4", country: "USA", countryZh: "美国", code: "US", person: "Person B", place: "New York",  date: "2026-09-02", note: "Short description of this photo." },
-  { id: 6, image: "", ratio: "4/3", country: "Finland", countryZh: "芬兰", code: "FI", person: "Person C", place: "Helsinki",  date: "2026-09-05", note: "Short description of this photo." },
-  { id: 7, image: "", ratio: "1/1", country: "France", countryZh: "法国", code: "FR", person: "Person A", place: "Paris",     date: "2026-09-08", note: "Short description of this photo." },
-  { id: 8, image: "", ratio: "3/4", country: "France", countryZh: "法国", code: "FR", person: "Person B", place: "Lyon",      date: "2026-09-09", note: "Short description of this photo." }
 ];
 
 // ===== 各个国家在地图上的位置（用首都的经纬度代表这个国家）=====
