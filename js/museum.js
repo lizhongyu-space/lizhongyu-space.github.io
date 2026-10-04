@@ -1,6 +1,6 @@
 /* My Museum catalog: PDF files are not requested while browsing cards. */
 const museumCollections=[
-{id:"album-001",type:"album",displayName:"2021 中国邮政特种纪念邮票.pdf",titleEn:"2021 中国邮政特种纪念邮票.pdf",titleZh:"2021 中国邮政特种纪念邮票.pdf",categoryEn:"Philatelic album",categoryZh:"集邮册",date:"2021",pages:"20 pages",cover:"museum/covers/album-001.svg",file:"museum/files/album-001.pdf",descriptionEn:"A scanned album preserved in its original reading quality.",descriptionZh:"一本按原始阅读质量保存的扫描集邮册。"}
+{id:"album-001",type:"album",displayName:"2021 China Post Special Commemorative Stamp Album.pdf",titleEn:"2021 China Post Special Commemorative Stamp Album.pdf",titleZh:"2021 中国邮政特种纪念邮票.pdf",categoryEn:"Philatelic album",categoryZh:"集邮册",date:"2021",pages:"20 pages",cover:"museum/covers/2021.png",file:"museum/files/album-001.pdf",descriptionEn:"A scanned copy of an official China Post commemorative stamp album from my personal collection.",descriptionZh:"一本来自我个人收藏的中国邮政官方特种纪念邮票集邮册扫描件。"}
 ];
 const museumGrid=document.getElementById("museumGrid");
 const museumEmpty=document.getElementById("museumEmpty");
