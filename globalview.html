@@ -205,7 +205,7 @@
           <li>If I feel that a photo seriously does not meet the requirements for Global View, I will reply to you by email. I reserve the right not to upload photos that do not meet the requirements, although I hope we never have to do that.</li>
         </ol>
         <p>That's all. Wishing you all the best and a lovely day.</p>
-      <div class="gv-share-agreement">
+      <div class="gv-share-agreement" id="gvAgreementSection">
         <input id="gvAgreement" type="checkbox" aria-describedby="gvAgreementText">
         <label for="gvAgreement" id="gvAgreementText">
           <span data-share-lang="zh">我已阅读并理解 <a href="https://lizhongyu-space.github.io/Photo%20Submission%20License%20Agreement/%E7%85%A7%E7%89%87%E6%8A%95%E7%A8%BF%E6%8E%88%E6%9D%83%E5%8D%8F%E8%AE%AE.pdf" target="_blank" rel="noopener">《照片投稿授权协议》PDF</a>。</span>
@@ -307,7 +307,16 @@ gvShareModal?.addEventListener("click", (e) => { if (e.target === gvShareModal) 
 gvAgreement?.addEventListener("change", () => {
   if (gvSendBtn) gvSendBtn.disabled = !gvAgreement.checked;
 });
-gvSendBtn?.addEventListener("click", sendGV);
+gvSendBtn?.addEventListener("click", () => {
+  if (gvSendBtn?.disabled) {
+    const agreementSection = document.getElementById("gvAgreementSection");
+    agreementSection?.scrollIntoView({ behavior: "smooth", block: "center" });
+    agreementSection?.classList.add("gv-agreement-highlight");
+    setTimeout(() => agreementSection?.classList.remove("gv-agreement-highlight"), 1800);
+    return;
+  }
+  sendGV();
+});
 
 window.addEventListener("site-language-change", setShareLanguage);
 document.addEventListener("keydown", (e) => { if (e.key === "Escape" && gvShareModal && !gvShareModal.hidden) closeShareModal(); });
