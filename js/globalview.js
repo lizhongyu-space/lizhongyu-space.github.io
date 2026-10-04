@@ -57,7 +57,7 @@
     flat = [];
     label.textContent = en ? "GLOBAL VIEW · " + (byCountry ? "BY COUNTRY" : "BY PERSON") : "全球视野 · " + (byCountry ? "按国家" : "按人物");
     groupsEl.innerHTML = [...groups].map(([name, list]) => {
-      const head = byCountry ? `${flag(list[0].code)} ${name}` : name;   // 国家分组前面加国旗
+      const head = byCountry ? `${flag(list[0].code)} ${en ? name : (list[0].countryZh || name)}` : name;   // 国家分组前面加国旗
       const cards = list.map((p) => {
         const displayPlace = en ? (p.place || p.placeZh || "") : (p.placeZh || p.place || "");
         const i = flat.push(p) - 1;
@@ -103,7 +103,7 @@
       ? `<a class="photo-download" href="${encodeURI(originalPath)}" download="${escapeHtml(originalName)}" aria-label="${downloadLabel}" title="${downloadLabel}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg><span>${downloadLabel}</span></a>`
       : "";
     lb.querySelector(".lb-info").innerHTML =
-      `${downloadControl}<h3>${en ? (p.place || p.placeZh || "") : (p.placeZh || p.place || "")}, ${en ? p.country : (p.country === "China" ? "中国" : p.country)}</h3>` +
+      `${downloadControl}<h3>${en ? (p.place || p.placeZh || "") : (p.placeZh || p.place || "")}, ${en ? p.country : (p.countryZh || (p.country === "China" ? "中国" : p.country))}</h3>` +
       `<p>${en ? "Date" : "日期"} · ${p.date}</p><p>${en ? "From" : "来自"} · ${p.person}</p><p>${en ? (p.note || p.noteZh || "") : (p.noteZh || p.note || "")}</p>`;
     lb.hidden = false;
   };
