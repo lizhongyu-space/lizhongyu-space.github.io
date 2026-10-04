@@ -92,6 +92,11 @@
 .gv-share-foot { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 32px; border-top: 1px solid var(--border); background: var(--surface-soft); }
 .gv-share-foot .btn { margin: 0; }
 .gv-share-status { color: var(--muted); font-size: 12px; }
+.gv-share-agreement { display: flex; align-items: flex-start; gap: 10px; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 13px; line-height: 1.65; color: var(--muted); }
+.gv-share-agreement input { flex: none; width: 16px; height: 16px; margin: 3px 0 0; accent-color: var(--accent); cursor: pointer; }
+.gv-share-agreement label { cursor: pointer; }
+.gv-share-agreement a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+.gv-share-agreement a:hover { color: var(--accent); }
 .gv-share-fallback { display: none; color: var(--muted); font-size: 12px; line-height: 1.6; }
 .gv-share-foot.sent .gv-share-fallback { display: inline; }
 @media (max-width: 600px) { .gv-share-body { padding: 22px 20px 14px; } .gv-share-foot { padding: 12px 20px; } }
@@ -200,6 +205,13 @@
           <li>If I feel that a photo seriously does not meet the requirements for Global View, I will reply to you by email. I reserve the right not to upload photos that do not meet the requirements, although I hope we never have to do that.</li>
         </ol>
         <p>That's all. Wishing you all the best and a lovely day.</p>
+        <div class="gv-share-agreement">
+          <input id="gvAgreement" type="checkbox">
+          <label for="gvAgreement">
+            <span data-share-lang="zh">我已阅读并理解<a href="Photo%20Submission%20License%20Agreement/%E7%85%A7%E7%89%87%E6%8A%95%E7%A8%BF%E6%8E%88%E6%9D%83%E5%8D%8F%E8%AE%AE.pdf" target="_blank" rel="noopener">《照片投稿授权协议》</a>。</span>
+            <span data-share-lang="en" hidden>I have read and understood the <a href="Photo%20Submission%20License%20Agreement/%E7%85%A7%E7%89%87%E6%8A%95%E7%A8%BF%E6%8E%88%E6%9D%83%E5%8D%8F%E8%AE%AE.pdf" target="_blank" rel="noopener">Photo Submission License Agreement</a>.</span>
+          </label>
+        </div>
       </div>
     </div>
     <div class="gv-share-foot">
@@ -243,6 +255,7 @@ const gvIntroShare = document.getElementById("gvIntroShare");
 const gvShareModal = document.getElementById("gvShareModal");
 const gvShareClose = document.getElementById("gvShareClose");
 const gvSendBtn = document.getElementById("gvSendBtn");
+const gvAgreement = document.getElementById("gvAgreement");
 const gvSendStatus = document.getElementById("gvSendStatus");
 
 function setGVLanguage() {
@@ -262,6 +275,9 @@ function setShareLanguage() {
 
 function openShareModal() {
   if (!gvShareModal) return;
+  if (gvAgreement) gvAgreement.checked = false;
+  if (gvSendBtn) gvSendBtn.disabled = true;
+  if (gvSendStatus) gvSendStatus.textContent = "";
   setShareLanguage();
   gvShareModal.hidden = false;
 }
@@ -289,6 +305,9 @@ gvShare?.addEventListener("click", openShareModal);
 gvIntroShare?.addEventListener("click", openShareModal);
 gvShareClose?.addEventListener("click", closeShareModal);
 gvShareModal?.addEventListener("click", (e) => { if (e.target === gvShareModal) closeShareModal(); });
+gvAgreement?.addEventListener("change", () => {
+  if (gvSendBtn) gvSendBtn.disabled = !gvAgreement.checked;
+});
 gvSendBtn?.addEventListener("click", sendGV);
 
 window.addEventListener("site-language-change", setShareLanguage);
