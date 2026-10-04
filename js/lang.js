@@ -14,7 +14,7 @@
   // 之前 gallery 的城市/照片信息那几项写成了 ["中文", "英文"]，导致中英文显示反了，现已全部调转。
   const PAIRS = [
     // —— 左侧导航、页脚 ——
-    ["About", "关于"], ["Gallery", "相册"], ["Postcrossing", "明信片交换"], ["Global View", "全球视野"], ["Contact", "联系"],
+    ["About", "关于"], ["Gallery", "相册"], ["Postcrossing", "明信片交换"], ["Global View", "全球视野"], ["My Museum", "我的博物馆"], ["Contact", "联系"],
     ["Keep Exploring.", "继续探索。"],
 
     // —— About 页面 ——
