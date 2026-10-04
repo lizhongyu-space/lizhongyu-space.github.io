@@ -27,7 +27,7 @@
 
   const flag = code => [...code.toUpperCase()].map(c => String.fromCodePoint(127397 + c.charCodeAt(0))).join("");
   const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, ch => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",""":"&quot;","'":"&#39;"
+    "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
   }[ch]));
 
   // Global View 保留自己的国家小地图；照片详情则完全采用 Gallery 的信息结构。
