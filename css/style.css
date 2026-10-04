@@ -563,3 +563,16 @@ html[lang="zh-CN"] [data-intro-lang="en"]{display:none}
 html[data-theme="dark"] .editorial-intro{
   background:color-mix(in srgb,var(--accent) 12%,var(--surface));
 }
+
+
+/* Gallery lightbox: download control must remain readable on the dark overlay in light mode */
+.lightbox .photo-download{
+  color:#eee;
+  border-color:rgba(238,238,238,.32);
+}
+.lightbox .photo-download:hover{
+  color:#fff;
+  border-color:var(--accent);
+  background:rgba(255,255,255,.08);
+}
+.lightbox .photo-download svg{stroke:currentColor}
