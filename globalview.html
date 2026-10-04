@@ -275,7 +275,7 @@ function setShareLanguage() {
 function openShareModal() {
   if (!gvShareModal) return;
   if (gvAgreement) gvAgreement.checked = false;
-  if (gvSendBtn) gvSendBtn.disabled = true;
+  if (gvSendBtn) { gvSendBtn.disabled = false; gvSendBtn.setAttribute("aria-disabled", "true"); }
   if (gvSendStatus) gvSendStatus.textContent = "";
   setShareLanguage();
   gvShareModal.hidden = false;
@@ -305,10 +305,10 @@ gvIntroShare?.addEventListener("click", openShareModal);
 gvShareClose?.addEventListener("click", closeShareModal);
 gvShareModal?.addEventListener("click", (e) => { if (e.target === gvShareModal) closeShareModal(); });
 gvAgreement?.addEventListener("change", () => {
-  if (gvSendBtn) gvSendBtn.disabled = !gvAgreement.checked;
+  if (gvSendBtn) { gvSendBtn.disabled = false; gvSendBtn.setAttribute("aria-disabled", gvAgreement.checked ? "false" : "true"); }
 });
 gvSendBtn?.addEventListener("click", () => {
-  if (gvSendBtn?.disabled) {
+  if (gvSendBtn?.getAttribute("aria-disabled") === "true") {
     const agreementSection = document.getElementById("gvAgreementSection");
     agreementSection?.scrollIntoView({ behavior: "smooth", block: "center" });
     agreementSection?.classList.add("gv-agreement-highlight");
