@@ -59,14 +59,15 @@
     groupsEl.innerHTML = [...groups].map(([name, list]) => {
       const head = byCountry ? `${flag(list[0].code)} ${name}` : name;   // 国家分组前面加国旗
       const cards = list.map((p) => {
+        const displayPlace = en ? (p.place || p.placeZh || "") : (p.placeZh || p.place || "");
         const i = flat.push(p) - 1;
         const placeholder = en ? "No photo yet — looking forward to yours." : "暂时没有，期待你的上传";
         const imageContent = p.image
-          ? `<img src="${p.image}" alt="${p.place}" loading="lazy" decoding="async">`
+          ? `<img src="${p.image}" alt="${displayPlace}" loading="lazy" decoding="async">`
           : `<div class="gv-photo-placeholder" role="img" aria-label="${placeholder}" style="display:flex;width:100%;height:100%;box-sizing:border-box;align-items:center;justify-content:center;padding:1rem;background:var(--surface-soft);color:var(--muted);text-align:center;font-size:clamp(12px,1.2vw,14px);line-height:1.6"><span>${placeholder}</span></div>`;
         return `<figure class="card" data-i="${i}" tabindex="0" style="aspect-ratio:${p.ratio || "4/3"}">` +
           imageContent +
-          `<figcaption>${p.place}</figcaption></figure>`;
+          `<figcaption>${displayPlace}</figcaption></figure>`;
       }).join("");
       const loc = byCountry ? countryLocations[name] : null;   // 只有"按国家"分类时，才在右侧显示小地图
       return `<div class="gv-group"><h2>${head} <span class="muted small">${list.length}</span></h2>` +
@@ -91,19 +92,19 @@
     const p = flat[cur];
     const en = document.documentElement.lang !== "zh-CN";
     lb.querySelector(".lb-img").innerHTML = p.image
-      ? `<img src="${p.image}" alt="${p.place}">`
+      ? `<img src="${p.image}" alt="${en ? (p.place || p.placeZh || "") : (p.placeZh || p.place || "")}">`
       : `<div class="ph" style="aspect-ratio:${p.ratio}"></div>`;
     const originalPath = p.image || "";
     const originalExt = (originalPath.split(".").pop() || "jpg").split("?")[0];
-    const downloadBase = (p.place || p.country || (en ? "photo" : "照片")) + "-" + (p.date || (en ? "undated" : "未记录时间"));
+    const downloadBase = (en ? (p.place || p.placeZh || p.country || "photo") : (p.placeZh || p.place || "照片")) + "-" + (p.date || (en ? "undated" : "未记录时间"));
     const originalName = downloadBase.replace(/[\\\\/:*?"<>|]+/g, "-") + "." + originalExt;
     const downloadLabel = en ? "Download original" : "下载原图";
     const downloadControl = originalPath
       ? `<a class="photo-download" href="${encodeURI(originalPath)}" download="${escapeHtml(originalName)}" aria-label="${downloadLabel}" title="${downloadLabel}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg><span>${downloadLabel}</span></a>`
       : "";
     lb.querySelector(".lb-info").innerHTML =
-      `${downloadControl}<h3>${p.place}, ${p.country}</h3>` +
-      `<p>${en ? "Date" : "日期"} · ${p.date}</p><p>${en ? "From" : "来自"} · ${p.person}</p><p>${p.note}</p>`;
+      `${downloadControl}<h3>${en ? (p.place || p.placeZh || "") : (p.placeZh || p.place || "")}, ${en ? p.country : (p.country === "China" ? "中国" : p.country)}</h3>` +
+      `<p>${en ? "Date" : "日期"} · ${p.date}</p><p>${en ? "From" : "来自"} · ${p.person}</p><p>${en ? (p.note || p.noteZh || "") : (p.noteZh || p.note || "")}</p>`;
     lb.hidden = false;
   };
   const open = (e) => { const c = e.target.closest(".card"); if (c) show(+c.dataset.i); };
