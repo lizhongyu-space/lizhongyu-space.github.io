@@ -1,6 +1,6 @@
 /* My Museum catalog: PDF files are not requested while browsing cards. */
 const museumCollections=[
-{id:"album-001",type:"album",titleEn:"Philatelic Album 01",titleZh:"集邮册 01",categoryEn:"Philatelic album",categoryZh:"集邮册",date:"2026",pages:"20 pages",cover:"museum/covers/album-001.svg",file:"museum-test/扫描文稿-linearized-test.pdf.pdf",descriptionEn:"A scanned album preserved in its original reading quality.",descriptionZh:"一本按原始阅读质量保存的扫描集邮册。"}
+{id:"album-001",type:"album",titleEn:"Philatelic Album 01",titleZh:"集邮册 01",categoryEn:"Philatelic album",categoryZh:"集邮册",date:"2026",pages:"20 pages",cover:"museum/covers/album-001.svg",file:"museum/files/album-001.pdf",descriptionEn:"A scanned album preserved in its original reading quality.",descriptionZh:"一本按原始阅读质量保存的扫描集邮册。"}
 ];
 const museumGrid=document.getElementById("museumGrid");
 const museumEmpty=document.getElementById("museumEmpty");
