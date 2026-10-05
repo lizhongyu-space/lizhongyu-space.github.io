@@ -76,7 +76,7 @@ html[lang="zh-CN"] [data-share-lang="en"]{display:none!important}
 
 /* ---- 4) 每个国家右侧的小地图（只在"按国家"分类时出现） ---- */
 .gv-row.has-map { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 32px; align-items: start; }   /* 左边照片，右边 280px 宽的地图（想改地图大小就改这个 280px） */
-.gv-row.has-map .masonry { column-count: 3; }                                                                   /* 有地图时，照片墙变成 3 列 */
+.gv-row.has-map .masonry { column-count: 2; }                                                                   /* 有地图时，照片墙变成 3 列 */
 .gv-map { position: sticky; top: 24px; border: 1px solid var(--border); background: #e9e7e0; }                  /* 小地图的外框（照片很多时，地图会跟着页面滚动停在旁边） */
 .gv-coord { padding: 8px 12px; font-size: 12px; letter-spacing: .12em; color: var(--muted); background: var(--background);
   border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }                                 /* 地图顶部的经纬度文字 */
@@ -157,8 +157,8 @@ html[lang="zh-CN"] [data-share-lang="en"]{display:none!important}
       <p>Global View is a collection of photographs from different places around the world, taken by different people.</p>
       <ol>
         <li>Choose how you want to browse: by country, or by person.</li>
-        <li>Click any photo to enlarge it.</li>
-        <li>Below the enlarged photo you'll find when and where it was taken, and a short note about it.</li>
+        <li>Click any photo to view its details.</li>
+        <li>The photo details include when and where it was taken, along with a short note about it.</li>
         <li><span data-gv-lang="en">Every photo is available to download. Please keep downloaded photos for your own collection and do not repost them on other social media platforms or websites. We respect the copyright of the original photographer.</span><span data-gv-lang="zh" hidden>每张照片都提供下载。请自行收藏，不要将下载的照片发布到其他社交媒体或网站，我们尊重原作者的版权。</span></li>
       </ol>
       <p>Would you like to share a photo from where you are? You're very welcome to get in touch.</p>
@@ -237,12 +237,12 @@ html[lang="zh-CN"] [data-share-lang="en"]{display:none!important}
   </div>
 </div>
 
-<!-- 这一段是：点击照片后的大图查看（样式沿用 Gallery 的 Lightbox） -->
+<!-- 这一段是：点击照片后的详细信息（不加载大图） -->
 <div id="lightbox" class="lightbox" hidden>
   <button class="lb-close" aria-label="Close">×</button>
-  <button class="lb-prev" aria-label="Previous">‹</button>
-  <div class="lb-box"><div class="lb-img"></div><div class="lb-info"></div></div>
-  <button class="lb-next" aria-label="Next">›</button>
+  
+  <div class="lb-box"><div class="lb-info"></div></div>
+  
 </div>
 
 <!-- 这一段是：加载脚本（世界地图数据 → 照片数据 → 全站导航 → 本页逻辑） -->
