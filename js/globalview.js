@@ -173,7 +173,6 @@
       ? (p.note || p.noteZh || "A brief description of this photo.")
       : (p.noteZh || p.note || "这张照片的简短说明。");
     const originalPath = p.image || "";
-    const displayPath = p.thumbnail || originalPath;
     const originalExt = (originalPath.split(".").pop() || "jpg").split("?")[0];
     const downloadBase = (en ? (p.place || p.placeZh || p.country || "photo") : (p.placeZh || p.place || "照片")) + "-" + (p.date || (en ? "undated" : "未记录时间"));
     const originalName = downloadBase.replace(/[\\/:*?"<>|]+/g, "-") + "." + originalExt;
@@ -184,9 +183,7 @@
 
     const place = en ? (p.place || p.placeZh || "Location not recorded") : (p.placeZh || p.place || "未记录地点");
     const country = en ? (p.country || "") : (p.countryZh || p.country || "");
-    lb.querySelector(".lb-img").innerHTML = originalPath
-      ? `<img src="${encodeURI(displayPath)}" data-original-src="${encodeURI(originalPath)}" alt="${escapeHtml(place)}" decoding="async">`
-      : `<div class="ph" style="aspect-ratio:${p.ratio || "4/3"}"></div>`;
+    // Detail view intentionally does not load any image. The original is requested only by Download.
 
     lb.querySelector(".lb-info").innerHTML =
       `${downloadControl}<h3>${escapeHtml(place)}${country ? ", " + escapeHtml(country) : ""}</h3>
