@@ -37,7 +37,7 @@
     ["No photos in this category yet.", "这个分类下还没有照片。"],
 
     // —— Postcrossing 页面 ——
-    ["Sent", "寄出"], ["Received", "收到"], ["Pending", "等待中"], ["Expired", "已过期"],
+    ["Sent", "寄出"], ["Received", "收到"], ["Pending", "等待中"], ["In transit", "在路上"], ["Completed", "完成"], ["Expired", "已过期"],
     ["Hover over a place for a preview · click for details", "将鼠标移到地点上预览 · 点击查看详情"],
     ["Records", "记录"], ["Date", "日期"], ["Country", "国家"], ["Type", "类型"], ["Postcard ID", "明信片编号"], ["Status", "状态"],
     ["Front", "正面"], ["Click for all records", "点击查看全部记录"],
