@@ -10,7 +10,7 @@ const { w: MW, h: MH, latTop, latBottom } = WORLD_MAP;
 const project = (lon, lat) => [(lon + 180) / 360 * MW, (latTop - lat) / (latTop - latBottom) * MH];
 const flag = (code) => [...code.toUpperCase()].map((c) => String.fromCodePoint(127397 + c.charCodeAt(0))).join("");
 const el = (tag, attrs = {}) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; };
-const dot = (status) => { const en = document.documentElement.lang !== "zh-CN"; const names = en ? {sent:"Sent", received:"Received"} : {sent:"寄出", received:"收到"}; return `<span class="dot ${status}"></span>${names[status] || status}`; };
+const dot = (status) => { const en = document.documentElement.lang !== "zh-CN"; const names = en ? {sent:"Sent", received:"Received", pending:"In transit"} : {sent:"寄出", received:"收到", pending:"在路上"}; return `<span class="dot ${status}"></span>${names[status] || status}`; };
 const sw = (type) => { const en = document.documentElement.lang !== "zh-CN"; const names = en ? {sent:"Sent", received:"Received"} : {sent:"寄出", received:"收到"}; return `<i class="sw ${type === "sent" ? "sent" : "recv"}"></i>${names[type] || type}`; };
 const primaryDate = (p) => p.type === "sent" ? p.sentDate : p.receivedDate;
 const byDate = (a, b) => primaryDate(a) < primaryDate(b) ? 1 : -1;
@@ -90,7 +90,7 @@ nodes.addEventListener("focusout", hideCard);
 const openDetail = (code) => {
   const g = groups[code];
   detail.innerHTML = `<h3>${flag(g.code)} ${g.country}</h3>` + g.records.map((p) =>
-    `<article class="pc-rec"><div class="pc-rec-h"><span>${p.id}</span><span>${dot(p.type)}</span></div>` +
+    `<article class="pc-rec"><div class="pc-rec-h"><span>${p.id}</span><span>${dot(p.status || p.type)}</span></div>` +
     `<p><strong>${p.member}</strong></p>` +
     `<p class="muted">${document.documentElement.lang !== "zh-CN" ? "Sent" : "寄出"}: ${p.sentDate}<br>${document.documentElement.lang !== "zh-CN" ? "Received" : "收到"}: ${p.receivedDate}</p></article>`).join("");
   modal.hidden = false;
