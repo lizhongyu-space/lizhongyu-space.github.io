@@ -310,7 +310,10 @@ async function sendGV() {
     gvSendBtn?.closest(".gv-share-foot")?.classList.add("sent");
   }
   const mailto = "mailto:lzy2504@outlook.com?subject=" + encodeURIComponent(data.title) + "&body=" + encodeURIComponent(data.text);
-  setTimeout(() => { window.location.href = mailto; }, 120);
+  // Open the mail app first, then continue to the dedicated Thank You page.
+  // The page transition is intentionally kept local to this Send action; no other Global View behavior is changed.
+  try { window.open(mailto, "_blank", "noopener"); } catch (e) {}
+  setTimeout(() => { window.location.href = "thankyou.html"; }, 180);
 }
 
 gvShare?.addEventListener("click", openShareModal);
