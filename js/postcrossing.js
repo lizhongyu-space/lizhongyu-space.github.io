@@ -12,6 +12,7 @@ const flag = (code) => [...code.toUpperCase()].map((c) => String.fromCodePoint(1
 const el = (tag, attrs = {}) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; };
 const dot = (status) => { const en = document.documentElement.lang !== "zh-CN"; const names = en ? {sent:"Sent", received:"Received", pending:"In transit"} : {sent:"寄出", received:"收到", pending:"在路上"}; return `<span class="dot ${status}"></span>${names[status] || status}`; };
 const sw = (type) => { const en = document.documentElement.lang !== "zh-CN"; const names = en ? {sent:"Sent", received:"Received"} : {sent:"寄出", received:"收到"}; return `<i class="sw ${type === "sent" ? "sent" : "recv"}"></i>${names[type] || type}`; };
+const status = (value) => { const en = document.documentElement.lang !== "zh-CN"; const names = en ? {completed:"Completed", pending:"In transit"} : {completed:"完成", pending:"在路上"}; const key = value === "pending" ? "pending" : "completed"; return `<span class="dot ${key}"></span>${names[key]}`; };
 const primaryDate = (p) => p.type === "sent" ? p.sentDate : p.receivedDate;
 const byDate = (a, b) => primaryDate(a) < primaryDate(b) ? 1 : -1;
 
@@ -103,7 +104,7 @@ document.addEventListener("keydown", (e) => { if (e.key === "Escape") modal.hidd
 
 // ---- 7) Records 表格 ----
 document.getElementById("recordsBody").innerHTML = [...postcards].sort(byDate).map((p) =>
-  `<tr data-code="${p.code}"><td>${primaryDate(p)}</td><td>${flag(p.flagCode || p.code)} ${p.country}</td><td>${p.id}</td><td>${dot(p.type)}</td></tr>`).join("");
+  `<tr data-code="${p.code}"><td>${primaryDate(p)}</td><td>${flag(p.flagCode || p.code)} ${p.country}</td><td>${p.id}</td><td>${dot(p.type)}</td><td>${status(p.status)}</td></tr>`).join("");
 
 // ---- 8) Hover Records：鼠标移到表格行时，地图上的对应地点同步放大 ----
 const rows = document.querySelectorAll("#recordsBody tr");
