@@ -14,11 +14,11 @@ const HOME = { name: "Nanjing", lat: 32.06, lon: 118.80 };
 
 const postcards = [
   // ----- SENT -----
-  { id: "CN-4393815", member: "mayjailer", country: "Belgium", code: "BE", lat: 50.85, lon: 4.35, sentDate: "2026-09-17", type: "sent" },
-  { id: "CN-4393811", member: "tesska21", country: "Czechia", code: "CZ", lat: 50.08, lon: 14.44, sentDate: "2026-09-17", type: "sent" },
-  { id: "CN-4393804", member: "amon-ra", country: "Belarus", code: "BY", lat: 53.90, lon: 27.57, sentDate: "2026-09-17", type: "sent" },
-  { id: "CN-4393797", member: "forgetmenott", country: "U.S.A.", code: "US", lat: 38.90, lon: -77.04, sentDate: "2026-09-17", type: "sent" },
-  { id: "CN-4393760", member: "linos203", country: "Germany", code: "DE", lat: 52.52, lon: 13.40, sentDate: "2026-09-17", type: "sent" },
+  { id: "CN-4393815", member: "mayjailer", country: "Belgium", code: "BE", lat: 50.85, lon: 4.35, sentDate: "2026-09-17", status: "pending", type: "sent" },
+  { id: "CN-4393811", member: "tesska21", country: "Czechia", code: "CZ", lat: 50.08, lon: 14.44, sentDate: "2026-09-17", status: "pending", type: "sent" },
+  { id: "CN-4393804", member: "amon-ra", country: "Belarus", code: "BY", lat: 53.90, lon: 27.57, sentDate: "2026-09-17", status: "pending", type: "sent" },
+  { id: "CN-4393797", member: "forgetmenott", country: "U.S.A.", code: "US", lat: 38.90, lon: -77.04, sentDate: "2026-09-17", status: "pending", type: "sent" },
+  { id: "CN-4393760", member: "linos203", country: "Germany", code: "DE", lat: 52.52, lon: 13.40, sentDate: "2026-09-17", status: "pending", type: "sent" },
   { id: "CN-4058314", member: "poseidon66", country: "Russia", code: "RU", lat: 55.75, lon: 37.62, sentDate: "2025-06-22", receivedDate: "2025-09-10", type: "sent" },
   { id: "CN-4058254", member: "wendyquilter", country: "Canada", code: "CA", lat: 45.42, lon: -75.70, sentDate: "2025-06-22", receivedDate: "2025-07-24", type: "sent" },
   { id: "CN-4058322", member: "Paol", country: "Italy", code: "IT", lat: 41.90, lon: 12.50, sentDate: "2025-06-22", receivedDate: "2025-07-16", type: "sent" },
