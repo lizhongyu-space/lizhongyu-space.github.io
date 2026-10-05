@@ -173,7 +173,7 @@
       ? (p.note || p.noteZh || "A brief description of this photo.")
       : (p.noteZh || p.note || "这张照片的简短说明。");
     const originalPath = p.image || "";
-    const displayPath = p.display || originalPath;
+    const displayPath = p.thumbnail || originalPath;
     const originalExt = (originalPath.split(".").pop() || "jpg").split("?")[0];
     const downloadBase = (en ? (p.place || p.placeZh || p.country || "photo") : (p.placeZh || p.place || "照片")) + "-" + (p.date || (en ? "undated" : "未记录时间"));
     const originalName = downloadBase.replace(/[\\/:*?"<>|]+/g, "-") + "." + originalExt;
@@ -202,24 +202,10 @@
     if (c) show(+c.dataset.i);
   };
 
-  groupsEl.addEventListener("error", e => {
-    const img = e.target;
-    if (img instanceof HTMLImageElement && img.dataset.originalSrc && img.src !== img.dataset.originalSrc) {
-      img.src = img.dataset.originalSrc;
-    }
-  }, true);
-
   groupsEl.addEventListener("click", open);
   groupsEl.addEventListener("keydown", e => {
     if (e.key === "Enter") open(e);
   });
-
-  lb.addEventListener("error", e => {
-    const img = e.target;
-    if (img instanceof HTMLImageElement && img.dataset.originalSrc && img.src !== img.dataset.originalSrc) {
-      img.src = img.dataset.originalSrc;
-    }
-  }, true);
 
   lb.addEventListener("click", e => {
     if (e.target === lb || e.target.matches(".lb-close")) lb.hidden = true;
