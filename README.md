@@ -23,10 +23,12 @@ There is currently no build step, bundler, or runtime server.
 .
 ├── .github/
 │   └── workflows/
-│       └── gallery-thumbnails.yml   # Gallery image processing
+│       ├── gallery-thumbnails.yml    # Gallery image processing
+│       └── globalview-thumbnails.yml # Global View image processing
 ├── css/
 │   ├── style.css                    # Main shared stylesheet
-│   └── theme.css                    # Theme variables / visual tokens
+│   ├── theme.css                    # Theme variables / visual tokens
+│   └── museum.css                   # My Museum page styling
 ├── js/
 │   ├── main.js                      # Shared site logic and common UI
 │   ├── lang.js                      # Language state / switching
@@ -36,15 +38,20 @@ There is currently no build step, bundler, or runtime server.
 │   ├── postcrossing.js              # Postcrossing page logic
 │   ├── worldmap.js                  # Map data / map rendering support
 │   ├── globalphotos.js              # Global View photo data
-│   └── globalview.js                # Global View page logic
+│   ├── globalview.js                # Global View page logic
+│   └── museum.js                    # My Museum catalog logic
 ├── gallery/                         # Original photo archive
-├── gallery-thumbs/                  # Web-optimized gallery thumbnails
-├── gallery-display/                 # Web-optimized display images
+├── gallery-thumbs/                  # Web-optimized gallery thumbnails (generated)
+├── global_view_photo/               # Global View original photos (continent/country/person)
+├── global-view-thumbs/              # Global View thumbnails (generated)
+├── Photo Submission License Agreement/  # Global View submission agreement PDF
 ├── index.html
 ├── about.html
 ├── gallery.html
 ├── postcrossing.html
 ├── globalview.html
+├── museum.html
+├── thankyou.html
 ├── contact.html
 ├── 404.html
 ├── .gitignore
@@ -78,6 +85,7 @@ Theme CSS is loaded directly by HTML rather than dynamically injected by JavaScr
 | `worldmap.js` | Map data and map-related rendering |
 | `globalphotos.js` | Global View photo data |
 | `globalview.js` | Global View interactions |
+| `museum.js` | My Museum catalog rendering |
 
 External scripts are loaded with `defer` where appropriate, preserving dependency order while avoiding parser-blocking script execution.
 
@@ -97,11 +105,10 @@ These files act as the source/archive layer.
 
 ### Generated web images
 
-GitHub Actions generates two derived layers:
+GitHub Actions generates the web thumbnail layer:
 
 ~~~text
 gallery-thumbs/
-gallery-display/
 ~~~
 
 The workflow is defined in `.github/workflows/gallery-thumbnails.yml`.
@@ -110,11 +117,12 @@ The current pipeline:
 1. Reads supported source images from `gallery/`.
 2. Handles JPG/JPEG, PNG, HEIC/HEIF, and WebP inputs.
 3. Applies EXIF orientation when processing images.
-4. Generates WebP derivatives.
-5. Produces approximately:
-   - `gallery-thumbs/`: max 1200 × 1200
-   - `gallery-display/`: max 2400 × 2400
-6. Removes derived files whose source originals have been deleted.
+4. Generates WebP derivatives:
+   - `gallery-thumbs/`: max 480 × 480, quality 55
+5. Removes derived files whose source originals have been deleted.
+6. Removes the deprecated `gallery-display/` directory if it exists.
+
+The historical `gallery-display/` layer is no longer generated or used; the runtime renders from thumbnails and the original file is only requested by the explicit "Download original" action.
 
 The Gallery card view uses the thumbnail layer, not the original archive files.
 
@@ -166,6 +174,8 @@ The project uses independent HTML entry points rather than client-side routing.
 | `gallery.html` | Photo gallery |
 | `postcrossing.html` | Postcrossing data and map |
 | `globalview.html` | Global View content |
+| `museum.html` | My Museum personal collection catalog |
+| `thankyou.html` | Global View thank-you page with signature animation |
 | `contact.html` | Contact page |
 | `404.html` | GitHub Pages fallback page |
 
@@ -227,13 +237,14 @@ For data-only updates, modify the relevant manifest rather than changing renderi
 
 ## 11. GitHub Actions
 
-The repository currently uses GitHub Actions for gallery derivative generation:
+The repository currently uses GitHub Actions for thumbnail derivative generation:
 
-` .github/workflows/gallery-thumbnails.yml `
+- ` .github/workflows/gallery-thumbnails.yml ` (sources: `gallery/**` → `gallery-thumbs/`)
+- ` .github/workflows/globalview-thumbnails.yml ` (sources: `global_view_photo/**` → `global-view-thumbs/`)
 
-This workflow is part of the asset pipeline and should be preserved when modifying Gallery storage or image-processing logic.
+Both workflows push generated derivatives back to `main` as `github-actions[bot]` after rebasing, and remove the deprecated `*-display/` directories. They are part of the asset pipeline and should be preserved when modifying image storage or image-processing logic.
 
-If the workflow is changed, verify both generated file paths and generated image dimensions/formats before considering the change complete.
+If a workflow is changed, verify both generated file paths and generated image dimensions/formats before considering the change complete.
 
 ## 12. Performance Baseline
 

@@ -2,14 +2,15 @@
 // 每张照片均使用与 Gallery 相同的元数据结构；lat/lon 为城市/地区级参考坐标，不是原始 GPS。
 // 新投稿按「大洲 → 国家 → 人物」存放，网站路径直接引用仓库中的原图。
 //
-//   1. 把图片放进 images/global/ 文件夹（需要自己新建这个文件夹）
-//   2. 把下面某一条的 image 改成图片路径，例如 image: "images/global/tokyo-01.jpg"
+//   1. 把图片放进 global_view_photo/<大洲>/<国家>/<人物>/ 文件夹（缩略图由 CI 自动生成到 global-view-thumbs/ 同名路径）
+//   2. 把下面某一条的 image 改成图片路径，例如 image: "global_view_photo/asia/japan/yuki/tokyo-01.jpg"
+//      thumbnail 填对应的 "global-view-thumbs/<同样路径>.webp"
 //   3. 把 country（国家）、code（国家两位字母代码，用来显示国旗）、person（人名）、place（地点）、date（时间）、note（说明）改成真实信息
 // ratio 是照片宽高比（横图 "4/3"，竖图 "3/4"，方图 "1/1"），image 留空时显示灰色占位块。
 // 想新增一张照片：复制下面任意一行 { ... }, 粘贴在末尾，再修改里面的内容。
 const globalPhotos = [
-  { id: 9, image: "global_view_photo/asia/china/pipi/拉普兰_20261004_014 拷贝.jpg", thumbnail: "global-view-thumbs/asia/china/pipi/拉普兰_20261004_014 拷贝.webp", display: "global-view-display/asia/china/pipi/拉普兰_20261004_014 拷贝.webp", ratio: "4/3", country: "China", code: "CN", person: "pipi", place: "Qixia Mountain", placeZh: "栖霞山", countryZh: "中国", lat: 32.17, lon: 118.99, date: "2026-10-04", note: "Photographed at Qixia Mountain on October 4, 2026.", noteZh: "拍摄于2026年10月4日，栖霞山。" },
-  { id: 10, image: "global_view_photo/asia/china/pipi/拉普兰_20261004_016 拷贝.jpg", thumbnail: "global-view-thumbs/asia/china/pipi/拉普兰_20261004_016 拷贝.webp", display: "global-view-display/asia/china/pipi/拉普兰_20261004_016 拷贝.webp", ratio: "4/3", country: "China", code: "CN", person: "pipi", place: "Qixia Mountain", placeZh: "栖霞山", countryZh: "中国", lat: 32.17, lon: 118.99, date: "2026-10-04", note: "Photographed at Qixia Mountain on October 4, 2026.", noteZh: "拍摄于2026年10月4日，栖霞山。" },
+  { id: 9, image: "global_view_photo/asia/china/pipi/拉普兰_20261004_014 拷贝.jpg", thumbnail: "global-view-thumbs/asia/china/pipi/拉普兰_20261004_014 拷贝.webp", ratio: "4/3", country: "China", code: "CN", person: "pipi", place: "Qixia Mountain", placeZh: "栖霞山", countryZh: "中国", lat: 32.17, lon: 118.99, date: "2026-10-04", note: "Photographed at Qixia Mountain on October 4, 2026.", noteZh: "拍摄于2026年10月4日，栖霞山。" },
+  { id: 10, image: "global_view_photo/asia/china/pipi/拉普兰_20261004_016 拷贝.jpg", thumbnail: "global-view-thumbs/asia/china/pipi/拉普兰_20261004_016 拷贝.webp", ratio: "4/3", country: "China", code: "CN", person: "pipi", place: "Qixia Mountain", placeZh: "栖霞山", countryZh: "中国", lat: 32.17, lon: 118.99, date: "2026-10-04", note: "Photographed at Qixia Mountain on October 4, 2026.", noteZh: "拍摄于2026年10月4日，栖霞山。" },
 ];
 
 // ===== 各个国家在地图上的位置（用首都的经纬度代表这个国家）=====
